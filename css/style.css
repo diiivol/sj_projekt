@@ -1,0 +1,139 @@
+/* font */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+/* *** */
+
+/* Preloader */
+#preloader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: #212121;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* *** */
+
+/* Body */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 70px;
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  background-color: #faf8f8;
+}
+/* *** */
+
+/* Menu */
+.food-item {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  border-radius: 7px;
+  padding: 15px;
+}
+.food-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.food-item img:hover {
+  cursor: pointer;
+}
+.food-item ul {
+  margin-bottom: 0;
+}
+/* *** */
+
+/* Footer */
+footer {
+  flex-shrink: 0;
+  height: 80px;
+  /* text on the center */
+  display: flex;
+  align-items: center;
+  background-color: #212529;
+  color: white;
+  text-align: center;
+}
+/* *** */
+
+/* O nas */
+.about-section {
+  padding: 50px 0;
+  text-align: center;
+}
+.photo-gallery img {
+  width: 100%;
+  border-radius: 5px;
+  transition: opacity 0.8s ease;
+}
+.photo-gallery img:hover {
+  opacity: 0.7;
+}
+.mySlides:hover {
+  cursor: pointer;
+}
+/* *** */
+ 
+/* Kontakt */
+.container iframe {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.map-responsive {
+  overflow: hidden;
+  padding-bottom: 50%;
+  position: relative;
+  height: 0;
+}
+.map-responsive iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+.social-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.social-button {
+  display: inline-block;
+  color: white;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+.twitter {
+  background-color: #1DA1F2;
+}
+.facebook {
+  background-color: #4267B2;
+}
+.instagram {
+  background-color: #E1306C;
+}
+.linkedin {
+    background-color: #0077B5;
+}
+/* *** */
+
+/* Extra */
+h1 {
+  text-transform:uppercase;
+}
+.menu, .o-nas, .kontakt, .thank {
+  flex: 1 0 auto;
+}
+/* *** */
