@@ -31,11 +31,11 @@
   <!--  -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand d-none d-lg-block" href="index.html">
+      <a class="navbar-brand d-none d-lg-block" href="index.php">
         <img src="img/logo_white.svg" alt="Logo" width="30" height="30" class="img-fluid">
         Oyster
       </a>
-      <a class="navbar-brand d-lg-none" href="index.html">
+      <a class="navbar-brand d-lg-none" href="index.php">
         <img src="img/logo_white.svg" alt="Logo" width="30" height="30" class="d-inline-block align-text-top me-2">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,13 +44,13 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" href="menu.html">Menu</a>
+            <a class="nav-link" href="menu.php">Menu</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="contacts.html">Kontakt</a>
+            <a class="nav-link" href="contacts.php">Kontakt</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="about-us.html">O nas</a>
+            <a class="nav-link" href="about-us.php">O nas</a>
           </li>
         </ul>
       </div>
