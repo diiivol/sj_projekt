@@ -8,6 +8,10 @@
       <div class="text-center">
           <h1 class="display-4 mb-4">Ďakujem!</h1>
           <p>Vaša správa bola odoslaná.</p>
+          <?php
+            $contact_object = new Contact();
+            $contact_object->insert();
+          ?>
       </div>
   </div>
 

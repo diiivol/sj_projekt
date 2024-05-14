@@ -18,6 +18,19 @@ class Dishes extends Database {
         }   
     }
 
+    public function delete(){
+        try{
+            $data = array(
+                'dishes_id' => $_POST['delete_dishes']
+            );
+            $query = "DELETE FROM dishes WHERE id = :dishes_id";
+            $query_run = $this->db->prepare($query);
+            $query_run->execute($data);
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+
 }
 
 ?>

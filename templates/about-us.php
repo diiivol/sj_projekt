@@ -32,15 +32,12 @@
           <!-- použite vhodné množstvo obrázkov na stránku.  -->
         <!--  -->
 
-        <!-- Upozornenie: všetky obrázky boli prevzaté zo freepik.com okrem jedného - Živánska (na stránke menu), -
-          pretože som ju nemohla nikde nájsť, okrem bigstockphoto.com, takže som použila obrázok odtiaľ. -->
-        <!--  -->
-
-        <div class="col-lg-6 text-center d-flex justify-content-center">
-          <img class="mySlides m-0" src="../assets/img/o-nas1.jpg" alt="Náš tím" onclick="plusSlides(1)">
-          <img class="mySlides m-0" src="../assets/img/o-nas2.jpg" alt="Náš tím" onclick="plusSlides(1)">
-          <img class="mySlides m-0" src="../assets/img/o-nas3.jpg" alt="Náš tím" onclick="plusSlides(1)">
-        </div>
+        <?php
+          $img_folder = '../assets/img/o_nas/';
+          $slider = new Slider();
+          $slider->set_img_folder($img_folder);
+          echo($slider->generate_slides($img_folder));
+        ?>
         <!--  -->
 
       </div>

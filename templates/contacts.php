@@ -18,26 +18,26 @@
     <!--  -->
     <div class="row">
       <div class="col-md-8 col-lg-6 mx-auto">
-        <form onsubmit="event.preventDefault(); window.location.href='thank.html'">
+        <form id="contact" action="thank.php" method="POST">
           <div class="mb-3">
             <label for="name" class="form-label">Meno</label>
-            <input type="text" class="form-control" id="name" placeholder="Zadajte svoje meno" required>
+            <input type="text" class="form-control" name = "name" id="name" placeholder="Zadajte svoje meno" required>
           </div>
           <div class="mb-3">
             <label for="email" class="form-label">E-mail</label>
-            <input type="email" class="form-control" id="email" placeholder="Zadajte svoju e-mailovú adresu" required>
+            <input type="email" class="form-control" name = "email" id="email" placeholder="Zadajte svoju e-mailovú adresu" required>
           </div>
           <div class="mb-3">
             <label for="message" class="form-label">Správa</label>
-            <textarea class="form-control" id="message" rows="5" placeholder="Napíšte svoj názor a myšlienky po návšteve našej reštaurácie alebo sa na niečo spýtajte!" required></textarea>
+            <textarea class="form-control" name = "message" id="message" rows="5" placeholder="Napíšte svoj názor a myšlienky po návšteve našej reštaurácie alebo sa na niečo spýtajte!" required></textarea>
           </div>
           <div class="mb-3 form-check">
-            <input class="form-check-input" type="checkbox" required>
+            <input class="form-check-input" name="acceptance" type="checkbox" required>
             <label class="form-check-label">
               Súhlas so spracovaním osobných údajov
             </label>
           </div>
-          <button type="submit" class="btn btn-primary">Odoslať</button>
+          <button type="submit" name="contact_submitted" class="btn btn-primary">Odoslať</button>
         </form>
       </div>
     </div>
