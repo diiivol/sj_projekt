@@ -34,5 +34,10 @@
             }
             return $result;
         }
+
+        function redirect_homepage(){
+            header("Location: templates/index.php");
+            die("Nepodarilo sa nájsť Domovskú stránku");
+        }
     }   
 ?>
