@@ -9,7 +9,7 @@ class Menu {
     public function generate_menu(): string {
         $menu = '';
         foreach ($this->pages as $name => $url) {
-            $menu .= '<li><a href="' . $url . '">' . $name . '</a></li>';
+            $menu .= '<li class="nav-item"><a class="nav-link" href="' . $url . '">' . $name . '</a></li>';
         }
         return $menu;
     }
