@@ -18,6 +18,12 @@
           echo '<h3>'.$dishes[$i]->name.'</h3>';
           echo '<p>'.$dishes[$i]->description.'</p>';
           echo '<p class="m-0">Cena: '.$dishes[$i]->price.'€</p>';
+          if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['user_role'] != 1){
+            echo '<form action="" method="POST">';
+            echo '<input type="number" name="quantity" value="1" min="1" max="10">';
+            echo '<input type="submit" value="Pridať do košíka" name="add_to_cart">';
+            echo '</form>';
+          }
           echo '<div id="'.$dishes[$i]->name.'" style="display: none;">';
           echo '<br>';
           echo '<p>Ingredients:</p>';
