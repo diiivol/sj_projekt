@@ -37,9 +37,9 @@
         <!--  -->
 
         <div class="col-lg-6 text-center d-flex justify-content-center">
-          <img class="mySlides m-0" src="img/o-nas1.jpg" alt="Náš tím" onclick="plusSlides(1)">
-          <img class="mySlides m-0" src="img/o-nas2.jpg" alt="Náš tím" onclick="plusSlides(1)">
-          <img class="mySlides m-0" src="img/o-nas3.jpg" alt="Náš tím" onclick="plusSlides(1)">
+          <img class="mySlides m-0" src="../assets/img/o-nas1.jpg" alt="Náš tím" onclick="plusSlides(1)">
+          <img class="mySlides m-0" src="../assets/img/o-nas2.jpg" alt="Náš tím" onclick="plusSlides(1)">
+          <img class="mySlides m-0" src="../assets/img/o-nas3.jpg" alt="Náš tím" onclick="plusSlides(1)">
         </div>
         <!--  -->
 
