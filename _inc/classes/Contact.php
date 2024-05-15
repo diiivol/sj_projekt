@@ -11,10 +11,10 @@
 
         function insert(){
             if($this->db){
-             echo 'máme spojenie';
+            //  echo 'máme spojenie';
             }
             if(isset($_POST['contact_submitted'])){
-               echo 'Form bol odoslany';
+              //  echo 'Form bol odoslany';
                
                $data = array('contact_name'=>$_POST['name'],
                'contact_email'=>$_POST['email'],

@@ -8,10 +8,18 @@
     <h1 class="display-4 text-center mb-4">Menu</h1>
     <div class="row">
       <?php
+
+        $cart = new Cart();
+
+        if(isset($_POST['add_to_cart'])){
+          $quantity = $_POST['quantity'];
+          $product_id = $_POST['product_id'];
+          $cart->addProduct($product_id, $quantity);
+        }
+
         $dishes_class = new Dishes();
         $dishes = $dishes_class->select();
 
-        $cart = new Cart();
         $cartItems = $cart->getCart();
 
         for ($i=0;$i<count($dishes);$i++) {
@@ -31,7 +39,7 @@
             echo '</form>';
             
             if (isset($cartItems[$dishes[$i]->id])) {
-              echo '<p>Already in cart: ' . $cartItems[$dishes[$i]->id] . '</p>';
+              echo '<p>Už do košíka: ' . $cartItems[$dishes[$i]->id] . '</p>';
             }
           }
           
@@ -48,12 +56,7 @@
           echo '</div>';
           echo '</div>';
         }
-        if(isset($_POST['add_to_cart'])){
-          $cart = new Cart();
-          $quantity = $_POST['quantity'];
-          $product_id = $_POST['product_id'];
-          $cart->addProduct($product_id, $quantity);
-        }
+
       ?>
     </div>
   </div>

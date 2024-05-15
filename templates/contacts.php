@@ -32,7 +32,7 @@
             <textarea class="form-control" name = "message" id="message" rows="5" placeholder="Napíšte svoj názor a myšlienky po návšteve našej reštaurácie alebo sa na niečo spýtajte!" required></textarea>
           </div>
           <div class="mb-3 form-check">
-            <input class="form-check-input" name="acceptance" type="checkbox" required>
+            <input class="form-check-input" name="acceptance" value="1" type="checkbox" required>
             <label class="form-check-label">
               Súhlas so spracovaním osobných údajov
             </label>
