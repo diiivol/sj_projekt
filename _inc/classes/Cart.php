@@ -16,12 +16,10 @@ class Cart {
     
     public function removeProduct($product_id) {
         if (isset($_SESSION['cart'][$product_id])) {
-            $_SESSION['cart'][$product_id]--;
-            if ($_SESSION['cart'][$product_id] <= 0) {
-                unset($_SESSION['cart'][$product_id]);
-            }
+            unset($_SESSION['cart'][$product_id]);
         }
     }
+
 
     public function getCart() {
         return $_SESSION['cart'];

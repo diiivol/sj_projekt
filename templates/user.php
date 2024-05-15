@@ -1,7 +1,7 @@
 <?php
 include('partials/header.php');
 
-if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true){
+if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSION['user_role'] == 1){
     header('Location: 404.php');
 }
 
@@ -30,13 +30,19 @@ if (!isset($_SESSION['cart'])) {
                     echo '<tr>';
                     echo '<td>' . $name . '</td>';
                     echo '<td>' . $quantity . '</td>';
-                    echo '<td><form action="remove_from_cart.php" method="post">
+                    echo '<td><form method="POST">
                               <input type="hidden" name="product_id" value="' . $id . '">
-                              <input type="submit" value="Remove">
+                              <input type="submit" value="Remove" name="remove_from_cart">
                           </form></td>';
                     echo '</tr>';
                 }
+                if(isset($_POST['remove_from_cart'])){
+                    $product_id = $_POST['product_id'];
+                    $cart->removeProduct($product_id);
+                    header('Location: ' . $_SERVER['PHP_SELF']);
+                    exit();
 
+                  }
                 echo '</table>';
                 ?>
             </div>

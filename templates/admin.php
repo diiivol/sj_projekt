@@ -1,7 +1,7 @@
 <?php
 include('partials/header.php');
 
-if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true){
+if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSION['user_role'] == 0){
     header('Location: 404.php');
 }
 ?>
