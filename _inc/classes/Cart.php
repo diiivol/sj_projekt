@@ -6,14 +6,14 @@ class Cart {
         }
     }
 
-    public function addProduct($product_id) {
-        if (isset($_SESSION['cart'][$product_id])) {
-            $_SESSION['cart'][$product_id]++;
-        } else {
-            $_SESSION['cart'][$product_id] = 1;
+    
+    public function addProduct($product_id, $quantity) {
+        if(!isset($_SESSION['cart'][$product_id])) {
+            $_SESSION['cart'][$product_id] = 0;
         }
+        $_SESSION['cart'][$product_id] += $quantity;
     }
-
+    
     public function removeProduct($product_id) {
         if (isset($_SESSION['cart'][$product_id])) {
             $_SESSION['cart'][$product_id]--;

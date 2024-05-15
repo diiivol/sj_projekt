@@ -5,7 +5,7 @@ class Dishes extends Database {
     private $db;
 
     public function __construct(){
-        $this->db = $this->connect();        
+        $this->db = $this->connect();
     }
 
     public function select(){
@@ -30,6 +30,7 @@ class Dishes extends Database {
             echo $e->getMessage();
         }
     }
+
 
 }
 

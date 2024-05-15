@@ -57,10 +57,8 @@ $page_object->set_page_name($page_name);
                 
                 if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true){
                     if($_SESSION['user_role'] == 1){
-                        // Если пользователь - админ, добавить ссылку на страницу управления
                         $pages['Admin'] = 'admin.php';
                     } else {
-                        // Если пользователь - не админ, добавить ссылку на корзину
                         $pages['Kosik'] = 'user.php';
                     }
                     $pages['Odhlásiť sa'] = 'logout.php';
