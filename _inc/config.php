@@ -10,3 +10,4 @@ require_once('classes/Dishes.php');
 require_once('classes/Slider.php');
 require_once('classes/User.php');
 require_once('classes/Cart.php');
+require_once('classes/Order.php');

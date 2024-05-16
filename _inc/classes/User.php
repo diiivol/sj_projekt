@@ -28,7 +28,8 @@ class User extends Database
 
                 $user = $query_run->fetch(PDO::FETCH_ASSOC);
                 $_SESSION['user_role'] = $user['role'];
-
+                $_SESSION['user_email'] = $user['email'];
+                $_SESSION['user_id'] = $user['id'];
 
                 return true;
             } else {
