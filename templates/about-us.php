@@ -15,17 +15,12 @@ include_once('partials/header.php');
       Každý recept, každé kuchárske tajomstvo sa starostlivo odovzdávalo z generácie na generáciu.
       Keď sme si uvedomili, že naša kulinárska vášeň má potenciál spájať ľudí a rozvíjať komunitu, rozhodli sme sa
       otvoriť Oyster.</p>
-    <p>Za naše motto sme si zvolili slová: kvalita, vášeň a pohostinnosť. Každé jedlo, ktoré podávame, pripravujeme s
-      láskou a starostlivosťou.
-      V našej kuchyni sa stretávajú tradičné slovenské recepty s moderným šarmom a vytvárajú tak pre našich hostí
-      jedinečné gastronomické zážitky.</p>
-    <p>Tešíme sa na stretnutie s vami v "Ustrici" a na spoločné objavovanie radosti z gastronómie!</p>
   </div>
 
   <!--  -->
   <!-- Slideshow (Carousel) (1b) -->
   <!--  -->
-  <div class="container">
+  <div class="container mb-3">
     <h3 class="text-center mb-4">Galeria</h3>
     <div class="photo-gallery row justify-content-center ">
       <!--  -->
@@ -44,8 +39,15 @@ include_once('partials/header.php');
       <!--  -->
 
     </div>
-    <p class="text-center my-4">(click)</p>
+    <!-- <p class="text-center my-4">(click)</p> -->
   </div>
+  <div class="container p-2 fs-5 col-md-8 mx-auto">
+  <p>Za naše motto sme si zvolili slová: kvalita, vášeň a pohostinnosť. Každé jedlo, ktoré podávame, pripravujeme s
+      láskou a starostlivosťou.
+      V našej kuchyni sa stretávajú tradičné slovenské recepty s moderným šarmom a vytvárajú tak pre našich hostí
+      jedinečné gastronomické zážitky.</p>
+  </div>
+
 </div>
 
 <!--  -->

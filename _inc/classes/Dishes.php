@@ -33,4 +33,17 @@ class Dishes extends Database
             echo $e->getMessage();
         }
     }
+
+
+
+    public function update()
+    {
+        $id = $_POST['update_dishes'];
+        $new_name = $_POST['new_dish_name'];
+        $new_description = $_POST['new_dish_description'];
+
+        $sql = "UPDATE dishes SET name = :name, description = :description WHERE id = :id";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute(['name' => $new_name, 'description' => $new_description, 'id' => $id]);
+    }
 }

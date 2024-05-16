@@ -133,7 +133,7 @@ footer {
 h1 {
   text-transform:uppercase;
 }
-.menu, .o-nas, .kontakt, .thank {
+.menu, .o-nas, .kontakt, .thank, .login{
   flex: 1 0 auto;
 }
 /* *** */

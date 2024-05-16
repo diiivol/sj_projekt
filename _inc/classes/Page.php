@@ -35,6 +35,9 @@ class Page
             case 'contacts':
                 $result .= '<script src="../assets/js/alert.js"></script>';
                 break;
+            case 'admin':
+                $result .= '<script src="../assets/js/edit.js"></script>';
+                break;
         }
         return $result;
     }

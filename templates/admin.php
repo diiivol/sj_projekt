@@ -57,22 +57,39 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                     header('Location: ' . $_SERVER['PHP_SELF']);
                     exit();
                 }
-                echo '<table class="admin-table">';
-                echo '<tr><th>Dish Name</th>
-                            <th>Dish Description</th>
-                            <th>Delete</th>
-                        </tr>';
+
+
+                if (isset($_POST['update_dishes'])) {
+                    $dishes_id = $_POST['update_dishes'];
+                    $dishes_object->update();
+                    header('Location: ' . $_SERVER['PHP_SELF']);
+                    exit();
+                }
+                // echo '<table class="admin-table">';
+                // echo '<tr><th>Dish Name</th>
+                //             <th>Dish Description</th>
+                //             <th>Delete</th>
+                //         </tr>';
                 foreach ($dishes as $d) {
-                    echo '<tr>';
-                    echo '<td>' . $d->name;
-                    '</td>';
-                    echo '<td>' . $d->description;
-                    '</td>';
+                    // echo '<tr>';
+                    // echo '<td>' . $d->name;
+                    // '</td>';
+                    // echo '<td>' . $d->description;
+                    // '</td>';
+
+                    
                     echo '<td>
-                                <form action="" method="POST">
-                                    <button type="submit" name="delete_dishes" value="' . $d->id . '"' . '>Vymazať</button>
-                                </form>
-                            </td>';
+                        <form action="" method="POST">
+                            <button class="edit-button" type="button">Upraviť</button>
+                            <button class="save-button" type="submit" name="update_dishes" value="' . $d->id . '" style="display: none;">OK</button>
+
+                            <div class="name-field">' . $d->name . '</div>
+                            <div class="description-field">' . $d->description . '</div>
+
+                            <button type="submit" name="delete_dishes" value="' . $d->id . '">Vymazať</button>
+                        </form>
+                    </td>';
+                    
                     echo '</tr>';
                 }
                 echo '</table>';
@@ -85,8 +102,9 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                     $items = $order_object->select_dishes($order->id);
                     // Now $items contains the items for this order
                 }
+
                 if (isset($_POST['delete_order'])) {
-                    $order_id = $_POST['delete_order'];
+                    // $order_id = $_POST['delete_order'];
                     $order_object->delete();
                     header('Location: ' . $_SERVER['PHP_SELF']);
                     exit();
@@ -127,7 +145,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                                     <button type="submit" name="delete_order" value="' . $o->id . '"' . '>Vymazať</button>
                                 </form>
                           </td>';
-                    echo '</tr>';
                 }
                 echo '</table>';
                 ?>

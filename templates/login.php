@@ -5,18 +5,23 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
 }
 ?>
 <main>
-    <section class="container">
-        <div class="row">
-            <div class="col-100 text-left">
-                <h1>Prihlásenie</h1>
+    <section class="container login pt-3">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6">
+                <h1 class="display-4 text-center mb-4">Prihlásenie</h1>
                 <form action="" method="POST">
-                    <input type="email" name="email" placeholder="Vaše meno">
-                    <br>
-                    <input type="text" name="password" placeholder="Vaše heslo">
-                    <br>
-                    <button type="submit" name="user_login" class="btn btn-primary">Odoslať</button>
-                    <a href="register.php">Registrovať sa</a>
-
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" id="email" placeholder="Vaš e-mail">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Heslo</label>
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Vaše heslo">
+                    </div>
+                    <button type="submit" name="user_login" class="btn btn-primary btn-block">Odoslať</button>
+                    <div class="text-center mt-3">
+                        <a href="register.php">Registrovať sa</a>
+                    </div>
                 </form>
 
                 <?php
