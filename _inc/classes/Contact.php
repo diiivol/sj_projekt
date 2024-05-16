@@ -42,7 +42,7 @@ class Contact extends Database
   {
     try {
       $sql = "SELECT * FROM contact";
-      $query =  $this->db->query($sql);
+      $query = $this->db->query($sql);
       $contacts = $query->fetchAll();
       return $contacts;
     } catch (PDOException $e) {

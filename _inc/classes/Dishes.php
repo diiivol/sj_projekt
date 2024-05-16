@@ -1,4 +1,3 @@
-
 <?php
 
 class Dishes extends Database
@@ -13,7 +12,7 @@ class Dishes extends Database
     public function select()
     {
         try {
-            $query =  $this->db->query("SELECT * FROM dishes");
+            $query = $this->db->query("SELECT * FROM dishes");
             $dishes = $query->fetchAll();
             return $dishes;
         } catch (PDOException $e) {
@@ -35,5 +34,3 @@ class Dishes extends Database
         }
     }
 }
-
-?>

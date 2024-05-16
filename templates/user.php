@@ -23,7 +23,7 @@ if (!isset($_SESSION['cart'])) {
                 $dishes = $dishes_class->select();
                 $totalPrice = 0;
                 $userId = $_SESSION['user_id'];
-                
+
                 echo '<h3>Užívateľ: ' . $_SESSION['user_email'] . '</h3>';
 
                 if (!empty($cartItems)) {

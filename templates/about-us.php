@@ -13,9 +13,12 @@ include_once('partials/header.php');
       Príbeh našej reštaurácie sa začal jedným snom a mnohými chutnými dobrotami.</p>
     <p>Naša cesta sa začala v srdci našej rodiny, kde sme spoločne zdieľali lásku k vareniu a stolovaniu.
       Každý recept, každé kuchárske tajomstvo sa starostlivo odovzdávalo z generácie na generáciu.
-      Keď sme si uvedomili, že naša kulinárska vášeň má potenciál spájať ľudí a rozvíjať komunitu, rozhodli sme sa otvoriť Oyster.</p>
-    <p>Za naše motto sme si zvolili slová: kvalita, vášeň a pohostinnosť. Každé jedlo, ktoré podávame, pripravujeme s láskou a starostlivosťou.
-      V našej kuchyni sa stretávajú tradičné slovenské recepty s moderným šarmom a vytvárajú tak pre našich hostí jedinečné gastronomické zážitky.</p>
+      Keď sme si uvedomili, že naša kulinárska vášeň má potenciál spájať ľudí a rozvíjať komunitu, rozhodli sme sa
+      otvoriť Oyster.</p>
+    <p>Za naše motto sme si zvolili slová: kvalita, vášeň a pohostinnosť. Každé jedlo, ktoré podávame, pripravujeme s
+      láskou a starostlivosťou.
+      V našej kuchyni sa stretávajú tradičné slovenské recepty s moderným šarmom a vytvárajú tak pre našich hostí
+      jedinečné gastronomické zážitky.</p>
     <p>Tešíme sa na stretnutie s vami v "Ustrici" a na spoločné objavovanie radosti z gastronómie!</p>
   </div>
 
@@ -36,7 +39,7 @@ include_once('partials/header.php');
       $img_folder = '../assets/img/o_nas/';
       $slider = new Slider();
       $slider->set_img_folder($img_folder);
-      echo ($slider->generate_slides($img_folder));
+      echo ($slider->generate_slides());
       ?>
       <!--  -->
 

@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include('partials/header.php');
 
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSION['user_role'] == 0) {
@@ -16,7 +17,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                 $contacts = $contact_object->select();
                 if (isset($_POST['delete_contact'])) {
                     $contact_id = $_POST['delete_contact'];
-                    $contact_object->delete($contact_id);
+                    $contact_object->delete();
                     header('Location: ' . $_SERVER['PHP_SELF']);
                     exit();
                 }
@@ -52,7 +53,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                 $dishes = $dishes_object->select();
                 if (isset($_POST['delete_dishes'])) {
                     $dishes_id = $_POST['delete_dishes'];
-                    $dishes_object->delete($dishes_id);
+                    $dishes_object->delete();
                     header('Location: ' . $_SERVER['PHP_SELF']);
                     exit();
                 }
@@ -72,6 +73,37 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                                     <button type="submit" name="delete_dishes" value="' . $d->id . '"' . '>Vymazať</button>
                                 </form>
                             </td>';
+                    echo '</tr>';
+                }
+                echo '</table>';
+                ?>
+                <h2>Orders</h2>
+                <?php
+                $order_object = new Order();
+                $orders = $order_object->select();
+
+                if (isset($_POST['delete_order'])) {
+                    $order_id = $_POST['delete_order'];
+                    $order_object->delete();
+                    header('Location: ' . $_SERVER['PHP_SELF']);
+                    exit();
+                }
+                echo '<table class="admin-table">';
+                echo '<tr><th>Order ID</th>
+                            <th>User ID</th>
+                            <th>Order Date</th>
+                            <th>Delete</th>
+                        </tr>';
+                foreach ($orders as $o) {
+                    echo '<tr>';
+                    echo '<td>' . $o->id . '</td>';
+                    echo '<td>' . $o->user_id . '</td>';
+                    echo '<td>' . $o->order_date . '</td>';
+                    echo '<td>
+                                <form action="" method="POST">
+                                    <button type="submit" name="delete_order" value="' . $o->id . '"' . '>Vymazať</button>
+                                </form>
+                          </td>';
                     echo '</tr>';
                 }
                 echo '</table>';
