@@ -1,7 +1,7 @@
 <?php
 include('partials/header.php');
 
-if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSION['user_role'] == 1){
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSION['user_role'] == 1) {
     header('Location: 404.php');
 }
 
@@ -21,14 +21,17 @@ if (!isset($_SESSION['cart'])) {
 
                 $cartItems = $cart->getCart();
                 $dishes = $dishes_class->select();
-
+                $totalPrice = 0;
                 echo '<table>';
                 echo '<tr><th>Product</th><th>Quantity</th><th>Action</th></tr>';
 
                 foreach ($cartItems as $id => $quantity) {
-                    $name = $dishes[$id-1]->name;
+                    $name = $dishes[$id - 1]->name;
+                    $price = $dishes[$id - 1]->price;
+                    $totalPrice += $price * $quantity;
                     echo '<tr>';
                     echo '<td>' . $name . '</td>';
+                    echo '<td>' . $price . '</td>';
                     echo '<td>' . $quantity . '</td>';
                     echo '<td><form method="POST">
                               <input type="hidden" name="product_id" value="' . $id . '">
@@ -36,20 +39,19 @@ if (!isset($_SESSION['cart'])) {
                           </form></td>';
                     echo '</tr>';
                 }
-                if(isset($_POST['remove_from_cart'])){
+                if (isset($_POST['remove_from_cart'])) {
                     $product_id = $_POST['product_id'];
                     $cart->removeProduct($product_id);
                     header('Location: ' . $_SERVER['PHP_SELF']);
                     exit();
-
-                  }
+                }
                 echo '</table>';
+                echo '<h3>Total price: ' . $totalPrice . '€</h3>';
                 ?>
             </div>
         </div>
-    </section> 
+    </section>
 </main>
 <?php
-    include('partials/footer.php');
+include('partials/footer.php');
 ?>
-
