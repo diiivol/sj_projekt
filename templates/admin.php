@@ -91,27 +91,32 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                     header('Location: ' . $_SERVER['PHP_SELF']);
                     exit();
                 }
-                echo '<table class="admin-table">';
-                echo '<table class="admin-table">';
-                echo '<tr><th>Order ID</th>
-                            <th>User ID</th>
-                            <th>Order Date</th>
-                            <th>Items</th>
-                            <th>Delete</th>
-                        </tr>';
+                // echo '<table class="admin-table">';
+                // echo '<table class="admin-table">';
+                // echo '<tr><th>Order ID</th>
+                //             <th>User ID</th>
+                //             <th>Order Date</th>
+                //             <th>Items</th>
+                //             <th>Delete</th>
+                //         </tr>';
                 foreach ($orders as $o) {
-                    echo '<tr>';
-                    echo '<td>' . $o->id . '</td>';
-                    echo '<td>' . $o->user_id . '</td>';
-                    echo '<td>' . $o->order_date . '</td>';
+                    echo '<div class="col-md-6 col-lg-4">';
+                    echo '<div class="food-item">';
+                    echo '<h3>Order №' . $o->id . '</h3>';
+                    echo '<p>User ID: ' . $o->user_id . '</p>';
+                    echo '<p>Order Date: ' . $o->order_date . '</p>';
+                    // echo '<tr>';
+                    // echo '<td>' . $o->id . '</td>';
+                    // echo '<td>' . $o->user_id . '</td>';
+                    // echo '<td>' . $o->order_date . '</td>';
 
-                    // Get the items for this order
+                    // // Get the items for this order
                     $items = $order_object->select_dishes($o->id);
 
-                    // Create a string with all item names, separated by commas
+                    // // Create a string with all item names, separated by commas
                     $itemNames = array();
                     foreach ($items as $item) {
-                        $itemNames[] = $item->name . ' (' . $item->quantity . ')'; // replace 'name' with the actual field name in your database
+                        $itemNames[] = $item->name . ' x' . $item->quantity; // replace 'name' with the actual field name in your database
                     }
                     $itemNamesString = implode(', ', $itemNames);
 

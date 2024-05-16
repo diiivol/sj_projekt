@@ -45,6 +45,7 @@ if (isset($_POST['user_register'])) {
           <input type="password" id="confirm_password" name="confirm_password" required>
           <br>
           <button type="submit" name="user_register">Registrovať sa</button>
+          <a href="login.php">Prihlásiť sa</a>
         </form>
       </div>
     </div>
