@@ -81,6 +81,24 @@ class Order extends Database
         }
     }
 
+    public function select_dishes($orderId)
+    {
+        try {
+            $sql = "SELECT dishes.*, order_items.quantity FROM order_items
+                JOIN dishes ON order_items.product_id = dishes.id 
+                WHERE order_items.order_id = :order_id";
+
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':order_id' => $orderId]);
+            $items = $stmt->fetchAll(PDO::FETCH_OBJ);
+            return $items;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+
 
     public function clearCart()
     {

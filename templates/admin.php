@@ -81,7 +81,10 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                 <?php
                 $order_object = new Order();
                 $orders = $order_object->select();
-
+                foreach ($orders as $order) {
+                    $items = $order_object->select_dishes($order->id);
+                    // Now $items contains the items for this order
+                }
                 if (isset($_POST['delete_order'])) {
                     $order_id = $_POST['delete_order'];
                     $order_object->delete();
@@ -89,9 +92,11 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                     exit();
                 }
                 echo '<table class="admin-table">';
+                echo '<table class="admin-table">';
                 echo '<tr><th>Order ID</th>
                             <th>User ID</th>
                             <th>Order Date</th>
+                            <th>Items</th>
                             <th>Delete</th>
                         </tr>';
                 foreach ($orders as $o) {
@@ -99,6 +104,19 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                     echo '<td>' . $o->id . '</td>';
                     echo '<td>' . $o->user_id . '</td>';
                     echo '<td>' . $o->order_date . '</td>';
+
+                    // Get the items for this order
+                    $items = $order_object->select_dishes($o->id);
+
+                    // Create a string with all item names, separated by commas
+                    $itemNames = array();
+                    foreach ($items as $item) {
+                        $itemNames[] = $item->name . ' (' . $item->quantity . ')'; // replace 'name' with the actual field name in your database
+                    }
+                    $itemNamesString = implode(', ', $itemNames);
+
+                    echo '<td>' . $itemNamesString . '</td>';
+
                     echo '<td>
                                 <form action="" method="POST">
                                     <button type="submit" name="delete_order" value="' . $o->id . '"' . '>Vymazať</button>
