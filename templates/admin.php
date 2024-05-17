@@ -7,9 +7,9 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
 }
 ?>
 <main>
-    <section class="container">
+    <section class="container pt-3 mb-4">
         <div class="row">
-            <div class="col-100 text-left">
+            <!-- <div class="col-100"> -->
                 <h1>Admin rozhranie</h1>
 
 
@@ -24,6 +24,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                     header('Location: ' . $_SERVER['PHP_SELF']);
                     exit();
                 }
+                echo '<div class="container pt-3 mb-4 contacts-table">';
                 echo '<table class="admin-table">';
                 echo '<tr><th>Name</th>
                               <th>Email</th>
@@ -49,6 +50,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                 }
 
                 echo '</table>';
+                echo '</div>';
                 ?>
 
 
@@ -77,6 +79,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                     exit();
                 }
                 
+                echo '<div class="container pt-3 mb-4 dishes-table">';
                 echo '<table class="admin-table">';
                 echo '<tr><th>Name</th>
                           <th>Description</th>
@@ -112,6 +115,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                 }
                 
                 echo '</table>';
+                echo '</div>';
                 
                 
                 
@@ -134,7 +138,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                 }
 
                 
-                echo '<div class="container">';
+                echo '<div class="container pt-3 mb-4 orders">';
                 echo '<div class="row">';
 
                 foreach ($orders as $o) {
@@ -164,7 +168,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                 }
 
                 echo '</div>'; 
-                echo '</div>'; 
+                // echo '</div>'; 
                 
 
                 ?>

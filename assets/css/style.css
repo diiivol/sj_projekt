@@ -18,6 +18,11 @@
   src: url(../fonts/Bookerly\ Bold.ttf) format('truetype');
 }
 
+@font-face {
+  font-family: 'Bookerly Light';
+  src: url(../fonts/Bookerly\ Light.ttf) format('truetype');
+}
+
 /* Preloader */
 #preloader {
   position: fixed;
@@ -54,12 +59,22 @@ body {
 
 /* Menu */
 .food-item {
+  font-family: 'Bookerly Light';
   background-color: #fff;
   border: 1px solid #ccc;
   margin-bottom: 20px;
   border-radius: 7px;
   padding: 15px;
 }
+
+.food-item h3 {
+  font-family: 'Bookerly';
+}
+
+.food-item .m-0 {
+  font-family: 'Bookerly';
+}
+
 
 .food-item img {
   width: 100%;
@@ -118,6 +133,10 @@ footer {
 .container iframe {
   border-radius: 5px;
   border: 1px solid #ccc;
+}
+
+.form-control {
+  font-family: 'Bookerly Light';
 }
 
 .map-responsive {
@@ -186,17 +205,13 @@ h1 {
 
 /* Admin | User table*/
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-}
+
 
 table th,
 table td {
   border: 1px solid #ddd;
   padding: 8px;
-  text-align: left;
+  text-align: center;
 }
 
 table th {
@@ -207,6 +222,7 @@ table th {
 table tr:nth-child(even) {
   background-color: #f2f2f2;
 }
+
 
 .form-inline {
   display: flex;

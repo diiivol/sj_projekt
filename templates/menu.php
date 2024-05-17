@@ -30,7 +30,7 @@ include_once('partials/header.php');
         echo '<div class="food-item">';
         echo '<img src="../assets/img/' . $dishes[$i]->image . '" alt="' . $dishes[$i]->name . '" class="img-fluid mb-3" onclick="toggleText(\'' . $dishes[$i]->name . '\')">';
         echo '<h3>' . $dishes[$i]->name . '</h3>';
-        echo '<p>' . $dishes[$i]->description . '</p>';
+        echo '<p class="description">' . $dishes[$i]->description . '</p>';
         // echo '<p>'.$dishes[$i]->id.'</p>';
         echo '<p class="m-0">Cena: ' . $dishes[$i]->price . '€</p>';
 
