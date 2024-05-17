@@ -80,6 +80,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                 echo '<table class="admin-table">';
                 echo '<tr><th>Name</th>
                           <th>Description</th>
+                          <th>Price</th>
+                          <th>Ingredients</th>
                           <th>Edit</th>
                           <th>Delete</th>
                       </tr>';
@@ -88,10 +90,15 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                     echo '<tr>';
                     echo '<td class="dish-name">' . $d->name . '</td>';
                     echo '<td class="dish-description">' . $d->description . '</td>';
+                    echo '<td class="dish-price">' . $d->price . '</td>';
+                    echo '<td class="dish-ingredients">' . $d->ingredients . '</td>';
+                    
                     echo '<td>
                             <form action="" method="POST">
                                 <input type="hidden" name="new_dish_name" value="' . $d->name . '">
                                 <input type="hidden" name="new_dish_description" value="' . $d->description . '">
+                                <input type="hidden" name="new_dish_price" value="' . $d->price . '">
+                                <input type="hidden" name="new_dish_ingredients" value="' . $d->ingredients . '">
                                 <button class="edit-button" type="button">Upraviť</button>
                                 <button class="save-button" type="submit" name="update_dishes" value="' . $d->id . '" style="display: none;">OK</button>
                             </form>

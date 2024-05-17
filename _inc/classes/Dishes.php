@@ -41,9 +41,12 @@ class Dishes extends Database
         $id = $_POST['update_dishes'];
         $new_name = $_POST['new_dish_name'];
         $new_description = $_POST['new_dish_description'];
+        $new_price = $_POST['new_dish_price'];
+        $new_ingredients = $_POST['new_dish_ingredients'];
 
-        $sql = "UPDATE dishes SET name = :name, description = :description WHERE id = :id";
+        $sql = "UPDATE dishes SET name = :name, description = :description, price = :price, ingredients = :ingredients WHERE id = :id";
         $stmt = $this->connect()->prepare($sql);
-        $stmt->execute(['name' => $new_name, 'description' => $new_description, 'id' => $id]);
+        $stmt->execute(['name' => $new_name, 'description' => $new_description, 'price' => $new_price, 'ingredients' => $new_ingredients, 'id' => $id]);
     }
+    
 }
