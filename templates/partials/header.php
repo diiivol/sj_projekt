@@ -60,11 +60,10 @@ $page_object->set_page_name($page_name);
 
                     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
                         if ($_SESSION['user_role'] == 1) {
-                            $pages['Admin'] = 'admin.php';
+                            $pages['Admin | <i class="fas fa-user"></i> ' . $_SESSION['user_email']] = 'admin.php';
                         } else {
                             $pages['Kosik | <i class="fas fa-user"></i> ' . $_SESSION['user_email']] = 'user.php';
                         }
-                        // $pages[$_SESSION['user_email'] . 'Odhlásiť sa'] = '#';
                         $pages['Odhlásiť sa'] = 'logout.php';
                     } else {
                         $pages['Prihlásiť sa'] = 'login.php';

@@ -26,8 +26,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 nameInput.value = event.target.value;
             });
 
-            let editableDescriptionInput = document.createElement('input');
-            editableDescriptionInput.type = 'text';
+            let editableDescriptionInput = document.createElement('textarea');
+            editableDescriptionInput.rows = 5;
+            editableDescriptionInput.cols = 60;
             editableDescriptionInput.value = descriptionInput.value;
             editableDescriptionInput.addEventListener('input', (event) => {
                 descriptionInput.value = event.target.value;
@@ -36,12 +37,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
             let editablePriceInput = document.createElement('input');
             editablePriceInput.type = 'text';
             editablePriceInput.value = priceInput.value;
+            editablePriceInput.style.width = '60px'; 
             editablePriceInput.addEventListener('input', (event) => {
                 priceInput.value = event.target.value;
             });
 
-            let editableIngredientsInput = document.createElement('input');
-            editableIngredientsInput.type = 'text';
+            let editableIngredientsInput = document.createElement('textarea');
+            editableIngredientsInput.rows = 5;
             editableIngredientsInput.value = ingredientsInput.value;
             editableIngredientsInput.addEventListener('input', (event) => {
                 ingredientsInput.value = event.target.value;

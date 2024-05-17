@@ -76,6 +76,9 @@ if (!isset($_SESSION['cart'])) {
                 <?php
                 $orders = $order_object->select($userId);
                 
+                echo '<div class="container">';
+                echo '<div class="row">';
+
                 foreach ($orders as $o) {
                     echo '<div class="col-md-6 col-lg-4">';
                     echo '<div class="food-item">';
@@ -83,10 +86,8 @@ if (!isset($_SESSION['cart'])) {
                     echo '<p>User ID: ' . $o->user_id . '</p>';
                     echo '<p>Order Date: ' . $o->order_date . '</p>';
 
-                    
                     $items = $order_object->select_dishes($o->id);
 
-                    
                     $itemNames = array();
                     foreach ($items as $item) {
                         $itemNames[] = $item->name . ' x' . $item->quantity; 
@@ -94,9 +95,18 @@ if (!isset($_SESSION['cart'])) {
                     $itemNamesString = implode(', ', $itemNames);
 
                     echo '<p>' . $itemNamesString . '</p>';
+
+                    echo '<td>
+                            <form action="" method="POST">
+                                <button type="submit" name="delete_order" value="' . $o->id . '"' . '>Vymazať</button>
+                            </form>
+                          </td>';
                     echo '</div>'; 
                     echo '</div>'; 
                 }
+
+                echo '</div>'; 
+                echo '</div>'; 
                 
                 ?>
             </div>
