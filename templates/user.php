@@ -27,7 +27,12 @@ if (!isset($_SESSION['cart'])) {
 
                 if (!empty($cartItems)) {
                     echo '<table>';
-                    echo '<tr><th>Product</th><th>Quantity</th><th>Action</th></tr>';
+                    echo '<tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Action</th>
+                    </tr>';
 
                     foreach ($cartItems as $id => $quantity) {
                         $name = $dishes[$id - 1]->name;
