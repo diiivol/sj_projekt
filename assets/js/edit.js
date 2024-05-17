@@ -3,25 +3,35 @@ window.addEventListener('DOMContentLoaded', (event) => {
         button.addEventListener('click', (event) => {
             event.preventDefault();
 
+            let row = event.target.closest('tr');
+            let nameField = row.querySelector('.dish-name');
+            let descriptionField = row.querySelector('.dish-description');
             let form = event.target.closest('form');
-            let nameField = form.querySelector('.name-field');
-            let descriptionField = form.querySelector('.description-field');
+            let nameInput = form.querySelector('input[name="new_dish_name"]');
+            let descriptionInput = form.querySelector('input[name="new_dish_description"]');
 
-            let nameInput = document.createElement('input');
-            nameInput.type = 'text';
-            nameInput.name = 'new_dish_name';
-            nameInput.value = nameField.textContent;
+            nameField.textContent = '';
+            descriptionField.textContent = '';
 
-            let descriptionInput = document.createElement('input');
-            descriptionInput.type = 'text';
-            descriptionInput.name = 'new_dish_description';
-            descriptionInput.value = descriptionField.textContent;
+            let editableNameInput = document.createElement('input');
+            editableNameInput.type = 'text';
+            editableNameInput.value = nameInput.value;
+            editableNameInput.addEventListener('input', (event) => {
+                nameInput.value = event.target.value;
+            });
 
-            nameField.replaceWith(nameInput);
-            descriptionField.replaceWith(descriptionInput);
+            let editableDescriptionInput = document.createElement('input');
+            editableDescriptionInput.type = 'text';
+            editableDescriptionInput.value = descriptionInput.value;
+            editableDescriptionInput.addEventListener('input', (event) => {
+                descriptionInput.value = event.target.value;
+            });
+
+            nameField.appendChild(editableNameInput);
+            descriptionField.appendChild(editableDescriptionInput);
 
             event.target.style.display = 'none';
-            form.querySelector('.save-button').style.display = 'block';
+            row.querySelector('.save-button').style.display = 'inline';
         });
     });
 });

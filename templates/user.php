@@ -14,7 +14,6 @@ if (!isset($_SESSION['cart'])) {
         <div class="row">
             <div class="col-100 text-left">
                 <h1>Kosik</h1>
-                <h2>Objednávka</h2>
                 <?php
                 $cart = new Cart();
                 $dishes_class = new Dishes();

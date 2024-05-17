@@ -1,0 +1,7 @@
+INSERT INTO dishes (id, name, description, price, image, ingredients) VALUES
+(1, 'Bryndzové Halušky', 'Tradičné slovenské jedlo s varenými haluškami z čerstvých zemiakových knedlíkov, ktoré sú podávané s kvalitnou ovčou bryndzou a obložené opečenou slaninou.', 12.00, '../img/dishes/bryndzove-halusky.jpg', 'zemiakové knedlíky, ovčia bryndza, slanina'),
+(2, 'Kapustnica', 'Výnimočná slovenská kapustová polievka s kombináciou kyslej kapusty, rôznych druhov mäsa a aromatických korenín, starostlivo varovaná na úžasné chute.', 10.00, '../img/dishes/kapustnica.jpg', 'kyslá kapusta, mäso, korenie'),
+(3, 'Sviečková na smotane', 'Marínovaný hovädzí sviečkový rezeň podávaný s bohatou smotanovou omáčkou a tradičnými knedľami, výnimočná chuťová skúsenosť pre gurmánov.', 15.00, '../img/dishes/svieckova-na-smotane.jpg', 'hovädzí rezeň, smotana, knedle'),
+(4, 'Pirohy', 'Špeciálne slovenské knedle plnené lahodnou zmesou zemiakov, syra, kapusty alebo mäsa, varené a následne jemne opečené pre dokonalú textúru.', 11.00, '../img/dishes/pirohy.jpg', 'zemiakové knedle, syr, kapusta, mäso'),
+(5, 'Živánska', 'Grilovaný alebo panvovo opečený bravčový alebo kurací steak, zahalený v plátku šunky a prekrytý kvalitným syrom, sprevádzaný špeciálnymi prílohami.', 13.00, '../img/dishes/zivanska.jpg', 'bravčový alebo kurací steak, šunka, syr'),
+(6, 'Rezeň', 'Klasický mäsový rezeň - krehký a zlatohnedý, podávaný s vybranými prílohami podľa výberu, ideálny pre milovníkov tradičnej slovenskej kuchyne.', 12.00, '../img/dishes/rezen.jpg', 'rezeň');
