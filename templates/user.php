@@ -96,11 +96,6 @@ if (!isset($_SESSION['cart'])) {
 
                     echo '<p>' . $itemNamesString . '</p>';
 
-                    echo '<td>
-                            <form action="" method="POST">
-                                <button type="submit" name="delete_order" value="' . $o->id . '"' . '>Vymazať</button>
-                            </form>
-                          </td>';
                     echo '</div>'; 
                     echo '</div>'; 
                 }
