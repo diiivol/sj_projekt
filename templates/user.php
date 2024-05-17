@@ -13,17 +13,17 @@ if (!isset($_SESSION['cart'])) {
     <section class="container">
         <div class="row">
             <div class="col-100 text-left">
-                <h1>Kosik</h1>
                 <?php
+                echo '<h1>Kosik</h1>';
                 $cart = new Cart();
                 $dishes_class = new Dishes();
+                $order_object = new Order();
 
                 $cartItems = $cart->getCart();
                 $dishes = $dishes_class->select();
                 $totalPrice = 0;
                 $userId = $_SESSION['user_id'];
 
-                echo '<h3>Užívateľ: ' . $_SESSION['user_email'] . '</h3>';
 
                 if (!empty($cartItems)) {
                     echo '<table>';
@@ -63,15 +63,41 @@ if (!isset($_SESSION['cart'])) {
                           <input type="submit" value="Order" name="order">
                       </form>';
                     if (isset($_POST['order'])) {
-                        $order = new Order();
-                        $order->createOrder($userId, $cartItems);
-                        $order->clearCart();
+                        $order_object->createOrder($userId, $cartItems);
+                        $order_object->clearCart();
                         header('Location: ' . $_SERVER['PHP_SELF']);
                         exit();
                     }
                 } else {
                     echo '<h3>Nic tu nie je</h3>';
                 }
+                ?>
+                <h1>Orders</h1>
+                <?php
+                $orders = $order_object->select($userId);
+                
+                foreach ($orders as $o) {
+                    echo '<div class="col-md-6 col-lg-4">';
+                    echo '<div class="food-item">';
+                    echo '<h3>Order №' . $o->id . '</h3>';
+                    echo '<p>User ID: ' . $o->user_id . '</p>';
+                    echo '<p>Order Date: ' . $o->order_date . '</p>';
+
+                    
+                    $items = $order_object->select_dishes($o->id);
+
+                    
+                    $itemNames = array();
+                    foreach ($items as $item) {
+                        $itemNames[] = $item->name . ' x' . $item->quantity; 
+                    }
+                    $itemNamesString = implode(', ', $itemNames);
+
+                    echo '<p>' . $itemNamesString . '</p>';
+                    echo '</div>'; 
+                    echo '</div>'; 
+                }
+                
                 ?>
             </div>
         </div>

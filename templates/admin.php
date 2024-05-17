@@ -140,26 +140,28 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                     echo '<p>User ID: ' . $o->user_id . '</p>';
                     echo '<p>Order Date: ' . $o->order_date . '</p>';
 
-
-                    // // Get the items for this order
+                    
                     $items = $order_object->select_dishes($o->id);
 
-                    // // Create a string with all item names, separated by commas
+                    
                     $itemNames = array();
                     foreach ($items as $item) {
-                        $itemNames[] = $item->name . ' x' . $item->quantity; // replace 'name' with the actual field name in your database
+                        $itemNames[] = $item->name . ' x' . $item->quantity; 
                     }
                     $itemNamesString = implode(', ', $itemNames);
 
-                    echo '<td>' . $itemNamesString . '</td>';
-
+                    echo '<p>' . $itemNamesString . '</p>';
+                    
+                
                     echo '<td>
                                 <form action="" method="POST">
                                     <button type="submit" name="delete_order" value="' . $o->id . '"' . '>Vymazať</button>
                                 </form>
                           </td>';
+                          echo '</div>'; 
+                    echo '</div>'; 
                 }
-                echo '</table>';
+
                 ?>
             </div>
         </div>

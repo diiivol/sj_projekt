@@ -68,11 +68,18 @@ class Order extends Database
     }
 
 
-    public function select()
+    
+    public function select($userId = null)
     {
         try {
-            $sql = "SELECT * FROM orders";
-            $stmt = $this->db->query($sql);
+            if ($userId) {
+                $sql = "SELECT * FROM orders WHERE user_id = :user_id";
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute([':user_id' => $userId]);
+            } else {
+                $sql = "SELECT * FROM orders";
+                $stmt = $this->db->query($sql);
+            }
             $orders = $stmt->fetchAll(PDO::FETCH_OBJ);
             return $orders;
         } catch (PDOException $e) {
@@ -80,6 +87,7 @@ class Order extends Database
             return false;
         }
     }
+
 
     public function select_dishes($orderId)
     {

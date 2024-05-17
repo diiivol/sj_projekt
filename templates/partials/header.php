@@ -17,6 +17,7 @@ $page_object->set_page_name($page_name);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oyster</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <?php echo $page_object->add_stylesheet(); ?>
     <link rel="icon" href="../assets/img/logo_white.svg" type="image/x-icon">
 </head>
@@ -61,8 +62,9 @@ $page_object->set_page_name($page_name);
                         if ($_SESSION['user_role'] == 1) {
                             $pages['Admin'] = 'admin.php';
                         } else {
-                            $pages['Kosik'] = 'user.php';
+                            $pages['Kosik | <i class="fas fa-user"></i> ' . $_SESSION['user_email']] = 'user.php';
                         }
+                        // $pages[$_SESSION['user_email'] . 'Odhlásiť sa'] = '#';
                         $pages['Odhlásiť sa'] = 'logout.php';
                     } else {
                         $pages['Prihlásiť sa'] = 'login.php';
