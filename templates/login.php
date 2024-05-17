@@ -18,9 +18,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
                         <label for="password" class="form-label">Heslo</label>
                         <input type="password" name="password" class="form-control" id="password" placeholder="Vaše heslo">
                     </div>
-                    <button type="submit" name="user_login" class="btn btn-primary btn-block">Odoslať</button>
-                    <div class="text-center mt-3">
-                        <a href="register.php">Registrovať sa</a>
+                    <div class="d-flex">
+                        <button type="submit" name="user_login" class="btn btn-primary">Odoslať</button>
+                        <a href="register.php" class="btn btn-link">Registrovať sa</a>
                     </div>
                 </form>
 

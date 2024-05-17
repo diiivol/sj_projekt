@@ -1,6 +1,17 @@
 /* font */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap'); */
 /* *** */
+
+@font-face {
+  font-family: 'LarosaRegular';
+  src: url('../fonts/LarosaRegular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Bookerly';
+  src: url(../fonts/Bookerly.ttf) format('truetype');
+}
 
 /* Preloader */
 #preloader {
@@ -21,7 +32,10 @@
 body {
   padding: 70px 0 0;
   color: white;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Bookerly';
+  /* font-family: 'LarosaRegular'; */
+  /* font-family: 'Playfair Display', serif; */
+  /* font-family: "Ubuntu Sans Mono", monospace; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,7 +64,7 @@ body {
 /* Tabulka*/
 table {
   width: 100%;
-  margin: 10px auto;
+  /* margin: 10px auto; */
 }
 tr, td {
   font-size: 1.5rem;
