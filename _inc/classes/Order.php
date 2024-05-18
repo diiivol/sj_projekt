@@ -9,18 +9,19 @@ class Order extends Database
         $this->db = $this->connect();
     }
 
-    public function createOrder($userId, $cartItems)
+    
+    public function createOrder($userId, $cartItems, $totalPrice)
     {
         try {
-            //  orders
-            $sql = "INSERT INTO orders (user_id, order_date) VALUES (:user_id, NOW())";
+            // Insert order
+            $sql = "INSERT INTO orders (user_id, order_date, total_price) VALUES (:user_id, NOW(), :total_price)";
             $stmt = $this->db->prepare($sql);
-            $stmt->execute([':user_id' => $userId]);
+            $stmt->execute([':user_id' => $userId, ':total_price' => $totalPrice]);
 
-            // ID 
+            // Get order ID
             $orderId = $this->db->lastInsertId();
 
-            // 
+            // Insert order items
             foreach ($cartItems as $id => $quantity) {
                 $sql = "INSERT INTO order_items (order_id, product_id, quantity) VALUES (:order_id, :product_id, :quantity)";
                 $stmt = $this->db->prepare($sql);

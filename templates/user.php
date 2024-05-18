@@ -17,12 +17,18 @@ if (!isset($_SESSION['cart'])) {
             <!-- <div class="col-100 text-left"> -->
                 <?php
                 echo '<h1>Kosik</h1>';
-                $cart = new Cart();
                 $dishes_class = new Dishes();
                 $order_object = new Order();
+                
+                $dishes =[];
+                foreach ($dishes_class->select() as $dish) {
+                    $dishes[$dish->id] = $dish;
+                }
 
+                $cart = new Cart();
                 $cartItems = $cart->getCart();
-                $dishes = $dishes_class->select();
+
+                // $dishes = $dishes_class->select();
                 $totalPrice = 0;
                 $userId = $_SESSION['user_id'];
 
@@ -36,10 +42,13 @@ if (!isset($_SESSION['cart'])) {
                         <th>Quantity</th>
                         <th>Action</th>
                     </tr>';
-
+                    
                     foreach ($cartItems as $id => $quantity) {
-                        $name = $dishes[$id - 1]->name;
-                        $price = $dishes[$id - 1]->price;
+                        if (isset($dishes[$id])) {
+                            $name = $dishes[$id]->name;
+                            $price = $dishes[$id]->price;
+                            
+                        }
                         $delivery = 5;
                         $totalPrice += $price * $quantity + $delivery;
                         echo '<tr>';
@@ -67,7 +76,7 @@ if (!isset($_SESSION['cart'])) {
                           <input type="submit" value="Order" name="order">
                       </form>';
                     if (isset($_POST['order'])) {
-                        $order_object->createOrder($userId, $cartItems);
+                        $order_object->createOrder($userId, $cartItems, $totalPrice + $delivery);
                         $order_object->clearCart();
                         header('Location: ' . $_SERVER['PHP_SELF']);
                         exit();
@@ -90,26 +99,20 @@ if (!isset($_SESSION['cart'])) {
                     echo '<div class="col-md-6 col-lg-4">';
                     echo '<div class="food-item">';
                     echo '<h3>Order №' . $o->id . '</h3>';
-                    echo '<p>User ID: ' . $o->user_id . '</p>';
-                    echo '<p>Order Date: ' . $o->order_date . '</p>';
-                    // echo '<p>Order Price: ' . $o->price . '€</p>';
-                    echo '<p>Order Status: ' . $o->order_status . '</p>';
-
+                    // echo '<p>Order Date: ' . $o->order_date . '</p>';
+                    
                     $items = $order_object->select_dishes($o->id);
-
+                    
                     $itemNames = array();
                     foreach ($items as $item) {
                         $itemNames[] = $item->name . ' x' . $item->quantity; 
                     }
-                    $itemNamesString = implode(', ', $itemNames);
-
+                    $itemNamesString = implode('<br>', $itemNames);
+                    
                     echo '<p>' . $itemNamesString . '</p>';
-
-                    echo '<td>
-                            <form action="" method="POST">
-                                <button type="submit" name="delete_order" value="' . $o->id . '"' . '>Vymazať</button>
-                            </form>
-                          </td>';
+                    
+                    echo '<p>Order Status: ' . $o->order_status . '</p>';
+                    echo '<h4>Order Price: ' . $o->total_price . '€</h4>';
                     echo '</div>'; 
                     echo '</div>'; 
                 }
