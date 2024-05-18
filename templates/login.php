@@ -8,9 +8,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
 
 
 <div class="container login d-flex align-items-center justify-content-center">
-    <div>
-        <h1 class="display-4 text-center mb-4">Prihlásenie</h1>
-        <div class="row">
+    <div class="card p-3">
+        <div class="card-body">
+            <h1 class="display-4 text-center mb-4">Prihlásenie</h1>
             <form action="" method="POST">
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
@@ -26,34 +26,28 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
                 </div>
             </form>
 
-                <?php
-
-                if (isset($_POST['user_login'])) {
-                    $email = $_POST['email'];
-                    $password = $_POST['password'];
-                    $user = new User();
-                    //tu bude vzdy true alebo false
-                    $login_success = $user->login($email, $password);
-                    if ($login_success == true) {
-
-
-                        if ($_SESSION['user_role'] == 1) {
-                            header('Location: admin.php');
-                        } else {
-                            $_SESSION['cart'] = array();
-                            header('Location: user.php');
-                        }
-                        exit;
+            <?php
+            if (isset($_POST['user_login'])) {
+                $email = $_POST['email'];
+                $password = $_POST['password'];
+                $user = new User();
+                $login_success = $user->login($email, $password);
+                if ($login_success == true) {
+                    if ($_SESSION['user_role'] == 1) {
+                        header('Location: admin.php');
                     } else {
-                        echo 'Nesprávne meno alebo heslo';
+                        $_SESSION['cart'] = array();
+                        header('Location: user.php');
                     }
+                    exit;
+                } else {
+                    echo 'Nesprávne meno alebo heslo';
                 }
-
-                ?>
-
-            </div>
+            }
+            ?>
         </div>
     </div>
+</div>
 
 <?php
 include('partials/footer.php');

@@ -27,9 +27,9 @@ if (isset($_POST['user_register'])) {
 ?>
 
 <div class="container register d-flex align-items-center justify-content-center">
-    <div>
-        <h1 class="display-4 text-center mb-4">Registrácia</h1>
-        <div class="row">
+    <div class = "card p-3">
+      <div class="card-body">
+          <h1 class="display-4 text-center mb-4">Registrácia</h1>
             <form action="" method="POST">
                 <div class="mb-3">
                     <label for="email" class="form-label">E-mail:</label>
