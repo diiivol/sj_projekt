@@ -11,8 +11,8 @@ if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
 }
 ?>
-<main>
-    <section class="container pt-3 mb-4">
+
+    <div class="container user pt-3 mb-4">
         <div class="row">
             <!-- <div class="col-100 text-left"> -->
                 <?php
@@ -131,8 +131,8 @@ if (!isset($_SESSION['cart'])) {
                 ?>
             </div>
         </div>
-    </section>
-</main>
+    </div>
+
 <?php
 include('partials/footer.php');
 ?>

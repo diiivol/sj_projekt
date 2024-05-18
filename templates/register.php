@@ -26,8 +26,8 @@ if (isset($_POST['user_register'])) {
 }
 ?>
 
-<main>
-  <section class="container register pt-3">
+
+<div class="container register pt-3">
     <div class="row justify-content-center">
       <div class="col-12 col-md-6">
         <h1 class="display-4 text-center mb-4">Registrácia</h1>
@@ -51,8 +51,8 @@ if (isset($_POST['user_register'])) {
         </form>
       </div>
     </div>
-  </section>
-</main>
+</div>
+
 
 <?php
 include_once('partials/footer.php');

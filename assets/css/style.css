@@ -248,8 +248,14 @@ h1 {
 .o-nas,
 .kontakt,
 .thank,
-.login {
-  flex: 1 0 auto;
+.login,
+.register,
+.error,
+.admin,
+.user {
+  /* flex: 1 0 auto; */
+  /* flex-grow: 1; */
+  flex-grow: 1;
 }
 
 /* *** */

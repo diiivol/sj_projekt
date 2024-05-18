@@ -4,8 +4,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
     header('Location: admin.php');
 }
 ?>
-<main>
-    <section class="container login pt-3">
+
+    <div class="container login pt-3">
         <div class="row justify-content-center">
             <div class="col-12 col-md-6">
                 <h1 class="display-4 text-center mb-4">Prihlásenie</h1>
@@ -51,8 +51,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
 
             </div>
         </div>
-    </section>
-</main>
+    </div>
+
 <?php
 include('partials/footer.php');
 ?>

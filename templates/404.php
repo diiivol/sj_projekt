@@ -1,13 +1,13 @@
 <?php
 include_once('partials/header.php');
 ?>
-<main>
-  <section class="container">
+
+  <section class="container error pt-3 mb-4">
 
     <h1> 404 </h1>
-  </section>
+</div>
 
-</main>
+
 <?php
 include_once('partials/footer.php')
 ?>

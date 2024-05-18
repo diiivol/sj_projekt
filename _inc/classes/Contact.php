@@ -10,34 +10,35 @@ class Contact extends Database
     $this->db = $this->connect();
   }
 
+  
+  
+  
   function insert()
   {
-    if ($this->db) {
-      //  echo 'máme spojenie';
-    }
-    if (isset($_POST['contact_submitted'])) {
-      //  echo 'Form bol odoslany';
-
+    if ($this->db && isset($_POST['contact_submitted'])) {
       $data = array(
         'contact_name' => $_POST['name'],
         'contact_email' => $_POST['email'],
-        //'contact_message'=>$_POST['message'],
         'contact_message' => filter_var($_POST['message'], FILTER_SANITIZE_FULL_SPECIAL_CHARS),
         'contact_acceptance' => $_POST['acceptance'],
       );
 
       try {
         $query = "INSERT INTO contact (name, email, message, acceptance) VALUES 
-                 (:contact_name, :contact_email, :contact_message, :contact_acceptance)";
+             (:contact_name, :contact_email, :contact_message, :contact_acceptance)";
         $query_run = $this->db->prepare($query);
         $query_run->execute($data);
+
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit;
       } catch (PDOException $e) {
-        $e->getMessage();
+        echo 'Post nebol vykonaný: ' . $e->getMessage();
       }
-    } else {
-      echo 'Post nebol vykonaný';
     }
   }
+
+  
+  
   public function select()
   {
     try {

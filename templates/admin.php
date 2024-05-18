@@ -6,8 +6,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
     header('Location: 404.php');
 }
 ?>
-<main>
-    <section class="container pt-3 mb-4">
+
+    <div class="container admin pt-3 mb-4">
         <div class="row">
             <!-- <div class="col-100"> -->
                 <h1>Admin rozhranie</h1>
@@ -207,8 +207,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                 ?>
             </div>
         </div>
-    </section>
-</main>
+    </div>
+
 <?php
 include('partials/footer.php');
 ?>
