@@ -48,5 +48,17 @@ class Dishes extends Database
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute(['name' => $new_name, 'description' => $new_description, 'price' => $new_price, 'ingredients' => $new_ingredients, 'id' => $id]);
     }
+
+    public function insert()
+    {
+        $name = $_POST['new_dish_name'];
+        $description = $_POST['new_dish_description'];
+        $price = $_POST['new_dish_price'];
+        $ingredients = $_POST['new_dish_ingredients'];
+
+        $sql = "INSERT INTO dishes (name, description, price, ingredients) VALUES (:name, :description, :price, :ingredients)";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute(['name' => $name, 'description' => $description, 'price' => $price, 'ingredients' => $ingredients]);
+    }
     
 }

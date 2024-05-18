@@ -69,15 +69,19 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                     header('Location: ' . $_SERVER['PHP_SELF']);
                     exit();
                 }
-
-
-
                 if (isset($_POST['update_dishes'])) {
                     $dishes_id = $_POST['update_dishes'];
                     $dishes_object->update();
                     header('Location: ' . $_SERVER['PHP_SELF']);
                     exit();
                 }
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    $dishes = new Dishes();
+                    $dishes->insert();
+                    header('Location: ' . $_SERVER['PHP_SELF']);
+                    exit();
+                }
+
                 
                 echo '<div class="container pt-3 mb-4 dishes-table">';
                 echo '<table class="admin-table">';
@@ -98,10 +102,10 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                     
                     echo '<td>
                             <form action="" method="POST">
-                                <input type="hidden" name="new_dish_name" value="' . $d->name . '">
-                                <input type="hidden" name="new_dish_description" value="' . $d->description . '">
-                                <input type="hidden" name="new_dish_price" value="' . $d->price . '">
-                                <input type="hidden" name="new_dish_ingredients" value="' . $d->ingredients . '">
+                                <input type="hidden" name="new_dish_name" value="' . $d->name . '" required>
+                                <input type="hidden" name="new_dish_description" value="' . $d->description . '" required>
+                                <input type="hidden" name="new_dish_price" value="' . $d->price . '" required>
+                                <input type="hidden" name="new_dish_ingredients" value="' . $d->ingredients . '" required>
                                 <button class="edit-button" type="button">Upraviť</button>
                                 <button class="save-button" type="submit" name="update_dishes" value="' . $d->id . '" style="display: none;">OK</button>
                             </form>
@@ -113,8 +117,19 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                           </td>';
                     echo '</tr>';
                 }
+                echo '<tr>
+                    <form method="POST">
+                        <td><input type="text" id="new_dish_name" name="new_dish_name" required style="width: 100%;"></td>
+                        <td><textarea id="new_dish_description" name="new_dish_description" required rows="4" style="width: 100%;"></textarea></td>
+                        <td><input type="number" value="1" min="1" step="0.50" id="new_dish_price" name="new_dish_price" required style="width: 100%;"></td>
+                        <td><textarea id="new_dish_ingredients" name="new_dish_ingredients" required rows="4" style="width: 100%;"></textarea></td>
+                        <td colspan="2"><input type="submit" value="Add Dish" name="add_dish" required></td>
+                    </form>
+                </tr>';
                 
                 echo '</table>';
+
+
                 echo '</div>';
             
 
@@ -169,6 +184,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                     echo '<option value="preparing"' . ($o->order_status == 'preparing' ? ' selected' : '') . '>Preparing</option>';
                     echo '<option value="ready"' . ($o->order_status == 'ready' ? ' selected' : '') . '>Ready</option>';
                     echo '</select>';
+                    echo '<br>';
                     echo '<button type="submit" name="update_order" value="' . $o->id . '">Update</button>';
                     echo '</form>';
 

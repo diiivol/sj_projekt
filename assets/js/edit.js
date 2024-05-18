@@ -22,28 +22,33 @@ window.addEventListener('DOMContentLoaded', (event) => {
             let editableNameInput = document.createElement('input');
             editableNameInput.type = 'text';
             editableNameInput.value = nameInput.value;
+            editableNameInput.style.width = '100%';
             editableNameInput.addEventListener('input', (event) => {
                 nameInput.value = event.target.value;
             });
 
             let editableDescriptionInput = document.createElement('textarea');
-            editableDescriptionInput.rows = 5;
-            editableDescriptionInput.cols = 60;
+            editableDescriptionInput.rows = 4;
+            // editableDescriptionInput.cols = 60;
+            editableDescriptionInput.style.width = '100%';
             editableDescriptionInput.value = descriptionInput.value;
             editableDescriptionInput.addEventListener('input', (event) => {
                 descriptionInput.value = event.target.value;
             });
 
             let editablePriceInput = document.createElement('input');
-            editablePriceInput.type = 'text';
+            editablePriceInput.type = 'number';
+            editablePriceInput.min = 1;
+            editablePriceInput.step = 0.50;
             editablePriceInput.value = priceInput.value;
-            editablePriceInput.style.width = '60px'; 
+            editablePriceInput.style.width = '100%';
             editablePriceInput.addEventListener('input', (event) => {
                 priceInput.value = event.target.value;
             });
 
             let editableIngredientsInput = document.createElement('textarea');
-            editableIngredientsInput.rows = 5;
+            editableIngredientsInput.rows = 4;
+            editableIngredientsInput.style.width = '100%';
             editableIngredientsInput.value = ingredientsInput.value;
             editableIngredientsInput.addEventListener('input', (event) => {
                 ingredientsInput.value = event.target.value;
