@@ -57,7 +57,7 @@ if (!isset($_SESSION['cart'])) {
                         echo '<td>' . $quantity . '</td>';
                         echo '<td><form method="POST">
                               <input type="hidden" name="product_id" value="' . $id . '">
-                              <input type="submit" value="Remove" name="remove_from_cart">
+                            <input type="submit" value="Remove" name="remove_from_cart" class="btn btn-danger">
                           </form></td>';
                         echo '</tr>';
                     }
@@ -71,10 +71,13 @@ if (!isset($_SESSION['cart'])) {
                     echo '</div>';
                     echo '<h4>Total price: ' . $totalPrice . '€</h4>';
                     echo '<h4>Delivery: ' . $delivery . '€</h4>';
-                    echo '<h3>Total price with delivery: ' . ($totalPrice + $delivery) . '€</h3>';
+                    
+                    echo '<h3><u>Total price with delivery: ' . ($totalPrice + $delivery) . '€</u></h3>';
+                                        
                     echo '<form method="POST">
-                          <input type="submit" value="Order" name="order">
-                      </form>';
+                        <input type="submit" value="Order" name="order" class="btn btn-primary mb-4">
+                    </form>';
+                    
                     if (isset($_POST['order'])) {
                         $order_object->createOrder($userId, $cartItems, $totalPrice + $delivery);
                         $order_object->clearCart();

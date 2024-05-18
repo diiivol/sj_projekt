@@ -1,8 +1,8 @@
 <footer>
   <div class="container">
     <div class="row">
-      <div class="col text-left">&copy; 2023 Oyster.</div>
-      <div class="col-md-auto text-right">Vytvorila Daria Volynchikova.</div>
+      <div class="col text-left">&copy; 2023 Oyster</div>
+      <div class="col-md-auto text-right">Vytvorila Daria Volynchikova</div>
     </div>
   </div>
 </footer>

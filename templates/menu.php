@@ -15,6 +15,8 @@ include_once('partials/header.php');
       $quantity = $_POST['quantity'];
       $product_id = $_POST['product_id'];
       $cart->addProduct($product_id, $quantity);
+      header('Location: menu.php');
+      exit();
     }
 
     $dishes_class = new Dishes();
@@ -29,23 +31,27 @@ include_once('partials/header.php');
         echo '<div class="col-md-6 col-lg-4">';
         echo '<div class="food-item">';
         echo '<img src="../assets/img/' . $dishes[$i]->image . '" alt="' . $dishes[$i]->name . '" class="img-fluid mb-3" onclick="toggleText(\'' . $dishes[$i]->name . '\')">';
+
+        if (isset($cartItems[$dishes[$i]->id])) {
+          echo '<div class="in_cart"><a href="user.php">Už do košíka: ' . $cartItems[$dishes[$i]->id] . '</a></div>';
+        }
         echo '<h3>' . $dishes[$i]->name . '</h3>';
         echo '<p class="description">' . $dishes[$i]->description . '</p>';
         // echo '<p>'.$dishes[$i]->id.'</p>';
         echo '<p class="m-0">Cena: ' . $dishes[$i]->price . '€</p>';
 
+        
         if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['user_role'] != 1) {
-          echo '<form method="POST">';
-          echo '<input type="number" name="quantity" value="1" min="1" max="10">';
+          echo '<form method="POST" style="display: flex; justify-content: space-between; align-items: center;">';
+          echo '<div class="form-group">';
+          echo '<input type="number" name="quantity" value="1" min="1" max="50" class="form-control" style="width: 100px;">';
           echo '<input type="hidden" name="product_id" value="' . $dishes[$i]->id . '">';
-          echo '<input type="submit" value="Pridať do košíka" name="add_to_cart">';
+          echo '</div>';
+          echo '<button type="submit" name="add_to_cart" class="btn btn-dark">Pridať do košíka</button>';
           echo '</form>';
 
-          if (isset($cartItems[$dishes[$i]->id])) {
-            
-            echo '<p style="margin: 0;">Už do košíka: ' . $cartItems[$dishes[$i]->id] . '</p>';
-            }
         }
+        
 
         echo '<div id="' . $dishes[$i]->name . '" style="display: none;">';
         echo '<br>';
