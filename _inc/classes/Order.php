@@ -106,7 +106,15 @@ class Order extends Database
         }
     }
 
+    public function update()
+    {
+        $id = $_POST['update_order'];
+        $new_status = $_POST['order_status'];
 
+        $sql = "UPDATE orders SET order_status = :order_status WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['order_status' => $new_status, 'id' => $id]);
+    }
 
     public function clearCart()
     {

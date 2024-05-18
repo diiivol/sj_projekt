@@ -42,8 +42,9 @@ include_once('partials/header.php');
           echo '</form>';
 
           if (isset($cartItems[$dishes[$i]->id])) {
-            echo '<p>Už do košíka: ' . $cartItems[$dishes[$i]->id] . '</p>';
-          }
+            
+            echo '<p style="margin: 0;">Už do košíka: ' . $cartItems[$dishes[$i]->id] . '</p>';
+            }
         }
 
         echo '<div id="' . $dishes[$i]->name . '" style="display: none;">';

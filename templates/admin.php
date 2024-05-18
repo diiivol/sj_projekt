@@ -116,9 +116,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                 
                 echo '</table>';
                 echo '</div>';
-                
-                
-                
+            
 
                 ?>
                 <h2>Orders</h2>
@@ -137,10 +135,17 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                     exit();
                 }
 
+                if (isset($_POST['update_order'])) {
+
+                    $order_object->update();
+                    header('Location: ' . $_SERVER['PHP_SELF']);
+                    exit();
+                }
+
                 
                 echo '<div class="container pt-3 mb-4 orders">';
                 echo '<div class="row">';
-
+                
                 foreach ($orders as $o) {
                     echo '<div class="col-md-6 col-lg-4">';
                     echo '<div class="food-item">';
@@ -158,14 +163,23 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
 
                     echo '<p>' . $itemNamesString . '</p>';
 
-                    echo '<td>
-                            <form action="" method="POST">
-                                <button type="submit" name="delete_order" value="' . $o->id . '"' . '>Vymazať</button>
-                            </form>
-                          </td>';
+                    echo '<form action="" method="POST">';
+                    echo '<select name="order_status">';
+                    echo '<option value="accepted"' . ($o->order_status == 'accepted' ? ' selected' : '') . '>Accepted</option>';
+                    echo '<option value="preparing"' . ($o->order_status == 'preparing' ? ' selected' : '') . '>Preparing</option>';
+                    echo '<option value="ready"' . ($o->order_status == 'ready' ? ' selected' : '') . '>Ready</option>';
+                    echo '</select>';
+                    echo '<button type="submit" name="update_order" value="' . $o->id . '">Update</button>';
+                    echo '</form>';
+
+                    echo '<form action="" method="POST">';
+                    echo '<button type="submit" name="delete_order" value="' . $o->id . '">Delete</button>';
+                    echo '</form>';
+
                     echo '</div>'; 
                     echo '</div>'; 
                 }
+                
 
                 echo '</div>'; 
                 // echo '</div>'; 
