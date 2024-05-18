@@ -5,24 +5,26 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
 }
 ?>
 
-    <div class="container login pt-3">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-6">
-                <h1 class="display-4 text-center mb-4">Prihlásenie</h1>
-                <form action="" method="POST">
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control" id="email" placeholder="Vaš e-mail">
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Heslo</label>
-                        <input type="password" name="password" class="form-control" id="password" placeholder="Vaše heslo">
-                    </div>
-                    <div class="d-flex">
-                        <button type="submit" name="user_login" class="btn btn-primary">Odoslať</button>
-                        <a href="register.php" class="btn btn-link">Registrovať sa</a>
-                    </div>
-                </form>
+
+
+<div class="container login d-flex align-items-center justify-content-center">
+    <div>
+        <h1 class="display-4 text-center mb-4">Prihlásenie</h1>
+        <div class="row">
+            <form action="" method="POST">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="Vaš e-mail">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Heslo</label>
+                    <input type="password" name="password" class="form-control" id="password" placeholder="Vaše heslo">
+                </div>
+                <div class="d-flex">
+                    <button type="submit" name="user_login" class="btn btn-primary">Odoslať</button>
+                    <a href="register.php" class="btn btn-link">Registrovať sa</a>
+                </div>
+            </form>
 
                 <?php
 

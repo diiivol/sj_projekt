@@ -112,8 +112,8 @@ body::after {
   text-transform: uppercase;
   font-family: 'Bookerly Bold';
   font-size: 13px;
-  color: #967259;
-  background-color:  	 	#ece0d1;
+  color: #deb6aa;
+  background-color:  	 	#e6dfde;
   border: none;
   border-radius: 15px; 
   padding: 5px 10px;
@@ -122,7 +122,7 @@ body::after {
 }
 
 .in_cart a {
-  color: #967259;
+  color: #deb6aa;
   text-decoration: none;
 
 }

@@ -19,7 +19,7 @@ $page_object->set_page_name($page_name);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <?php echo $page_object->add_stylesheet(); ?>
-    <link rel="icon" href="../assets/img/logo_white.svg" type="image/x-icon">
+    <link rel="icon" href="../assets/img/icon.svg" type="image/x-icon">
 </head>
 
 <body>
@@ -40,11 +40,11 @@ $page_object->set_page_name($page_name);
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
             <a class="navbar-brand d-none d-lg-block" href="../index.php">
-                <img src="../assets/img/logo_white.svg" alt="Logo" width="30" height="30" class="img-fluid">
-                Oyster
+                <img src="../assets/img/icon.svg" alt="Logo" width="35" height="35" class="img-fluid">
+                yster
             </a>
             <a class="navbar-brand d-lg-none" href="../index.php">
-                <img src="../assets/img/logo_white.svg" alt="Logo" width="30" height="30" class="d-inline-block align-text-top me-2">
+                <img src="../assets/img/icon.svg" alt="Logo" width="35" height="35" class="d-inline-block align-text-top me-2">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
