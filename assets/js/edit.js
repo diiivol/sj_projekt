@@ -38,7 +38,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             let editablePriceInput = document.createElement('input');
             editablePriceInput.type = 'number';
-            editablePriceInput.min = 1;
+            editablePriceInput.min = 0;
             editablePriceInput.step = 0.50;
             editablePriceInput.value = priceInput.value;
             editablePriceInput.style.width = '100%';

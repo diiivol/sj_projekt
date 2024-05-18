@@ -75,9 +75,9 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                     header('Location: ' . $_SERVER['PHP_SELF']);
                     exit();
                 }
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $dishes = new Dishes();
-                    $dishes->insert();
+
+                if (isset($_POST['add_dish'])) {
+                    $dishes_object->insert();
                     header('Location: ' . $_SERVER['PHP_SELF']);
                     exit();
                 }
@@ -121,7 +121,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                     <form method="POST">
                         <td><input type="text" id="new_dish_name" name="new_dish_name" required style="width: 100%;"></td>
                         <td><textarea id="new_dish_description" name="new_dish_description" required rows="4" style="width: 100%;"></textarea></td>
-                        <td><input type="number" value="1" min="1" step="0.50" id="new_dish_price" name="new_dish_price" required style="width: 100%;"></td>
+                        <td><input type="number" value="0" min="0" step="0.50" id="new_dish_price" name="new_dish_price" required style="width: 100%;"></td>
                         <td><textarea id="new_dish_ingredients" name="new_dish_ingredients" required rows="4" style="width: 100%;"></textarea></td>
                         <td colspan="2"><input type="submit" value="Add Dish" name="add_dish" required></td>
                     </form>
@@ -184,8 +184,10 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                     echo '<option value="preparing"' . ($o->order_status == 'preparing' ? ' selected' : '') . '>Preparing</option>';
                     echo '<option value="ready"' . ($o->order_status == 'ready' ? ' selected' : '') . '>Ready</option>';
                     echo '</select>';
-                    echo '<br>';
                     echo '<button type="submit" name="update_order" value="' . $o->id . '">Update</button>';
+
+
+                    
                     echo '</form>';
 
                     echo '<form action="" method="POST">';

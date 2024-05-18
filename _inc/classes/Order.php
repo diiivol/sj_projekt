@@ -13,15 +13,13 @@ class Order extends Database
     public function createOrder($userId, $cartItems, $totalPrice)
     {
         try {
-            // Insert order
+
             $sql = "INSERT INTO orders (user_id, order_date, total_price) VALUES (:user_id, NOW(), :total_price)";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([':user_id' => $userId, ':total_price' => $totalPrice]);
 
-            // Get order ID
             $orderId = $this->db->lastInsertId();
 
-            // Insert order items
             foreach ($cartItems as $id => $quantity) {
                 $sql = "INSERT INTO order_items (order_id, product_id, quantity) VALUES (:order_id, :product_id, :quantity)";
                 $stmt = $this->db->prepare($sql);
@@ -46,22 +44,21 @@ class Order extends Database
                 'order_id' => $_POST['delete_order']
             );
 
-            // Удаляем элементы заказа
             $query = "DELETE FROM order_items WHERE order_id = :order_id";
             $query_run = $this->db->prepare($query);
             $query_run->execute($data);
 
-            // Удаляем заказ
+
             $query = "DELETE FROM orders WHERE id = :order_id";
             $query_run = $this->db->prepare($query);
             $query_run->execute($data);
 
-            // Завершаем транзакцию
+
             $this->db->commit();
 
             return true;
         } catch (PDOException $e) {
-            // Откатываем транзакцию, если что-то пошло не так
+
             $this->db->rollBack();
             echo "Error: " . $e->getMessage();
             return false;
