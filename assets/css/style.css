@@ -55,6 +55,38 @@ body {
   background-color: #faf8f8;
 }
 
+
+body::before{
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 10%; 
+  background: url('../img/left.png');
+  background-repeat: repeat-y;
+  background-position: right;
+  z-index: -1;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 10%;
+  background: url('../img/right.png');
+  background-repeat: repeat-y;
+  background-position: left;
+  z-index: -1;
+}
+
+body::before {
+  left: 0;
+}
+
+body::after {
+  right: 0;
+}
 /* *** */
 
 /* Menu */
@@ -71,7 +103,8 @@ body {
   font-family: 'Bookerly';
 }
 
-.food-item .m-0 {
+.food-item .cena {
+  margin-bottom: 7px;
   font-family: 'Bookerly';
 }
 

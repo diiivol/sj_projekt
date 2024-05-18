@@ -16,7 +16,7 @@ if (!isset($_SESSION['cart'])) {
         <div class="row">
             <!-- <div class="col-100 text-left"> -->
                 <?php
-                echo '<h1>Kosik</h1>';
+                echo '<h1>Košík</h1>';
                 $dishes_class = new Dishes();
                 $order_object = new Order();
                 
@@ -85,16 +85,18 @@ if (!isset($_SESSION['cart'])) {
                         exit();
                     }
                 } else {
-                    echo '<h3>Nic tu nie je</h3>';
+                    echo '<h4>Nič tu nie je. Prejsť do <a href="menu.php">menu</a>?</h4>';
                 }
                 ?>
 
 
 
-                <h1>Orders</h1>
+                <h1>Objednávky</h1>
                 <?php
                 $orders = $order_object->select($userId);
                 
+                if (!empty($orders)) {
+
                 echo '<div class="container pt-3 mb-4 orders">';
                 echo '<div class="row">';
 
@@ -120,8 +122,11 @@ if (!isset($_SESSION['cart'])) {
                     echo '</div>'; 
                 }
 
-                echo '</div>';  
+                echo '</div>';  }
                 // echo '</div>'; 
+                else {
+                    echo '<h4>Nič tu nie je.</h4>';
+                }
                 
                 ?>
             </div>

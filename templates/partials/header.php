@@ -25,7 +25,7 @@ $page_object->set_page_name($page_name);
 <body>
     <!-- Preload (kreatívny bod?) -->
     <div id="preloader">
-        <img src="../assets/img/preloader.gif" alt="Loading...">
+        <img src="../assets/img/loading.gif" width="50" height = "50" alt="Loading...">
     </div>
     <!--  -->
 

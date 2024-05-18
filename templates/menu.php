@@ -38,7 +38,7 @@ include_once('partials/header.php');
         echo '<h3>' . $dishes[$i]->name . '</h3>';
         echo '<p class="description">' . $dishes[$i]->description . '</p>';
         // echo '<p>'.$dishes[$i]->id.'</p>';
-        echo '<p class="m-0">Cena: ' . $dishes[$i]->price . '€</p>';
+        echo '<p class="cena">Cena: ' . $dishes[$i]->price . '€</p>';
 
         
         if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['user_role'] != 1) {

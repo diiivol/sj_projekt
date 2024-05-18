@@ -43,7 +43,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                     // echo '<td>'.$c->acceptance;'</td>';
                     echo '<td>
                             <form action="" method="POST">
-                                <button type="submit" name="delete_contact" value="' . $c->id . '"' . '>Vymazať</button>
+                                <button type="submit" name="delete_contact" class="btn btn-danger" value="' . $c->id . '"' . '>Vymazať</button>
                             </form>
                           </td>';
                     echo '</tr>';
@@ -55,7 +55,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
 
 
 
-                <h2>Dishes</h2>
+                <h2>Jedlá</h2>
                 <?php
                 $dishes_object = new Dishes();
 
@@ -64,13 +64,13 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
 
 
                 if (isset($_POST['delete_dishes'])) {
-                    $dishes_id = $_POST['delete_dishes'];
+                    // $dishes_id = $_POST['delete_dishes'];
                     $dishes_object->delete();
                     header('Location: ' . $_SERVER['PHP_SELF']);
                     exit();
                 }
                 if (isset($_POST['update_dishes'])) {
-                    $dishes_id = $_POST['update_dishes'];
+                    // $dishes_id = $_POST['update_dishes'];
                     $dishes_object->update();
                     header('Location: ' . $_SERVER['PHP_SELF']);
                     exit();
@@ -87,10 +87,10 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                 echo '<table class="admin-table">';
                 echo '<tr><th>Name</th>
                           <th>Description</th>
-                          <th>Price</th>
+                          <th>Price <i class="fa fa-eur" ></th>
                           <th>Ingredients</th>
-                          <th>Edit</th>
-                          <th>Delete</th>
+                          <th><i class="fa fa-pencil" ></th>
+                          <th><i class="fa fa-trash"></th>
                       </tr>';
                 
                 foreach ($dishes as $d) {
@@ -112,7 +112,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                           </td>';
                     echo '<td>
                             <form action="" method="POST">
-                                <button type="submit" name="delete_dishes" value="' . $d->id . '">Vymazať</button>
+                                <button type="submit" name="delete_dishes" class="btn btn-danger" value="' . $d->id . '">Vymazať</button>
                             </form>
                           </td>';
                     echo '</tr>';
@@ -134,13 +134,12 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
             
 
                 ?>
-                <h2>Orders</h2>
+                <h2>Objednávky</h2>
                 <?php
                 $order_object = new Order();
                 $orders = $order_object->select();
                 foreach ($orders as $order) {
                     $items = $order_object->select_dishes($order->id);
-                    // Now $items contains the items for this order
                 }
 
                 if (isset($_POST['delete_order'])) {
@@ -164,9 +163,9 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                 foreach ($orders as $o) {
                     echo '<div class="col-md-6 col-lg-4">';
                     echo '<div class="food-item">';
-                    echo '<h3>Order №' . $o->id . '</h3>';
+                    echo '<h3>Objednávka №' . $o->id . '</h3>';
                     echo '<p>User ID: ' . $o->user_id . '</p>';
-                    echo '<p>Order Date: ' . $o->order_date . '</p>';
+                    echo '<p>Dátum objednávky: ' . $o->order_date . '</p>';
 
                     $items = $order_object->select_dishes($o->id);
 
@@ -178,21 +177,23 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
 
                     echo '<p>' . $itemNamesString . '</p>';
 
-                    echo '<form action="" method="POST">';
-                    echo '<select name="order_status">';
-                    echo '<option value="accepted"' . ($o->order_status == 'accepted' ? ' selected' : '') . '>Accepted</option>';
-                    echo '<option value="preparing"' . ($o->order_status == 'preparing' ? ' selected' : '') . '>Preparing</option>';
-                    echo '<option value="ready"' . ($o->order_status == 'ready' ? ' selected' : '') . '>Ready</option>';
+                    echo '<p>Objednávka je</p>'; 
+                    
+                    echo '<form action="" method="POST" class="order-update-form">';
+                    echo '<select name="order_status" class="form-select" onchange="this.form.submit()">';
+                    echo '<option value="accepted"' . ($o->order_status == 'accepted' ? ' selected' : '') . '>prijatá</option>';
+                    echo '<option value="preparing"' . ($o->order_status == 'preparing' ? ' selected' : '') . '>pripravená</option>';
+                    echo '<option value="ready"' . ($o->order_status == 'ready' ? ' selected' : '') . '>pripravená</option>';
                     echo '</select>';
-                    echo '<button type="submit" name="update_order" value="' . $o->id . '">Update</button>';
-
+                    echo '<input type="hidden" name="update_order" value="' . $o->id . '">';
+                    echo '</form>';
+                    
 
                     
-                    echo '</form>';
-
                     echo '<form action="" method="POST">';
-                    echo '<button type="submit" name="delete_order" value="' . $o->id . '">Delete</button>';
+                    echo '<button type="submit" name="delete_order" value="' . $o->id . '" class="btn btn-danger mt-3">Delete</button>';
                     echo '</form>';
+                    
 
                     echo '</div>'; 
                     echo '</div>'; 
