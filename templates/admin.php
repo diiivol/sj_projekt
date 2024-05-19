@@ -12,8 +12,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
             <!-- <div class="col-100"> -->
                 <h1>Admin rozhranie</h1>
 
-
-
                 <h2>Kontakty</h2>
                 <?php
                 $contact_object = new Contact();
@@ -106,9 +104,9 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                                 <input type="hidden" name="new_dish_description" value="' . $d->description . '" required>
                                 <input type="hidden" name="new_dish_price" value="' . $d->price . '" required>
                                 <input type="hidden" name="new_dish_ingredients" value="' . $d->ingredients . '" required>
-                                <button class="edit-button" type="button">Upraviť</button>
-                                <button class="save-button" type="submit" name="update_dishes" value="' . $d->id . '" style="display: none;">OK</button>
-                            </form>
+                                <button class="btn btn-warning edit-button" type="button">Upraviť</button>
+                                <button class="btn btn-success save-button" type="submit" name="update_dishes" value="' . $d->id . '" style="display: none;">OK</button>
+                                </form>
                           </td>';
                     echo '<td>
                             <form action="" method="POST">
@@ -117,15 +115,17 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
                           </td>';
                     echo '</tr>';
                 }
+                
                 echo '<tr>
                     <form method="POST">
-                        <td><input type="text" id="new_dish_name" name="new_dish_name" required style="width: 100%;"></td>
-                        <td><textarea id="new_dish_description" name="new_dish_description" required rows="4" style="width: 100%;"></textarea></td>
-                        <td><input type="number" value="0" min="0" step="0.50" id="new_dish_price" name="new_dish_price" required style="width: 100%;"></td>
-                        <td><textarea id="new_dish_ingredients" name="new_dish_ingredients" required rows="4" style="width: 100%;"></textarea></td>
-                        <td colspan="2"><input type="submit" value="Add Dish" name="add_dish" required></td>
-                    </form>
+                        <td><input type="text" id="new_dish_name" name="new_dish_name" placeholder="Názov jedla" required style="width: 100%;"></td>
+                        <td><textarea id="new_dish_description" name="new_dish_description" placeholder="Popis jedla" required rows="4" style="width: 100%;"></textarea></td>
+                        <td><input type="number" value="0" min="0" step="0.50" id="new_dish_price" name="new_dish_price" placeholder="Cena jedla" required style="width: 100%;"></td>
+                        <td><textarea id="new_dish_ingredients" name="new_dish_ingredients" placeholder="Ingrediencie jedla" required rows="4" style="width: 100%;"></textarea></td>
+                        <td colspan="2"><input type="submit" value="Pridať jedlo" name="add_dish" class="btn btn-primary" required></td>
+                        </form>
                 </tr>';
+                
                 
                 echo '</table>';
 
@@ -191,7 +191,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
 
                     
                     echo '<form action="" method="POST">';
-                    echo '<button type="submit" name="delete_order" value="' . $o->id . '" class="btn btn-danger mt-3">Delete</button>';
+                    echo '<button type="submit" name="delete_order" value="' . $o->id . '" class="btn btn-danger mt-3">Vymazať</button>';
                     echo '</form>';
                     
 
