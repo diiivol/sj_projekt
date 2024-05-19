@@ -1,9 +1,8 @@
 <!-- Header -->
 <?php
-include_once('partials/header.php');
+include_once 'partials/header.php';
 ?>
 <!-- -->
-
 <!-- O nas -->
 <div class="container o-nas pt-3 text-center">
   <h1 class="display-4 text-center mb-4">O nas</h1>
@@ -16,7 +15,6 @@ include_once('partials/header.php');
       Keď sme si uvedomili, že naša kulinárska vášeň má potenciál spájať ľudí a rozvíjať komunitu, rozhodli sme sa
       otvoriť Oyster.</p>
   </div>
-
   <!--  -->
   <!-- Slideshow (Carousel) (1b) -->
   <!--  -->
@@ -29,22 +27,16 @@ include_once('partials/header.php');
       <!-- používajte obrázky z bezplatných zdrojov, -->
       <!-- použite vhodné množstvo obrázkov na stránku.  -->
       <!--  -->
-
       <?php
-      $img_folder = '../assets/img/o_nas/';
-      $slider = new Slider();
-      $slider->set_img_folder($img_folder);
-      echo ($slider->generate_slides());
-      ?>
+$img_folder = '../assets/img/o_nas/';
+$slider = new Slider();
+$slider->set_img_folder($img_folder);
+echo ($slider->generate_slides());
+?>
       <!--  -->
-
     </div>
-    <!-- <p class="text-center my-4">(click)</p> -->
   </div>
-
-
 </div>
-
 <!--  -->
 <!-- Footer (2b) -->
 <!--  -->
@@ -52,5 +44,5 @@ include_once('partials/header.php');
 <!-- Copyright -->
 <!--  -->
 <?php
-include_once('partials/footer.php')
+include_once 'partials/footer.php'
 ?>

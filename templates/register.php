@@ -1,31 +1,24 @@
 <?php
-include_once('partials/header.php');
+include_once 'partials/header.php';
 if ($_SESSION['logged_in'] == true) {
-  header('Location: 404.php');
+    header('Location: 404.php');
 }
-
 $user_object = new User();
-
-
 if (isset($_POST['user_register'])) {
-  $email = $_POST['email'];
-  $password = $_POST['password'];
-  $confirm_password = $_POST['confirm_password'];
-
-
-  if ($password === $confirm_password) {
-
-    if ($user_object->register($email, $password)) {
-      echo "<p>Registrácia bola úspešná</p>";
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
+    if ($password === $confirm_password) {
+        if ($user_object->register($email, $password)) {
+            echo "<p>Registrácia bola úspešná</p>";
+        } else {
+            echo "<p>Registrácia zlyhala</p>";
+        }
     } else {
-      echo "<p>Registrácia zlyhala</p>";
+        echo "<p>Heslá sa nezhodujú</p>";
     }
-  } else {
-    echo "<p>Heslá sa nezhodujú</p>";
-  }
 }
 ?>
-
 <div class="container register d-flex align-items-center justify-content-center">
     <div class = "card p-3">
       <div class="card-body">
@@ -51,8 +44,6 @@ if (isset($_POST['user_register'])) {
       </div>
     </div>
 </div>
-
-
 <?php
-include_once('partials/footer.php');
+include_once 'partials/footer.php';
 ?>

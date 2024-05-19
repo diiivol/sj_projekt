@@ -2,12 +2,10 @@
 class Menu
 {
     private $pages;
-
     public function __construct($pages)
     {
         $this->pages = $pages;
     }
-
     public function generate_menu(): string
     {
         $menu = '';

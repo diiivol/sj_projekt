@@ -1,6 +1,6 @@
 <!-- Header -->
 <?php
-include_once('partials/header.php');
+include_once 'partials/header.php';
 ?>
 <!--  -->
 <!-- Content -->
@@ -54,12 +54,9 @@ include_once('partials/header.php');
 </div>
 <!-- (nie je tu Footer, pretože nezapadá do štýlu hlavnej stránky,
   nie preto, že by som ho zabudla zahrnúť alebo nevedela, ako to urobiť) -->
-
 <!-- Odkazy na scripty -->
 <script src="../assets/js/preload.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <!--  -->
-
 </body>
-
 </html>

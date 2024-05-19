@@ -1,12 +1,10 @@
 <!-- Header -->
 <?php
-include_once('partials/header.php');
+include_once 'partials/header.php';
 ?>
 <!--  -->
-
 <div class="container kontakt pt-3">
   <h1 class="display-4 text-center mb-4">Kontakt</h1>
-
   <!--  -->
   <!-- Formulár (5b) -->
   <!--  -->
@@ -42,7 +40,6 @@ include_once('partials/header.php');
     </div>
   </div>
   <!--  -->
-
   <!-- Adresa -->
   <div class="row my-4">
     <div class="col-md-8 col-lg-6 mx-auto">
@@ -50,7 +47,6 @@ include_once('partials/header.php');
         <div class="card-body">
           <h5 class="card-title">Adresa</h5>
           <p class="card-text">949 01, Nitra, Slovensko</p>
-
           <!--  -->
           <!-- Odkaz na email a telefón (mailto: , tel: ) (1b) -->
           <!--  -->
@@ -61,12 +57,10 @@ include_once('partials/header.php');
             Email: <a href="mailto:Oyster@mail.com">Oyster@mail.com</a>
           </p>
           <!--  -->
-
         </div>
       </div>
     </div>
   </div>
-
   <!-- Mapa -->
   <div class="row mb-4">
     <div class="col-md-8 col-lg-6 container text-center">
@@ -76,7 +70,6 @@ include_once('partials/header.php');
     </div>
   </div>
   <!--  -->
-
   <!--  -->
   <!-- Tlačidlo s preklikom na inú stránku (1b) - <a> tag, ktorý je naštýlovaný ako button -->
   <!-- Alert (1b) -->
@@ -98,9 +91,7 @@ include_once('partials/header.php');
     </div>
   </div>
   <!--  -->
-
 </div>
-
 <!--  -->
 <!-- Footer (2b) -->
 <!--  -->
@@ -108,5 +99,5 @@ include_once('partials/header.php');
 <!-- Copyright -->
 <!--  -->
 <?php
-include_once('partials/footer.php')
+include_once 'partials/footer.php'
 ?>

@@ -2,7 +2,6 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap'); */
 /* @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap'); */
 /* *** */
-
 @font-face {
   font-family: 'LarosaRegular';
   src: url('../fonts/LarosaRegular.ttf') format('truetype');
@@ -38,7 +37,6 @@
 }
 
 /* *** */
-
 /* Body */
 body {
   display: flex;
@@ -55,13 +53,12 @@ body {
   background-color: #faf8f8;
 }
 
-
-body::before{
+body::before {
   content: "";
   position: fixed;
   top: 0;
   bottom: 0;
-  width: 10%; 
+  width: 10%;
   background: url('../img/left.png');
   background-repeat: repeat-y;
   background-position: right;
@@ -87,8 +84,8 @@ body::before {
 body::after {
   right: 0;
 }
-/* *** */
 
+/* *** */
 /* Menu */
 .food-item {
   font-family: 'Bookerly Light';
@@ -113,18 +110,17 @@ body::after {
   font-family: 'Bookerly Bold';
   font-size: 13px;
   color: #deb6aa;
-  background-color:  	 	#e6dfde;
+  background-color: #e6dfde;
   border: none;
-  border-radius: 15px; 
+  border-radius: 15px;
   padding: 5px 10px;
   margin-bottom: 10px;
-  display: inline-block; 
+  display: inline-block;
 }
 
 .in_cart a {
   color: #deb6aa;
   text-decoration: none;
-
 }
 
 .food-item img {
@@ -143,7 +139,6 @@ body::after {
 }
 
 /* *** */
-
 /* Footer */
 footer {
   flex-shrink: 0;
@@ -157,7 +152,6 @@ footer {
 }
 
 /* *** */
-
 /* O nas */
 .about-section {
   padding: 50px 0;
@@ -179,7 +173,6 @@ footer {
 }
 
 /* *** */
-
 /* Kontakt */
 .container iframe {
   border-radius: 5px;
@@ -237,7 +230,6 @@ footer {
 }
 
 /* *** */
-
 /* Extra */
 h1 {
   font-family: 'Bookerly Bold';
@@ -259,11 +251,7 @@ h1 {
 }
 
 /* *** */
-
 /* Admin | User table*/
-
-
-
 table th,
 table td {
   border: 1px solid #ddd;
@@ -279,7 +267,6 @@ table th {
 table tr:nth-child(even) {
   background-color: #f2f2f2;
 }
-
 
 .form-inline {
   display: flex;
