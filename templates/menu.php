@@ -33,13 +33,21 @@ if (empty($dishes)) {
         echo '<h3>' . $dishes[$i]->name . '</h3>';
         echo '<p class="description">' . $dishes[$i]->description . '</p>';
         echo '<p class="cena">Cena: ' . $dishes[$i]->price . '€</p>';
-        if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['user_role'] != 1) {
-            echo '<form method="POST" style="display: flex; justify-content: space-between; align-items: center;">';
+        if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
+            if ($_SESSION['user_role'] == 0) {
+                echo '<form method="POST" style="display: flex; justify-content: space-between; align-items: center;">';
+                echo '<div class="form-group">';
+                echo '<input type="number" name="quantity" value="1" min="1" max="50" class="form-control" style="width: 100px;">';
+                echo '<input type="hidden" name="product_id" value="' . $dishes[$i]->id . '">';
+                echo '</div>';
+                echo '<button type="submit" name="add_to_cart" class="btn btn-dark">Pridať do košíka</button>';
+                echo '</form>';
+            }
+        } else {
+            echo '<form style="display: flex; justify-content: space-between; align-items: center;">';
             echo '<div class="form-group">';
-            echo '<input type="number" name="quantity" value="1" min="1" max="50" class="form-control" style="width: 100px;">';
-            echo '<input type="hidden" name="product_id" value="' . $dishes[$i]->id . '">';
             echo '</div>';
-            echo '<button type="submit" name="add_to_cart" class="btn btn-dark">Pridať do košíka</button>';
+            echo '<a href="login.php" class="btn btn-dark">Pridať do košíka</a>';
             echo '</form>';
         }
         echo '<div id="' . $dishes[$i]->name . '" style="display: none;">';
