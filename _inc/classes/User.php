@@ -30,16 +30,28 @@ class User extends Database
             echo $e->getMessage();
         }
     }
+
     public function register($email, $password)
     {
         try {
-            $hashed_password = $password;
+            
+            $sql = "SELECT * FROM user WHERE email = :email";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute(['email' => $email]);
+            $user = $stmt->fetch();
+
+            if ($user) {
+                return false;
+            }
+
+            
+            $hashed_password = md5($password);
             $data = array(
                 'user_email' => $email,
-                'user_password' => md5($hashed_password),
+                'user_password' => $hashed_password,
                 'user_role' => '0',
             );
-            $sql = "INSERT INTO user (email, password,role) VALUES (:user_email, :user_password,:user_role)";
+            $sql = "INSERT INTO user (email, password, role) VALUES (:user_email, :user_password, :user_role)";
             $query_run = $this->db->prepare($sql);
             $query_run->execute($data);
             return true;
@@ -48,4 +60,5 @@ class User extends Database
             return false;
         }
     }
+
 }

@@ -75,7 +75,8 @@ if (!empty($cartItems)) {
     echo '</div>';
     echo '</div>';
 } else {
-    echo '<h4>Nič tu nie je. Prejsť do <a href="menu.php">menu</a>?</h4>';
+    echo '<h4>Nič tu nie je.</h4>
+        <h4>Prejsť do <a href="menu.php">menu</a>?</h4>';
 }
 ?>
                 <h1>Objednávky</h1>
@@ -87,16 +88,6 @@ if (!empty($orders)) {
     foreach ($orders as $o) {
         echo '<div class="col-md-6 col-lg-4">';
         echo '<div class="food-item">';
-        echo '<h3>Objednávka №' . $o->id . '</h3>';
-        $items = $order_object->select_dishes($o->id);
-        $itemNames = array();
-        foreach ($items as $item) {
-            $itemNames[] = $item->name . ' x' . $item->quantity;
-        }
-        $itemNamesString = implode('<br>', $itemNames);
-        echo '<p>' . $itemNamesString . '</p>';
-        echo '<h4>Order Price: ' . $o->total_price . '€</h4>';
-        
         $statusClass = '';
         switch ($o->order_status) {
             case 'prijatá':
@@ -110,6 +101,16 @@ if (!empty($orders)) {
                 break;
         }
         echo '<div class="in_cart ' . $statusClass .'">' . $o->order_status . '</div>';
+        echo '<h3>Objednávka №' . $o->id . '</h3>';
+        $items = $order_object->select_dishes($o->id);
+        $itemNames = array();
+        foreach ($items as $item) {
+            $itemNames[] = $item->name . ' x' . $item->quantity;
+        }
+        $itemNamesString = implode('<br>', $itemNames);
+        echo '<p>' . $itemNamesString . '</p>';
+        echo '<h4>Order Price: ' . $o->total_price . '€</h4>';
+        
         echo '</div>';
         echo '</div>';
     }

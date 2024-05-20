@@ -25,7 +25,7 @@ if (empty($dishes)) {
         echo '<div class="col-md-6 col-lg-4">';
         echo '<div class="food-item">';
         $imagePath = "../assets/img/dishes/" . $dishes[$i]->image;
-        $image = file_exists($imagePath) ? $dishes[$i]->image : 'default.png';
+        $image = (!empty($dishes[$i]->image) && file_exists($imagePath)) ? $dishes[$i]->image : 'default.png';
         echo '<img src="../assets/img/dishes/' . $image . '" alt="' . $dishes[$i]->name . '" class="img-fluid mb-3" onclick="toggleText(\'' . $dishes[$i]->name . '\')">';
         if (isset($cartItems[$dishes[$i]->id])) {
             echo '<div class="in_cart"><a href="user.php">Už do košíka: ' . $cartItems[$dishes[$i]->id] . '</a></div>';

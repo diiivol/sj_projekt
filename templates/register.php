@@ -12,7 +12,7 @@ if (isset($_POST['user_register'])) {
         if ($user_object->register($email, $password)) {
             echo "<p>Registrácia bola úspešná</p>";
         } else {
-            echo "<p>Registrácia zlyhala</p>";
+            echo "<p>Registrácia zlyhala alebo užívateľ s týmto e-mailom už existuje</p>";
         }
     } else {
         echo "<p>Heslá sa nezhodujú</p>";
