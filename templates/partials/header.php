@@ -50,25 +50,32 @@ $page_object->set_page_name($page_name);
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav">
                     <?php
-                    $pages = array(
+                    $commonPages = array(
                         'Menu' => 'menu.php',
                         'Kontakt' => 'contacts.php',
                         'O nas' => 'about-us.php'
                     );
+                    $menu_object = new Menu($commonPages);
+                    echo $menu_object->generate_menu();
+                    ?>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <?php
+                    $userPages = array();
 
                     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
                         if ($_SESSION['user_role'] == 1) {
-                            $pages['<i class="fas fa-user"></i> ' . $_SESSION['user_email']] = 'admin.php';
+                            $userPages['<i class="fas fa-user"></i> ' . $_SESSION['user_email']] = 'admin.php';
                         } else {
-                            $pages['<i class="fas fa-user"></i> ' . $_SESSION['user_email']] = 'user.php';
+                            $userPages['<i class="fas fa-user"></i> ' . $_SESSION['user_email']] = 'user.php';
                         }
-                        $pages['Odhlásiť sa'] = 'logout.php';
+                        $userPages['Odhlásiť sa'] = 'logout.php';
                     } else {
-                        $pages['Prihlásiť sa'] = 'login.php';
+                        $userPages['Prihlásiť sa'] = 'login.php';
                     }
-                    $menu_object = new Menu($pages);
+                    $menu_object = new Menu($userPages);
                     echo $menu_object->generate_menu();
                     ?>
                 </ul>
