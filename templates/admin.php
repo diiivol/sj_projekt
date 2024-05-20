@@ -141,9 +141,9 @@ foreach ($orders as $o) {
     echo '<p>Objednávka je</p>';
     echo '<form action="" method="POST" class="order-update-form">';
     echo '<select name="order_status" class="form-select" onchange="this.form.submit()">';
-    echo '<option value="accepted"' . ($o->order_status == 'accepted' ? ' selected' : '') . '>prijatá</option>';
-    echo '<option value="preparing"' . ($o->order_status == 'preparing' ? ' selected' : '') . '>pripravená</option>';
-    echo '<option value="ready"' . ($o->order_status == 'ready' ? ' selected' : '') . '>pripravená</option>';
+    echo '<option value="prijatá"' . ($o->order_status == 'prijatá' ? ' selected' : '') . '>prijatá</option>';
+    echo '<option value="pripravuje sa"' . ($o->order_status == 'pripravuje sa' ? ' selected' : '') . '>pripravuje sa</option>';
+    echo '<option value="hotová"' . ($o->order_status == 'hotová' ? ' selected' : '') . '>hotová</option>';
     echo '</select>';
     echo '<input type="hidden" name="update_order" value="' . $o->id . '">';
     echo '</form>';

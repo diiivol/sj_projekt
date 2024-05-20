@@ -109,7 +109,6 @@ body::after {
   text-transform: uppercase;
   font-family: 'Bookerly Bold';
   font-size: 13px;
-  color: #deb6aa;
   background-color: #e6dfde;
   border: none;
   border-radius: 15px;
@@ -119,7 +118,7 @@ body::after {
 }
 
 .in_cart a {
-  color: #deb6aa;
+  color: #a06c5c;
   text-decoration: none;
 }
 
@@ -278,3 +277,35 @@ table tr:nth-child(even) {
 }
 
 /* *** */
+
+/* user  */
+.bill{
+  
+  background-image: url('../img/bill/middle.png');
+  background-repeat: repeat-y;
+  background-position: center top;
+  background-size: contain;
+  
+}
+.image-top, .image-bottom {
+
+  width: 100%;
+  object-fit: cover; 
+  display: block;
+}
+
+
+.status-pending {
+  background-color: rgb(242, 243, 192);
+  color: rgb(102, 71, 50);
+}
+
+.status-processing {
+  background-color: rgb(230, 136, 14);
+  color: rgb(255, 240, 240);
+}
+
+.status-completed {
+  background-color: rgb(27, 226, 21);
+  color: rgb(255, 240, 240);
+}
