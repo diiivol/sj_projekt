@@ -58,19 +58,15 @@ class Contact extends Database
     }
 
     // Metóda pre odstránenie kontaktu z databázy
-    public function delete()
+    public function delete($id)
     {
         try {
-            // Vytvoríme pole s ID kontaktu, ktorý chceme odstrániť
-            $data = array(
-                'contact_id' => $_POST['delete_contact'],
-            );
             // Vytvoríme SQL príkaz pre odstránenie kontaktu
-            $query = "DELETE FROM contact WHERE id = :contact_id";
+            $query = "DELETE FROM contact WHERE id = :id";
             // Pripravíme SQL príkaz
             $query_run = $this->db->prepare($query);
             // Vykonáme SQL príkaz
-            $query_run->execute($data);
+            $query_run->execute(['id' => $id]);
         } catch (PDOException $e) {
             // Ak nastane chyba, vypíšeme ju
             echo $e->getMessage();

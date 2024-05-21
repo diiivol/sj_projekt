@@ -35,22 +35,19 @@ class Order extends Database
     }
 
     // Metóda pre odstránenie objednávky
-    public function delete()
+    public function delete($id)
     {
         try {
             // Začneme transakciu
             $this->db->beginTransaction();
-            $data = array(
-                'order_id' => $_POST['delete_order'],
-            );
             // Odstránime všetky položky objednávky
-            $query = "DELETE FROM order_items WHERE order_id = :order_id";
+            $query = "DELETE FROM order_items WHERE order_id = :id";
             $query_run = $this->db->prepare($query);
-            $query_run->execute($data);
+            $query_run->execute(['id' => $id]);
             // Odstránime objednávku
-            $query = "DELETE FROM orders WHERE id = :order_id";
+            $query = "DELETE FROM orders WHERE id = :id";
             $query_run = $this->db->prepare($query);
-            $query_run->execute($data);
+            $query_run->execute(['id' => $id]);
             // Potvrdíme transakciu
             $this->db->commit();
             return true;
@@ -61,6 +58,7 @@ class Order extends Database
             return false;
         }
     }
+
 
     // Metóda pre získanie objednávok
     public function select($userId = null)
@@ -107,11 +105,8 @@ class Order extends Database
     }
 
     // Metóda pre aktualizáciu objednávky
-    public function update()
+    public function update($id, $new_status)
     {
-        // Získame dáta z formulára
-        $id = $_POST['update_order'];
-        $new_status = $_POST['order_status'];
         // Vytvoríme SQL príkaz pre aktualizáciu objednávky
         $sql = "UPDATE orders SET order_status = :order_status WHERE id = :id";
         $stmt = $this->db->prepare($sql);

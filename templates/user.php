@@ -1,10 +1,20 @@
 <?php
+
+// Spustenie vyrovnávacej pamäte výstupu. To znamená, že akýkoľvek výstup,
+// ktorý skript generuje po tomto bode, sa ukladá do internej pamäte namiesto
+// toho, aby bol okamžite odoslaný klientovi. To môže byť užitočné, ak chcete
+// upraviť HTTP hlavičky po tom, ako už bol vygenerovaný nejaký výstup.
 ob_start();
+
+// Header
 include 'partials/header.php';
-// <!-- Kontrola prihlásenia a role užívateľa -->
+
+// Kontrola prihlásenia a role užívateľa
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSION['user_role'] == 1) {
     header('Location: 404.php');
 }
+
+// Inicializácia košíka
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
 }

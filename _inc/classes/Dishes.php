@@ -24,36 +24,26 @@ class Dishes extends Database
             echo ($e->getMessage());
         }
     }
-
-    // Metóda pre odstránenie jedla z databázy
-    public function delete()
+    
+    public function delete($id)
     {
         try {
-            // Vytvoríme pole s ID jedla, ktoré chceme odstrániť
-            $data = array(
-                'dishes_id' => $_POST['delete_dishes'],
-            );
             // Vytvoríme SQL príkaz pre odstránenie jedla
-            $query = "DELETE FROM dishes WHERE id = :dishes_id";
+            $query = "DELETE FROM dishes WHERE id = :id";
             // Pripravíme SQL príkaz
             $query_run = $this->db->prepare($query);
             // Vykonáme SQL príkaz
-            $query_run->execute($data);
+            $query_run->execute(['id' => $id]);
         } catch (PDOException $e) {
             // Ak nastane chyba, vypíšeme ju
             echo $e->getMessage();
         }
     }
 
+
     // Metóda pre aktualizáciu jedla v databáze
-    public function update()
+    public function update($id, $new_name, $new_description, $new_price, $new_ingredients)
     {
-        // Získame dáta z formulára
-        $id = $_POST['update_dishes'];
-        $new_name = $_POST['new_dish_name'];
-        $new_description = $_POST['new_dish_description'];
-        $new_price = $_POST['new_dish_price'];
-        $new_ingredients = $_POST['new_dish_ingredients'];
         // Vytvoríme SQL príkaz pre aktualizáciu jedla
         $sql = "UPDATE dishes SET name = :name, description = :description, price = :price, ingredients = :ingredients WHERE id = :id";
         // Pripravíme SQL príkaz
