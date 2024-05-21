@@ -17,7 +17,7 @@ if (isset($_POST['add_to_cart'])) {
 }
 $dishes_object = new Dishes();
 $dishes = $dishes_object->select();
-$cartItems = $cart->getCart();
+$cartItems = $cart->select();
 if (empty($dishes)) {
     echo '<h2 class="text-center w-100">Žiadne jedlá</h2>';
 } else {

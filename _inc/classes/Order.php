@@ -11,7 +11,7 @@ class Order extends Database
     }
 
     // Metóda pre vytvorenie objednávky
-    public function createOrder($userId, $cartItems, $totalPrice)
+    public function insert($userId, $cartItems, $totalPrice)
     {
         try {
             // Vytvoríme SQL príkaz pre vloženie novej objednávky

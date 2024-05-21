@@ -22,7 +22,7 @@ class Cart
     }
 
     // Metóda pre odstránenie produktu z košíka
-    public function removeProduct($id)
+    public function delete($id)
     {
         // Ak je produkt v košíku, odstránime ho
         if (isset($_SESSION['cart'][$id])) {
@@ -31,7 +31,7 @@ class Cart
     }
 
     // Metóda pre získanie obsahu košíka
-    public function getCart()
+    public function select()
     {
         // Vrátime obsah košíka
         return $_SESSION['cart'];

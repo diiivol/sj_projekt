@@ -246,6 +246,7 @@ if (empty($orders)) {
         }
         $itemNamesString = implode('<br>', $itemNames);
         echo '<p>' . $itemNamesString . '</p>';
+        echo '<p>Cena: ' . $o->total_price . '€</p>';
         echo '<form action="" method="POST">';
         echo '<button type="submit" name="delete_order" value="' . $o->id . '" class="btn btn-danger">Vymazať</button>';
         echo '</form>';

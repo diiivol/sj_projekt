@@ -33,16 +33,25 @@ $dishes_object = new Dishes();
 $cart = new Cart();
 
     $totalPrice = 0;
+    $delivery = 5;
 
+    // Získanie obsahu košíka
+    $cartItems = $cart->select();
+    
+    foreach ($cartItems as $id => $quantity) {
+        if (isset($dishes[$id])) {
+            $price = $dishes[$id]->price;
+        }
+        $totalPrice += $price * $quantity;
+    }
+    
+    // Odstránenie položky z košíka
     if (isset($_POST['remove_from_cart'])) {
         $id = $_POST['product_id'];
-        $cart->removeProduct($id);
+        $cart->delete($id);
         header('Location: ' . $_SERVER['PHP_SELF']);
         exit();
     }
-
-    // Získanie obsahu košíka
-    $cartItems = $cart->getCart();
 
 // Vytvorenie nového objektu objednávky
 $order_object = new Order();
@@ -51,12 +60,11 @@ $order_object = new Order();
 
     // Vytvorenie objednávky
     if (isset($_POST['order'])) {
-        $order_object->createOrder($userId, $cartItems, $totalPrice + $delivery);
+        $order_object->insert($userId, $cartItems, $totalPrice+$delivery);
         $order_object->clearCart();
         header('Location: ' . $_SERVER['PHP_SELF']);
         exit();
     }
-
 ?>
 
 <!-- Obsah -->
@@ -91,11 +99,6 @@ $order_object = new Order();
                         // Získanie ceny jedla z poľa jedál podľa ID
                         $price = $dishes[$id]->price;
                     }
-
-                    // Nastavenie ceny doručenia
-                    $delivery = 5;
-                    // Výpočet celkovej ceny objednávky (cena jedla * množstvo + cena doručenia)
-                    $totalPrice += $price * $quantity + $delivery;
 
                     echo '<tr>';
                     echo '<td>' . $name . '</td>';
