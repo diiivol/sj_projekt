@@ -1,4 +1,5 @@
 <?php
+
 class Order extends Database
 {
     private $db; // Premenná pre uchovanie pripojenia k databáze

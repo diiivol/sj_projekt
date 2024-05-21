@@ -1,4 +1,5 @@
 <?php
+
 class Contact extends Database
 {
     private $db;
@@ -53,7 +54,7 @@ class Contact extends Database
             return $contacts;
         } catch (PDOException $e) {
             // Ak nastane chyba, vypíšeme ju
-            echo ($e->getMessage());
+            echo($e->getMessage());
         }
     }
 

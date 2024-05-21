@@ -1,4 +1,5 @@
 <?php
+
 class Slider
 {
     private $img_folder = ''; // Premenná pre uchovanie cesty k priečinku s obrázkami

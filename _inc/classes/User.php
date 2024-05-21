@@ -1,4 +1,5 @@
 <?php
+
 class User extends Database
 {
     private $db; // Premenná pre uchovanie inštancie databázy

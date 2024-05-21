@@ -1,4 +1,5 @@
 <?php
+
 class Dishes extends Database
 {
     private $db;
@@ -21,10 +22,10 @@ class Dishes extends Database
             return $dishes;
         } catch (PDOException $e) {
             // Ak nastane chyba, vypíšeme ju
-            echo ($e->getMessage());
+            echo($e->getMessage());
         }
     }
-    
+
     public function delete($id)
     {
         try {

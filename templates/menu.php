@@ -4,8 +4,8 @@ include_once 'partials/header.php';
 ?>
 <!-- Menu -->
 <div class="container menu pt-3 mb-4">
-  <h1 class="display-4 text-center mb-4">Menu</h1>
-  <div class="row">
+    <h1 class="display-4 text-center mb-4">Menu</h1>
+    <div class="row">
     <?php
 $cart = new Cart();
 if (isset($_POST['add_to_cart'])) {
@@ -74,5 +74,5 @@ if (empty($dishes)) {
 <!-- Copyright -->
 <!--  -->
 <?php
-include_once 'partials/footer.php'
+include_once 'partials/footer.php';
 ?>

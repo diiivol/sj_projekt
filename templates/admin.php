@@ -19,48 +19,48 @@ $dishes_object = new Dishes();
 
 
 // Ak bol odoslaný formulár pre aktualizáciu jedla
-    if (isset($_POST['update_dishes'])) {
-        $id = $_POST['update_dishes'];
-        $new_name = $_POST['new_dish_name'];
-        $new_description = $_POST['new_dish_description'];
-        $new_price = $_POST['new_dish_price'];
-        $new_ingredients = $_POST['new_dish_ingredients'];
-        try {
-            $dishes_object->update($id, $new_name, $new_description, $new_price, $new_ingredients);
-            header('Location: ' . $_SERVER['PHP_SELF']);
-        } catch (Exception $e) {
-            echo 'Chyba pri aktualizácii jedla: ' . $e->getMessage();
-        }
-        exit();
+if (isset($_POST['update_dishes'])) {
+    $id = $_POST['update_dishes'];
+    $new_name = $_POST['new_dish_name'];
+    $new_description = $_POST['new_dish_description'];
+    $new_price = $_POST['new_dish_price'];
+    $new_ingredients = $_POST['new_dish_ingredients'];
+    try {
+        $dishes_object->update($id, $new_name, $new_description, $new_price, $new_ingredients);
+        header('Location: ' . $_SERVER['PHP_SELF']);
+    } catch (Exception $e) {
+        echo 'Chyba pri aktualizácii jedla: ' . $e->getMessage();
     }
+    exit();
+}
 
 // Ak bol odoslaný formulár pre vymazanie jedla
-    if (isset($_POST['delete_dishes'])) {
-        $id = $_POST['delete_dishes'];
-        if (is_numeric($id)) {
-            try {
-                $dishes_object->delete($id);
-                header('Location: ' . $_SERVER['PHP_SELF']);
-            } catch (Exception $e) {
-                echo 'Chyba pri mazaní jedla: ' . $e->getMessage();
-            }
-        } else {
-            echo "Chyba pri mazaní jedla: ID musí byť číslo";
-        }
-        exit();
-    }
-
-// Ak bol odoslaný formulár pre pridanie nového jedla
-    if (isset($_POST['add_dish'])) {
-        $new_dish = $_POST['add_dish']; // предполагается, что 'add_dish' содержит данные нового блюда
+if (isset($_POST['delete_dishes'])) {
+    $id = $_POST['delete_dishes'];
+    if (is_numeric($id)) {
         try {
-            $dishes_object->insert($new_dish);
+            $dishes_object->delete($id);
             header('Location: ' . $_SERVER['PHP_SELF']);
         } catch (Exception $e) {
-            echo 'Chyba pri pridaní jedla: ' . $e->getMessage();
+            echo 'Chyba pri mazaní jedla: ' . $e->getMessage();
         }
-        exit();
+    } else {
+        echo "Chyba pri mazaní jedla: ID musí byť číslo";
     }
+    exit();
+}
+
+// Ak bol odoslaný formulár pre pridanie nového jedla
+if (isset($_POST['add_dish'])) {
+    $new_dish = $_POST['add_dish']; // предполагается, что 'add_dish' содержит данные нового блюда
+    try {
+        $dishes_object->insert($new_dish);
+        header('Location: ' . $_SERVER['PHP_SELF']);
+    } catch (Exception $e) {
+        echo 'Chyba pri pridaní jedla: ' . $e->getMessage();
+    }
+    exit();
+}
 
 // Získanie všetkých jedál
 $dishes = $dishes_object->select();
@@ -70,33 +70,33 @@ $order_object = new Order();
 
 
 // Ak bol odoslaný formulár pre vymazanie objednávky
-    if (isset($_POST['delete_order'])) {
-        $id = $_POST['delete_order'];
-        try {
-            // Vymažeme objednávku
-            $order_object->delete($id);
-            header('Location: ' . $_SERVER['PHP_SELF']);
-        } catch (Exception $e) {
-            // Ak nastane chyba, vypíšeme ju
-            echo "Chyba pri mazaní objednávky: " . $e->getMessage();
-        }
-        exit();
+if (isset($_POST['delete_order'])) {
+    $id = $_POST['delete_order'];
+    try {
+        // Vymažeme objednávku
+        $order_object->delete($id);
+        header('Location: ' . $_SERVER['PHP_SELF']);
+    } catch (Exception $e) {
+        // Ak nastane chyba, vypíšeme ju
+        echo "Chyba pri mazaní objednávky: " . $e->getMessage();
     }
+    exit();
+}
 
 // Ak bol odoslaný formulár pre aktualizáciu objednávky
-    if (isset($_POST['update_order'])) {
-        // Aktualizujeme objednávku
-        $id = $_POST['update_order'];
-        $new_status = $_POST['order_status'];
-        try {
-            $order_object->update($id, $new_status);
-            header('Location: ' . $_SERVER['PHP_SELF']);
-        } catch (Exception $e) {
-            // Ak nastane chyba, vypíšeme ju
-            echo "Chyba pri aktualizácii objednávky: " . $e->getMessage();
-        }
-        exit();
+if (isset($_POST['update_order'])) {
+    // Aktualizujeme objednávku
+    $id = $_POST['update_order'];
+    $new_status = $_POST['order_status'];
+    try {
+        $order_object->update($id, $new_status);
+        header('Location: ' . $_SERVER['PHP_SELF']);
+    } catch (Exception $e) {
+        // Ak nastane chyba, vypíšeme ju
+        echo "Chyba pri aktualizácii objednávky: " . $e->getMessage();
     }
+    exit();
+}
 
 // Získanie všetkých objednávok
 $orders = $order_object->select();
@@ -106,16 +106,16 @@ $orders = $order_object->select();
 $contact_object = new Contact();
 
 // Ak bol odoslaný formulár pre vymazanie kontaktu
-    if (isset($_POST['delete_contact'])) {
-        $id = $_POST['delete_contact'];
-        try {
-            $contact_object->delete($id);
-            header('Location: ' . $_SERVER['PHP_SELF']);
-        } catch (Exception $e) {
-            echo "Chyba pri odstránení kontaktu: " . $e->getMessage();
-        }
-        exit();
+if (isset($_POST['delete_contact'])) {
+    $id = $_POST['delete_contact'];
+    try {
+        $contact_object->delete($id);
+        header('Location: ' . $_SERVER['PHP_SELF']);
+    } catch (Exception $e) {
+        echo "Chyba pri odstránení kontaktu: " . $e->getMessage();
     }
+    exit();
+}
 
 // Získanie všetkých kontaktov
 $contacts = $contact_object->select();
@@ -125,7 +125,7 @@ $contacts = $contact_object->select();
         <div class="row">
                 <h1>Kontakty</h1>
                 <?php
-                
+
                 if (empty($contacts)) {
                     echo '<h4>Žiadne kontakty</h4>';
                 } else {
@@ -156,7 +156,7 @@ $contacts = $contact_object->select();
                     echo '</table>';
                     echo '</div>';
                 }
-                ?>
+?>
 
 <h1>Jedlá</h1>
 

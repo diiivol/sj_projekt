@@ -1,4 +1,5 @@
 <?php
+
 class Cart
 {
     // Konštruktor triedy, ktorý sa automaticky zavolá pri vytvorení objektu tejto triedy

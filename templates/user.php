@@ -22,49 +22,49 @@ if (!isset($_SESSION['cart'])) {
 // Vykonanie nového objektu jedál
 $dishes_object = new Dishes();
 
-    $dishes = [];
+$dishes = [];
 
-    // Prechádzanie jedál a pridanie ich do poľa
-    foreach ($dishes_object->select() as $dish) {
-        $dishes[$dish->id] = $dish;
-    }
+// Prechádzanie jedál a pridanie ich do poľa
+foreach ($dishes_object->select() as $dish) {
+    $dishes[$dish->id] = $dish;
+}
 
 // Vytvorenie nového objektu košíka
 $cart = new Cart();
 
-    $totalPrice = 0;
-    $delivery = 5;
+$totalPrice = 0;
+$delivery = 5;
 
-    // Získanie obsahu košíka
-    $cartItems = $cart->select();
-    
-    foreach ($cartItems as $id => $quantity) {
-        if (isset($dishes[$id])) {
-            $price = $dishes[$id]->price;
-        }
-        $totalPrice += $price * $quantity;
+// Získanie obsahu košíka
+$cartItems = $cart->select();
+
+foreach ($cartItems as $id => $quantity) {
+    if (isset($dishes[$id])) {
+        $price = $dishes[$id]->price;
     }
-    
-    // Odstránenie položky z košíka
-    if (isset($_POST['remove_from_cart'])) {
-        $id = $_POST['product_id'];
-        $cart->delete($id);
-        header('Location: ' . $_SERVER['PHP_SELF']);
-        exit();
-    }
+    $totalPrice += $price * $quantity;
+}
+
+// Odstránenie položky z košíka
+if (isset($_POST['remove_from_cart'])) {
+    $id = $_POST['product_id'];
+    $cart->delete($id);
+    header('Location: ' . $_SERVER['PHP_SELF']);
+    exit();
+}
 
 // Vytvorenie nového objektu objednávky
 $order_object = new Order();
 
-    $userId = $_SESSION['user_id'];
+$userId = $_SESSION['user_id'];
 
-    // Vytvorenie objednávky
-    if (isset($_POST['order'])) {
-        $order_object->insert($userId, $cartItems, $totalPrice+$delivery);
-        $order_object->clearCart();
-        header('Location: ' . $_SERVER['PHP_SELF']);
-        exit();
-    }
+// Vytvorenie objednávky
+if (isset($_POST['order'])) {
+    $order_object->insert($userId, $cartItems, $totalPrice + $delivery);
+    $order_object->clearCart();
+    header('Location: ' . $_SERVER['PHP_SELF']);
+    exit();
+}
 ?>
 
 <!-- Obsah -->
@@ -92,7 +92,7 @@ $order_object = new Order();
 
                 // Prechádzanie položiek v košíku
                 foreach ($cartItems as $id => $quantity) {
-                    
+
                     if (isset($dishes[$id])) {
                         // Získanie názvu jedla z poľa jedál podľa ID
                         $name = $dishes[$id]->name;
@@ -127,57 +127,57 @@ $order_object = new Order();
                 echo '<h4>Nič tu nie je.</h4>
                     <h4>Prejsť do <a href="menu.php">menu</a>?</h4>';
             }
-            ?>
+?>
 
             <!-- Zobrazenie objednávok -->
             <h1>Objednávky</h1>
 
             <?php
-            // Získanie objednávok podľa ID užívateľa
-            $orders = $order_object->select($userId);
-            if (!empty($orders)) {
-                echo '<div class="container pt-3 mb-4 orders">';
-                echo '<div class="row">';
-                foreach ($orders as $o) {
-                    echo '<div class="col-md-6 col-lg-4">';
-                    echo '<div class="food-item">';
-                    $statusClass = '';
-                    // Nastavenie triedy podľa stavu objednávky
-                    switch ($o->order_status) {
-                        case 'prijatá':
-                            $statusClass = 'status-pending';
-                            break;
-                        case 'pripravuje sa':
-                            $statusClass = 'status-processing';
-                            break;
-                        case 'hotová':
-                            $statusClass = 'status-completed';
-                            break;
-                    }
-                    echo '<div class="in_cart ' . $statusClass .'">' . $o->order_status . '</div>';
-                    echo '<h3>Objednávka №' . $o->id . '</h3>';
+// Získanie objednávok podľa ID užívateľa
+$orders = $order_object->select($userId);
+if (!empty($orders)) {
+    echo '<div class="container pt-3 mb-4 orders">';
+    echo '<div class="row">';
+    foreach ($orders as $o) {
+        echo '<div class="col-md-6 col-lg-4">';
+        echo '<div class="food-item">';
+        $statusClass = '';
+        // Nastavenie triedy podľa stavu objednávky
+        switch ($o->order_status) {
+            case 'prijatá':
+                $statusClass = 'status-pending';
+                break;
+            case 'pripravuje sa':
+                $statusClass = 'status-processing';
+                break;
+            case 'hotová':
+                $statusClass = 'status-completed';
+                break;
+        }
+        echo '<div class="in_cart ' . $statusClass .'">' . $o->order_status . '</div>';
+        echo '<h3>Objednávka №' . $o->id . '</h3>';
 
-                    // Získanie jedál z objednávky
-                    $items = $order_object->select_dishes($o->id);
-                    // Vytvorenie zoznamu jedál
-                    $itemNames = array();
-                    // Prechádzanie jedál
-                    foreach ($items as $item) {
-                        $itemNames[] = $item->name . ' x' . $item->quantity;
-                    }
-                    // Spojenie názvov jedál do reťazca
-                    $itemNamesString = implode('<br>', $itemNames);
-                    echo '<p>' . $itemNamesString . '</p>';
-                    echo '<h4>Order Price: ' . $o->total_price . '€</h4>';
-                    echo '</div>';
-                    echo '</div>';
-                }
-                echo '</div>';
-            } else {
-                echo '<h4>Nič tu nie je.</h4>';
-            }
-            echo '</div>';
-            ?>
+        // Získanie jedál z objednávky
+        $items = $order_object->select_dishes($o->id);
+        // Vytvorenie zoznamu jedál
+        $itemNames = array();
+        // Prechádzanie jedál
+        foreach ($items as $item) {
+            $itemNames[] = $item->name . ' x' . $item->quantity;
+        }
+        // Spojenie názvov jedál do reťazca
+        $itemNamesString = implode('<br>', $itemNames);
+        echo '<p>' . $itemNamesString . '</p>';
+        echo '<h4>Order Price: ' . $o->total_price . '€</h4>';
+        echo '</div>';
+        echo '</div>';
+    }
+    echo '</div>';
+} else {
+    echo '<h4>Nič tu nie je.</h4>';
+}
+echo '</div>';
+?>
         </div>
     </div>
 
