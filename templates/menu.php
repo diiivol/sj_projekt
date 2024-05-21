@@ -15,8 +15,8 @@ if (isset($_POST['add_to_cart'])) {
     header('Location: menu.php');
     exit();
 }
-$dishes_class = new Dishes();
-$dishes = $dishes_class->select();
+$dishes_object = new Dishes();
+$dishes = $dishes_object->select();
 $cartItems = $cart->getCart();
 if (empty($dishes)) {
     echo '<h2 class="text-center w-100">Žiadne jedlá</h2>';

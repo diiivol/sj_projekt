@@ -18,6 +18,45 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
 }
+
+// Vykonanie nového objektu jedál
+$dishes_object = new Dishes();
+
+    $dishes = [];
+
+    // Prechádzanie jedál a pridanie ich do poľa
+    foreach ($dishes_object->select() as $dish) {
+        $dishes[$dish->id] = $dish;
+    }
+
+// Vytvorenie nového objektu košíka
+$cart = new Cart();
+
+    $totalPrice = 0;
+
+    if (isset($_POST['remove_from_cart'])) {
+        $id = $_POST['product_id'];
+        $cart->removeProduct($id);
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit();
+    }
+
+    // Získanie obsahu košíka
+    $cartItems = $cart->getCart();
+
+// Vytvorenie nového objektu objednávky
+$order_object = new Order();
+
+    $userId = $_SESSION['user_id'];
+
+    // Vytvorenie objednávky
+    if (isset($_POST['order'])) {
+        $order_object->createOrder($userId, $cartItems, $totalPrice + $delivery);
+        $order_object->clearCart();
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit();
+    }
+
 ?>
 
 <!-- Obsah -->
@@ -28,17 +67,6 @@ if (!isset($_SESSION['cart'])) {
             <h1>Košík</h1>
             
             <?php
-            // Inicializácia objektov a premenných
-            $dishes_class = new Dishes();
-            $order_object = new Order();
-            $dishes = [];
-            foreach ($dishes_class->select() as $dish) {
-                $dishes[$dish->id] = $dish;
-            }
-            $cart = new Cart();
-            $cartItems = $cart->getCart();
-            $totalPrice = 0;
-            $userId = $_SESSION['user_id'];
 
             // Zobrazenie položiek v košíku
             if (!empty($cartItems)) {
@@ -53,6 +81,8 @@ if (!isset($_SESSION['cart'])) {
                                     <th>Quantity</th>
                                     <th>Action</th>
                                 </tr>';
+
+                // Prechádzanie položiek v košíku
                 foreach ($cartItems as $id => $quantity) {
                     
                     if (isset($dishes[$id])) {
@@ -78,18 +108,6 @@ if (!isset($_SESSION['cart'])) {
                           </form></td>';
                     echo '</tr>';
                 }
-                
-                if (isset($_POST['remove_from_cart'])) {
-                    // Získanie ID produktu z POST dát
-                    $product_id = $_POST['product_id'];
-                    // Odstránenie produktu z košíka
-                    $cart->removeProduct($product_id);
-                    // Presmerovanie na aktuálnu stránku (obnovenie stránky)
-                    header('Location: ' . $_SERVER['PHP_SELF']);
-                    // Ukončenie skriptu
-                    exit();
-                }
-                
                 echo '</table>';
                 echo '<h4>Total price: ' . $totalPrice . '€</h4>';
                 echo '<h4>Delivery: ' . $delivery . '€</h4>';
@@ -97,13 +115,7 @@ if (!isset($_SESSION['cart'])) {
                 echo '<form method="POST">
                 <input type="submit" value="Order" name="order" class="btn btn-primary mb-4">
                 </form>';
-                // Vytvorenie objednávky
-                if (isset($_POST['order'])) {
-                    $order_object->createOrder($userId, $cartItems, $totalPrice + $delivery);
-                    $order_object->clearCart();
-                    header('Location: ' . $_SERVER['PHP_SELF']);
-                    exit();
-                }
+
                 echo '</div>';
                 echo '<img class="image-bottom" src="../assets/img/bill/image2.png" alt="Bottom image">';
                 echo '</div>';
