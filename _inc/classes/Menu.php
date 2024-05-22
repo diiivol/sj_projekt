@@ -1,25 +1,40 @@
 <?php
+
+/**
+ * Class Menu
+ *
+ * This class represents a menu on the website.
+ */
 class Menu
 {
-    private $pages; // Premenná pre uchovanie stránok menu
+    /**
+     * @var array $pages The pages of the menu.
+     */
+    private $pages;
 
-    // Konštruktor triedy, ktorý sa automaticky zavolá pri vytvorení objektu tejto triedy
+    /**
+     * Constructor of the class, which is automatically called when an object of this class is created.
+     *
+     * @param array $pages The pages of the menu.
+     */
     public function __construct($pages)
     {
-        // Priradenie hodnoty parametra konštruktora do premennej $pages
         $this->pages = $pages;
     }
 
-    // Metóda pre generovanie menu
+    /**
+     * Method for generating the menu.
+     *
+     * @return string The HTML code of the menu.
+     */
     public function generate_menu(): string
     {
-        $menu = ''; // Premenná pre uchovanie HTML kódu menu
-        // Prechádzame všetky stránky
+        $menu = '';
+
         foreach ($this->pages as $name => $url) {
-            // Pridáme do menu položku s názvom a URL stránky
             $menu .= '<li class="nav-item"><a class="nav-link" href="' . $url . '">' . $name . '</a></li>';
         }
-        // Vrátime HTML kód menu
+
         return $menu;
     }
 }

@@ -1,92 +1,135 @@
 <?php
 
+/**
+ * Class Order
+ *
+ * This class represents an order in the system.
+ */
 class Order extends Database
 {
-    private $db; // Premenná pre uchovanie pripojenia k databáze
+    /**
+     * @var PDO $db The database connection.
+     */
+    private $db;
 
-    // Konštruktor triedy, ktorý sa automaticky zavolá pri vytvorení objektu tejto triedy
+    /**
+     * Order constructor.
+     *
+     * Connects to the database.
+     */
     public function __construct()
     {
-        // Pripojíme sa k databáze
         $this->db = $this->connect();
     }
 
-    // Metóda pre vytvorenie objednávky
-    public function insert($userId, $cartItems, $totalPrice)
+    /**
+     * Inserts a new order into the database.
+     *
+     * @param int $userId The ID of the user.
+     * @param array $cartItems The items in the cart.
+     * @param float $totalPrice The total price of the order.
+     * @return bool True on success, false on failure.
+     */
+    public function insert($userId, $cartItems, $totalPrice): bool
     {
+
         try {
-            // Vytvoríme SQL príkaz pre vloženie novej objednávky
+            // Create SQL command to insert a new order
             $sql = "INSERT INTO orders (user_id, order_date, total_price) VALUES (:user_id, NOW(), :total_price)";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([':user_id' => $userId, ':total_price' => $totalPrice]);
             $orderId = $this->db->lastInsertId();
-            // Pre každú položku v košíku vložíme záznam do tabuľky order_items
+
+            // For each item in the cart, insert a record into the order_items table
             foreach ($cartItems as $id => $quantity) {
                 $sql = "INSERT INTO order_items (order_id, product_id, quantity) VALUES (:order_id, :product_id, :quantity)";
                 $stmt = $this->db->prepare($sql);
                 $stmt->execute([':order_id' => $orderId, ':product_id' => $id, ':quantity' => $quantity]);
             }
-            // Ak sa všetko podarilo, vrátime true
+
+            // If everything is successful, return true
             return true;
         } catch (PDOException $e) {
-            // Ak nastane chyba, vrátime false
+            // If an error occurs, return false
             $e->getMessage();
             return false;
         }
     }
 
-    // Metóda pre odstránenie objednávky
-    public function delete($id)
+    /**
+     * Deletes an order from the database.
+     *
+     * @param int $id The ID of the order.
+     * @return bool True on success, false on failure.
+     */
+    public function delete($id): bool
     {
         try {
-            // Začneme transakciu
+            // Start the transaction
             $this->db->beginTransaction();
-            // Odstránime všetky položky objednávky
+    
+            // Delete all order items
             $query = "DELETE FROM order_items WHERE order_id = :id";
             $query_run = $this->db->prepare($query);
             $query_run->execute(['id' => $id]);
-            // Odstránime objednávku
+    
+            // Delete the order
             $query = "DELETE FROM orders WHERE id = :id";
             $query_run = $this->db->prepare($query);
             $query_run->execute(['id' => $id]);
-            // Potvrdíme transakciu
+    
+            // Commit the transaction
             $this->db->commit();
+    
             return true;
         } catch (PDOException $e) {
-            // Ak nastane chyba, vrátime transakciu späť a vrátime false
+            // If an error occurs, roll back the transaction and return false
             $this->db->rollBack();
             echo "Error: " . $e->getMessage();
+    
             return false;
         }
     }
 
-
-    // Metóda pre získanie objednávok
-    public function select($userId = null)
+    /**
+     * Selects orders from the database.
+     *
+     * @param int|null $userId The ID of the user. If null, selects all orders.
+     * @return array|bool The orders on success, false on failure.
+     */
+    public function select($userId = null): array|bool
     {
         try {
-            // Ak je zadané ID užívateľa, získame len jeho objednávky
+            // If a user ID is specified, only get their orders
             if ($userId) {
                 $sql = "SELECT * FROM orders WHERE user_id = :user_id";
                 $stmt = $this->db->prepare($sql);
                 $stmt->execute([':user_id' => $userId]);
             } else {
-                // Inak získame všetky objednávky
+                // Otherwise, get all orders
                 $sql = "SELECT * FROM orders";
                 $stmt = $this->db->query($sql);
             }
-            // Získame všetky objednávky
+    
+            // Fetch all orders
             $orders = $stmt->fetchAll(PDO::FETCH_OBJ);
+    
             return $orders;
         } catch (PDOException $e) {
-            // Ak nastane chyba, vrátime false
+            // If an error occurs, return false
             echo $e->getMessage();
+    
             return false;
         }
     }
 
-    // Metóda pre získanie jedál v objednávke
-    public function select_dishes($orderId)
+    /**
+     * Selects dishes in an order from the database.
+     *
+     * @param int $orderId The ID of the order.
+     * @return array|bool The dishes on success, false on failure.
+     */
+    public function select_dishes($orderId): array|bool
     {
         try {
             // Vytvoríme SQL príkaz pre získanie jedál v objednávke
@@ -105,20 +148,28 @@ class Order extends Database
         }
     }
 
-    // Metóda pre aktualizáciu objednávky
-    public function update($id, $new_status)
+    /**
+     * Updates an order in the database.
+     *
+     * @param int $id The ID of the order.
+     * @param string $newStatus The new status of the order.
+     */
+    public function update($id, $newStatus): void
     {
-        // Vytvoríme SQL príkaz pre aktualizáciu objednávky
+        // Create SQL command to update the order
         $sql = "UPDATE orders SET order_status = :order_status WHERE id = :id";
         $stmt = $this->db->prepare($sql);
-        // Vykonáme SQL príkaz
-        $stmt->execute(['order_status' => $new_status, 'id' => $id]);
+
+        // Execute the SQL command
+        $stmt->execute(['order_status' => $newStatus, 'id' => $id]);
     }
 
-    // Metóda pre vyprázdnenie košíka
-    public function clearCart()
+    /**
+     * Clears the cart.
+     */
+    public function clearCart(): void
     {
-        // Vyprázdnime košík
+        // Empty the cart
         $_SESSION['cart'] = array();
     }
 }

@@ -1,71 +1,85 @@
 <?php
 
+/**
+ * Class Dishes
+ *
+ * This class represents a collection of dishes in a database.
+ */
 class Dishes extends Database
 {
+    /**
+     * @var PDO The PDO connection object.
+     */
     private $db;
-    // Konštruktor triedy, ktorý sa automaticky zavolá pri vytvorení objektu tejto triedy
+
+    /**
+     * Constructor of the class, which is automatically called when an object of this class is created.
+     * It establishes a connection to the database.
+     */
     public function __construct()
     {
-        // Pripojíme sa k databáze
         $this->db = $this->connect();
     }
 
-    // Metóda pre získanie všetkých jedál z databázy
-    public function select()
+    /**
+     * This method retrieves all dishes from the database.
+     *
+     * @return array The array of dishes.
+     */
+    public function select(): array
     {
         try {
-            // Vytvoríme SQL príkaz pre získanie všetkých jedál
             $query = $this->db->query("SELECT * FROM dishes");
-            // Získame všetky jedlá
             $dishes = $query->fetchAll();
-            // Vrátime jedlá
             return $dishes;
         } catch (PDOException $e) {
-            // Ak nastane chyba, vypíšeme ju
             echo($e->getMessage());
         }
     }
 
-    public function delete($id)
+    /**
+     * This method deletes a dish from the database.
+     *
+     * @param int $id The ID of the dish to delete.
+     */
+    public function delete(int $id): void
     {
         try {
-            // Vytvoríme SQL príkaz pre odstránenie jedla
             $query = "DELETE FROM dishes WHERE id = :id";
-            // Pripravíme SQL príkaz
             $query_run = $this->db->prepare($query);
-            // Vykonáme SQL príkaz
             $query_run->execute(['id' => $id]);
         } catch (PDOException $e) {
-            // Ak nastane chyba, vypíšeme ju
             echo $e->getMessage();
         }
     }
 
-
-    // Metóda pre aktualizáciu jedla v databáze
-    public function update($id, $new_name, $new_description, $new_price, $new_ingredients)
+    /**
+     * This method updates a dish in the database.
+     *
+     * @param int $id The ID of the dish to update.
+     * @param string $new_name The new name of the dish.
+     * @param string $new_description The new description of the dish.
+     * @param float $new_price The new price of the dish.
+     * @param string $new_ingredients The new ingredients of the dish.
+     */
+    public function update(int $id, string $new_name, string $new_description, float $new_price, string $new_ingredients): void
     {
-        // Vytvoríme SQL príkaz pre aktualizáciu jedla
         $sql = "UPDATE dishes SET name = :name, description = :description, price = :price, ingredients = :ingredients WHERE id = :id";
-        // Pripravíme SQL príkaz
         $stmt = $this->connect()->prepare($sql);
-        // Vykonáme SQL príkaz
         $stmt->execute(['name' => $new_name, 'description' => $new_description, 'price' => $new_price, 'ingredients' => $new_ingredients, 'id' => $id]);
     }
 
-    // Metóda pre vloženie nového jedla do databázy
-    public function insert()
+    /**
+     * This method inserts a new dish into the database.
+     */
+    public function insert(): void
     {
-        // Získame dáta z formulára
         $name = $_POST['new_dish_name'];
         $description = $_POST['new_dish_description'];
         $price = $_POST['new_dish_price'];
         $ingredients = $_POST['new_dish_ingredients'];
-        // Vytvoríme SQL príkaz pre vloženie nového jedla
         $sql = "INSERT INTO dishes (name, description, price, ingredients) VALUES (:name, :description, :price, :ingredients)";
-        // Pripravíme SQL príkaz
         $stmt = $this->connect()->prepare($sql);
-        // Vykonáme SQL príkaz
         $stmt->execute(['name' => $name, 'description' => $description, 'price' => $price, 'ingredients' => $ingredients]);
     }
 }
