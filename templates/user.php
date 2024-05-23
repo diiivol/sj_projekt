@@ -71,43 +71,39 @@ if (isset($_POST['order'])) {
 <!-- Obsah -->
 <div class="container user pt-3 mb-4">
     <div class="row">
-        <!-- Zobrazenie košíka -->
-        <h1>Košík</h1> 
-        <?php if (!empty($cartItems)): ?>
+        <?php if (!empty($cartItems)) : ?>
             <div class="container pt-3 mb-4 items-table">
                 <div class="col-md-6 col-lg-4">
                     <img class="image-top" src="../assets/img/bill/image1.png" alt="Top image">
                     <div class="bill p-3">
-                        <!-- Výpis položiek v košíku -->
-                        <pre>
-<?php
-
-foreach ($cartItems as $id => $quantity) {
-    if (isset($dishes[$id])) {
-        // Get the dish name from the dishes array by ID
-        $name = $dishes[$id]->name;
-        // Get the dish price from the dishes array by ID
-        $price = $dishes[$id]->price;
-    }
-    // Truncate the name to 15 characters
-    $name = mb_substr($name, 0, 32);
-    // Add spaces to the name until it's 32 characters long
-    while (mb_strlen($name) < 32) {
-        $name .= ' ';
-    }
-    // Calculate the price
-    $totalPrice += $price * $quantity;
-    $priceParts = explode('.', number_format($totalPrice, 2, '.', ''));
-    // Format the line to have a fixed width and print it
-    echo $name . sprintf(" %2d ks %7s,%s €\n", $quantity, $priceParts[0], $priceParts[1]);
-}
-?>
-<?= str_repeat('-', 51) . "\n"; ?>
-<?= sprintf("%-42s %s€", "Subtotal", str_pad($totalPrice, 7, ' ', STR_PAD_LEFT)) . "\n"; ?>
-<?= sprintf("%-42s %s€", "Delivery", str_pad($delivery, 7, ' ', STR_PAD_LEFT)) . "\n"; ?>
-<?= str_repeat('-', 51) . "\n"; ?>
-<?= sprintf("%-42s %s€", "Total", str_pad($totalPrice + $delivery, 7, ' ', STR_PAD_LEFT)) . "\n"; ?>
-                        </pre>
+                        <table class="user-table">
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Action</th>
+                            </tr>
+                            <?php foreach ($cartItems as $id => $quantity) : ?>
+                                <?php if (isset($dishes[$id])) :
+                                    $name = $dishes[$id]->name;
+                                    $price = $dishes[$id]->price;
+                                endif; ?>
+                                <tr>
+                                    <td><?php echo $name; ?></td>
+                                    <td><?php echo $price; ?></td>
+                                    <td><?php echo $quantity; ?></td>
+                                    <td>
+                                        <form method="POST">
+                                            <input type="hidden" name="product_id" value="<?php echo $id; ?>">
+                                            <input type="submit" value="Remove" name="remove_from_cart" class="btn btn-danger">
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </table>
+                        <h4>Total price: <?php echo $totalPrice; ?>€</h4>
+                        <h4>Delivery: <?php echo $delivery; ?>€</h4>
+                        <h3><u>Total price with delivery: <?php echo $totalPrice + $delivery; ?>€</u></h3>
                         <form method="POST">
                             <input type="submit" value="Order" name="order" class="btn btn-primary mb-4">
                         </form>
@@ -115,13 +111,13 @@ foreach ($cartItems as $id => $quantity) {
                     <img class="image-bottom" src="../assets/img/bill/image2.png" alt="Bottom image">
                 </div>
             </div>
-        <?php else: ?>
+        <?php else : ?>
             <h4>Nič tu nie je.</h4>
+            <h4>Prejsť do <a href="menu.php">menu</a>?</h4>
         <?php endif; ?>
 
         <!-- Zobrazenie objednávok -->
         <?php
-
         // Získanie objednávok podľa ID užívateľa
         $orders = $order_object->select($userId);
         ?>
