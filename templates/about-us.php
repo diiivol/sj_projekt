@@ -1,9 +1,19 @@
-<!-- Header -->
 <?php
+
+/**
+ * This file is used to start a session and include all necessary classes.
+ */
+
+// Check if the header file exists
+if (!file_exists('partials/header.php')) {
+  die('Chyba: chýba súbor s hlavičkou stránky. Prosím, kontaktujte administrátora.');
+}
+
+// Include the header
 include_once 'partials/header.php';
 ?>
-<!-- -->
-<!-- O nas -->
+
+<!-- About Us -->
 <div class="container o-nas pt-3 text-center">
   <h1 class="display-4 text-center mb-4">O nas</h1>
   <div class="container p-2 fs-5 col-md-8 mx-auto">
@@ -15,34 +25,21 @@ include_once 'partials/header.php';
       Keď sme si uvedomili, že naša kulinárska vášeň má potenciál spájať ľudí a rozvíjať komunitu, rozhodli sme sa
       otvoriť Oyster.</p>
   </div>
-  <!--  -->
-  <!-- Slideshow (Carousel) (1b) -->
-  <!--  -->
+
   <div class="container mb-5">
     <h3 class="text-center mb-4">Galeria</h3>
     <div class="photo-gallery row justify-content-center ">
-      <!--  -->
-      <!-- Obrázky (1b) -->
-      <!--  -->
-      <!-- používajte obrázky z bezplatných zdrojov, -->
-      <!-- použite vhodné množstvo obrázkov na stránku.  -->
-      <!--  -->
       <?php
-$img_folder = '../assets/img/o_nas/';
-$slider = new Slider();
-$slider->set_img_folder($img_folder);
-echo ($slider->generate_slides());
-?>
-      <!--  -->
+        $img_folder = '../assets/img/o_nas/';
+        $slider = new Slider();
+        $slider->set_img_folder($img_folder);
+        echo $slider->generate_slides();
+      ?>
     </div>
   </div>
 </div>
-<!--  -->
-<!-- Footer (2b) -->
-<!--  -->
-<!-- Niekoľko stĺpcov s informáciami o stránke -->
-<!-- Copyright -->
-<!--  -->
+
 <?php
+// Include the footer
 include_once 'partials/footer.php'
 ?>
