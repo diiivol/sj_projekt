@@ -60,7 +60,11 @@ $userId = $_SESSION['user_id'];
 
 // Vytvorenie objednávky
 if (isset($_POST['order'])) {
-    $order_object->insert($userId, $cartItems, $totalPrice + $delivery);
+    $name = $_POST['name'];
+    $street = $_POST['street'];
+    $city = $_POST['city'];
+    $postcode = $_POST['postcode'];
+    $order_object->insert($userId, $cartItems, $totalPrice + $delivery, $name, $street, $city, $postcode);
     $order_object->clearCart();
     header('Location: ' . $_SERVER['PHP_SELF']);
     exit();
@@ -70,45 +74,69 @@ if (isset($_POST['order'])) {
 
 <!-- Obsah -->
 <div class="container user pt-3 mb-4">
+    
+    <h1>Košík</h1>
     <div class="row">
         <?php if (!empty($cartItems)) : ?>
             <div class="container pt-3 mb-4 items-table">
-                <div class="col-md-6 col-lg-4">
-                    <img class="image-top" src="../assets/img/bill/image1.png" alt="Top image">
-                    <div class="bill p-3">
-                        <table class="user-table">
-                            <tr>
-                                <th>Product</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Action</th>
-                            </tr>
-                            <?php foreach ($cartItems as $id => $quantity) : ?>
-                                <?php if (isset($dishes[$id])) :
-                                    $name = $dishes[$id]->name;
-                                    $price = $dishes[$id]->price;
-                                endif; ?>
+                <div class="row">
+                <div class="col-lg-4">
+                        <img class="image-top" src="../assets/img/bill/image1.png" alt="Top image">
+                        <div class="bill p-3">
+                            <table class="user-table">
                                 <tr>
-                                    <td><?php echo $name; ?></td>
-                                    <td><?php echo $price; ?></td>
-                                    <td><?php echo $quantity; ?></td>
-                                    <td>
-                                        <form method="POST">
-                                            <input type="hidden" name="product_id" value="<?php echo $id; ?>">
-                                            <input type="submit" value="Remove" name="remove_from_cart" class="btn btn-danger">
-                                        </form>
-                                    </td>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Action</th>
                                 </tr>
-                            <?php endforeach; ?>
-                        </table>
-                        <h4>Total price: <?php echo $totalPrice; ?>€</h4>
-                        <h4>Delivery: <?php echo $delivery; ?>€</h4>
-                        <h3><u>Total price with delivery: <?php echo $totalPrice + $delivery; ?>€</u></h3>
+                                <?php foreach ($cartItems as $id => $quantity) : ?>
+                                    <?php if (isset($dishes[$id])) :
+                                        $name = $dishes[$id]->name;
+                                        $price = $dishes[$id]->price;
+                                    endif; ?>
+                                    <tr>
+                                        <td><?php echo $name; ?></td>
+                                        <td><?php echo $price; ?></td>
+                                        <td><?php echo $quantity; ?></td>
+                                        <td>
+                                            <form method="POST">
+                                                <input type="hidden" name="product_id" value="<?php echo $id; ?>">
+                                                <button type="submit" value="Remove" name="remove_from_cart" class="btn btn-danger">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </table>
+                            <h4>Cena: <?php echo $totalPrice; ?>€</h4>
+                            <h4>Doručenie: <?php echo $delivery; ?>€</h4>
+                            <h3><u>Spolu cena: <?php echo $totalPrice + $delivery; ?>€</u></h3>
+                        </div>
+                        <img class="image-bottom" src="../assets/img/bill/image2.png" alt="Bottom image">
+                    </div>
+                    <div class="col-lg-8">
                         <form method="POST">
-                            <input type="submit" value="Order" name="order" class="btn btn-primary mb-4">
+                            <div class="form-group">
+                                <label for="name">Meno Priezvisko</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="street">Ulica</label>
+                                <input type="text" class="form-control" id="street" name="street" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">Mesto</label>
+                                <input type="text" class="form-control" id="city" name="city" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="postcode">PSČ</label>
+                                <input type="text" class="form-control" id="postcode" name="postcode" required>
+                            </div>
+                            <input type="submit" value="Order" name="order" class="btn btn-primary mt-4">
                         </form>
                     </div>
-                    <img class="image-bottom" src="../assets/img/bill/image2.png" alt="Bottom image">
                 </div>
             </div>
         <?php else : ?>
@@ -122,9 +150,9 @@ if (isset($_POST['order'])) {
         $orders = $order_object->select($userId);
         ?>
 
+        <h1>Objednávky</h1>
         <?php if (!empty($orders)): ?>
             <div class="container pt-3 mb-4 orders">
-            <h1>Objednávky</h1>
                 <div class="row">
                     <?php foreach ($orders as $o): ?>
                         <div class="col-md-6 col-lg-4">

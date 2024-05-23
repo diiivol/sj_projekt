@@ -30,14 +30,21 @@ class Order extends Database
      * @param float $totalPrice The total price of the order.
      * @return bool True on success, false on failure.
      */
-    public function insert($userId, $cartItems, $totalPrice): bool
-    {
 
+    public function insert($userId, $cartItems, $totalPrice, $name, $street, $city, $postcode): bool
+    {
         try {
             // Create SQL command to insert a new order
-            $sql = "INSERT INTO orders (user_id, order_date, total_price) VALUES (:user_id, NOW(), :total_price)";
+            $sql = "INSERT INTO orders (user_id, order_date, total_price, name, street, city, postcode) VALUES (:user_id, NOW(), :total_price, :name, :street, :city, :postcode)";
             $stmt = $this->db->prepare($sql);
-            $stmt->execute([':user_id' => $userId, ':total_price' => $totalPrice]);
+            $stmt->execute([
+                ':user_id' => $userId, 
+                ':total_price' => $totalPrice, 
+                ':name' => $name, 
+                ':street' => $street, 
+                ':city' => $city, 
+                ':postcode' => $postcode
+            ]);
             $orderId = $this->db->lastInsertId();
 
             // For each item in the cart, insert a record into the order_items table

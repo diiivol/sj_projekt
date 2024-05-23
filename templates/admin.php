@@ -271,7 +271,9 @@ $contacts = $contact_object->select();
                             <td><?= $c->message ?></td>
                             <td>
                                 <form action="" method="POST">
-                                    <button type="submit" name="delete_contact" class="btn btn-danger" value="<?= $c->id ?>">Vymazať</button>
+                                    <button type="submit" name="delete_contact" class="btn btn-danger" value="<?= $c->id ?>">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
                                 </form>
                             </td>
                         </tr>
@@ -292,8 +294,8 @@ $contacts = $contact_object->select();
                         <th>Description</th>
                         <th>Price <i class="fa fa-eur"></i></th>
                         <th>Ingredients</th>
-                        <th><i class="fa fa-pencil"></i></th>
-                        <th><i class="fa fa-trash"></i></th>
+                        <th>Upraviť</th>
+                        <th>Vymazať</th>
                     </tr>
                     <?php foreach ($dishes as $d): ?>
                         <tr>
@@ -307,13 +309,17 @@ $contacts = $contact_object->select();
                                     <input type="hidden" name="new_dish_description" value="<?= $d->description ?>" required>
                                     <input type="hidden" name="new_dish_price" value="<?= $d->price ?>" required>
                                     <input type="hidden" name="new_dish_ingredients" value="<?= $d->ingredients ?>" required>
-                                    <button class="btn btn-warning edit-button" type="button">Upraviť</button>
+                                    <button class="btn btn-warning edit-button" type="button">
+                                        <i class="fa fa-pencil"></i>
+                                    </button>
                                     <button class="btn btn-success save-button" type="submit" name="update_dishes" value="<?= $d->id ?>" style="display: none;">OK</button>
                                 </form>
                             </td>
                             <td>
                                 <form action="" method="POST">
-                                    <button type="submit" name="delete_dishes" class="btn btn-danger" value="<?= $d->id ?>">Vymazať</button>
+                                    <button type="submit" name="delete_dishes" class="btn btn-danger" value="<?= $d->id ?>">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
                                 </form>
                             </td>
                         </tr>
@@ -359,6 +365,8 @@ $contacts = $contact_object->select();
                                 </form>
                                 <p>User ID: <?= $o->user_id ?></p>
                                 <p>Dátum objednávky: <?= $o->order_date ?></p>
+                                <p>Meno: <?= $o->name ?></p>
+                                <p>Adresa: <?= $o->street ?>, <?= $o->city ?>, <?= $o->postcode ?></p>
                                 <?php
                                 // Create an array to store the names of the items in the order
                                 $itemNames = array();
