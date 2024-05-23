@@ -81,6 +81,7 @@ if (isset($_POST['order'])) {
                         <!-- Výpis položiek v košíku -->
                         <pre>
 <?php
+
 foreach ($cartItems as $id => $quantity) {
     if (isset($dishes[$id])) {
         // Get the dish name from the dishes array by ID
@@ -95,7 +96,7 @@ foreach ($cartItems as $id => $quantity) {
         $name .= ' ';
     }
     // Calculate the price
-    $totalPrice = $price * $quantity;
+    $totalPrice += $price * $quantity;
     $priceParts = explode('.', number_format($totalPrice, 2, '.', ''));
     // Format the line to have a fixed width and print it
     echo $name . sprintf(" %2d ks %7s,%s €\n", $quantity, $priceParts[0], $priceParts[1]);
