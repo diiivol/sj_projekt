@@ -51,7 +51,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             descriptionField.appendChild(editableDescriptionInput);
             priceField.appendChild(editablePriceInput);
             ingredientsField.appendChild(editableIngredientsInput);
-            event.target.style.display = 'none';
+            event.currentTarget.style.display = 'none';
             row.querySelector('.save-button').style.display = 'inline';
         });
     });

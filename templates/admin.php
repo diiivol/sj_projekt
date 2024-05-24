@@ -254,7 +254,9 @@ $contacts = $contact_object->select();
 
 <div class="container admin pt-3 mb-4">
     <div class="row">
+        
         <h1>Kontakty</h1>
+        
         <?php if (!empty($contacts)): ?>
             <div class="container pt-3 mb-4 contacts-table">
                 <table class="admin-table">
@@ -286,10 +288,15 @@ $contacts = $contact_object->select();
         
         <h1>Jedlá</h1>
         
-        <?php if (!empty($dishes)): ?>
+        <?php
+        /**
+         * Check if the $dishes array is not empty
+         */
+        if (!empty($dishes)): ?>
             <div class="container pt-3 mb-4 dishes-table">
                 <table class="admin-table">
                     <tr>
+                        <!-- Table headers -->
                         <th>Name</th>
                         <th>Description</th>
                         <th>Price <i class="fa fa-eur"></i></th>
@@ -297,18 +304,25 @@ $contacts = $contact_object->select();
                         <th>Upraviť</th>
                         <th>Vymazať</th>
                     </tr>
-                    <?php foreach ($dishes as $d): ?>
+                    <?php 
+                    /**
+                     * Loop through each dish in the $dishes array
+                     */
+                    foreach ($dishes as $d): ?>
                         <tr>
+                            <!-- Display dish details -->
                             <td class="dish-name"><?= $d->name ?></td>
                             <td class="dish-description"><?= $d->description ?></td>
                             <td class="dish-price"><?= $d->price ?></td>
                             <td class="dish-ingredients"><?= $d->ingredients ?></td>
                             <td>
                                 <form action="" method="POST">
+                                    <!-- Hidden inputs to hold the dish details -->
                                     <input type="hidden" name="new_dish_name" value="<?= $d->name ?>" required>
                                     <input type="hidden" name="new_dish_description" value="<?= $d->description ?>" required>
                                     <input type="hidden" name="new_dish_price" value="<?= $d->price ?>" required>
                                     <input type="hidden" name="new_dish_ingredients" value="<?= $d->ingredients ?>" required>
+                                    <!-- Edit and save buttons -->
                                     <button class="btn btn-warning edit-button" type="button">
                                         <i class="fa fa-pencil"></i>
                                     </button>
@@ -317,6 +331,7 @@ $contacts = $contact_object->select();
                             </td>
                             <td>
                                 <form action="" method="POST">
+                                    <!-- Delete button -->
                                     <button type="submit" name="delete_dishes" class="btn btn-danger" value="<?= $d->id ?>">
                                         <i class="fa fa-trash"></i>
                                     </button>
@@ -326,6 +341,7 @@ $contacts = $contact_object->select();
                     <?php endforeach; ?>
                     <tr>
                         <form method="POST">
+                            <!-- Inputs for adding a new dish -->
                             <td><input type="text" id="new_dish_name" name="new_dish_name" placeholder="Názov jedla" required style="width: 100%;"></td>
                             <td><textarea id="new_dish_description" name="new_dish_description" placeholder="Popis jedla" required rows="4" style="width: 100%;"></textarea></td>
                             <td><input type="number" value="0" min="0" step="0.50" id="new_dish_price" name="new_dish_price" placeholder="Cena jedla" required style="width: 100%;"></td>
@@ -338,9 +354,9 @@ $contacts = $contact_object->select();
         <?php else: ?>
             <h4>Žiadne jedlá</h4>
         <?php endif; ?>
-
+        
         <h1>Objednávky</h1>
-
+        
         <?php
         if (!empty($orders)): ?>
             <div class="container pt-3 mb-4 orders">
@@ -379,9 +395,9 @@ $contacts = $contact_object->select();
                                 $itemNamesString = implode('<br>', $itemNames);
                                 ?>
                                 <p><?= $itemNamesString ?></p>
-                                <p>Cena: <?= $o->total_price ?>€</p>
+                                <h4>Cena: <?= $o->total_price ?>€</h4>
                                 <form action="" method="POST">
-                                    <button type="submit" name="delete_order" value="<?= $o->id ?>" class="btn btn-danger">Vymazať</button>
+                                    <button type="submit" name="delete_order" value="<?= $o->id ?>" class="btn btn-danger mt-2">Vymazať</button>
                                 </form>
                             </div>
                         </div>    

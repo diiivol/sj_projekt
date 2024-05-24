@@ -235,6 +235,7 @@ h1 {
   text-transform: uppercase;
 }
 
+/* Footer settings */
 .menu,
 .o-nas,
 .kontakt,
@@ -244,27 +245,31 @@ h1 {
 .error,
 .admin,
 .user {
-  /* flex: 1 0 auto; */
-  /* flex-grow: 1; */
   flex-grow: 1;
 }
 
 /* *** */
+
 /* Admin | User table*/
-table th,
-table td {
+
+.admin-table th,
+.admin-table td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: center;
 }
 
-table th {
+.admin-table th {
   background-color: #23272b;
   color: white;
 }
 
-table tr:nth-child(even) {
-  background-color: #f2f2f2;
+.admin-table tr:nth-child(even) {
+  background-color: #fff9f8;
+}
+
+.admin-table tr:nth-child(odd) {
+  background-color: #e7dedbd0;
 }
 
 .form-inline {
@@ -272,13 +277,63 @@ table tr:nth-child(even) {
   align-items: center;
 }
 
+.status-pending {
+  background-color: rgb(242, 243, 192);
+  color: rgb(102, 71, 50);
+}
+
+.status-processing {
+  background-color: rgb(230, 136, 14);
+  color: rgb(255, 240, 240);
+}
+
+.status-completed {
+  background-color: rgb(27, 226, 21);
+  color: rgb(255, 255, 255);
+}
+
 .btn {
-  margin-right: 5px;
+  font-family: 'Bookerly Bold';
 }
 
 /* *** */
 
-/* user  */
+/* User  */
+
+.user-table, .user-table th, .user-table td {
+  background: transparent;
+  border: none;
+  text-align: center;
+}
+
+.user-table th, .user-table td {
+  border-bottom: 1px dashed rgb(202, 201, 199);
+  padding: 5px 0;
+}
+
+.user-table {
+  width: 100%; /* Make the table take up the full width of its container */
+}
+
+.user-table th:first-child, .user-table td:first-child {
+  text-align: left; /* Align the first column to the left */
+}
+
+.user-table th:nth-child(1) {
+  width: 50%; /* Make the first column take up 30% of the table's width */
+}
+
+.user-table th:nth-child(2) {
+  width: 20%; /* Make the second column take up 50% of the table's width */
+}
+
+.user-table th:nth-child(3) {
+  width: 15%; /* Make the third column take up 20% of the table's width */
+}
+
+.user-table th:nth-child(4) {
+  width: 15%; /* Make the third column take up 20% of the table's width */
+}
 .bill{
   
   background-image: url('../img/bill/middle.png');
@@ -294,18 +349,12 @@ table tr:nth-child(even) {
   display: block;
 }
 
-
-.status-pending {
-  background-color: rgb(242, 243, 192);
-  color: rgb(102, 71, 50);
+.remove_btn {
+  background: none;
+  border: none;
+  cursor: pointer;
 }
-
-.status-processing {
-  background-color: rgb(230, 136, 14);
-  color: rgb(255, 240, 240);
+.remove_btn .fa {
+  color: #c74343; /* Change this to the color you want for the icon */
 }
-
-.status-completed {
-  background-color: rgb(27, 226, 21);
-  color: rgb(255, 240, 240);
-}
+/* *** */

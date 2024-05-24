@@ -73,22 +73,24 @@ if (isset($_POST['order'])) {
 ?>
 
 <!-- Obsah -->
-<div class="container user pt-3 mb-4">
-    
-    <h1>Košík</h1>
+<div class="container user pt-3 mb-4">    
     <div class="row">
+        
+        <h1>Košík</h1>
+        
         <?php if (!empty($cartItems)) : ?>
             <div class="container pt-3 mb-4 items-table">
-                <div class="row">
-                <div class="col-lg-4">
+                <div class="row d-flex justify-content-between">
+                    <!-- Zobrazenie košíka -->
+                    <div class="col-lg-4">
                         <img class="image-top" src="../assets/img/bill/image1.png" alt="Top image">
                         <div class="bill p-3">
-                            <table class="user-table">
+                            <table class="user-table mb-3">
                                 <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Action</th>
+                                    <th>Názov</th>
+                                    <th>Cena</th>
+                                    <th>ks</th>
+                                    <th></th>
                                 </tr>
                                 <?php foreach ($cartItems as $id => $quantity) : ?>
                                     <?php if (isset($dishes[$id])) :
@@ -102,7 +104,7 @@ if (isset($_POST['order'])) {
                                         <td>
                                             <form method="POST">
                                                 <input type="hidden" name="product_id" value="<?php echo $id; ?>">
-                                                <button type="submit" value="Remove" name="remove_from_cart" class="btn btn-danger">
+                                                <button type="submit" class="remove_btn" value="Remove" name="remove_from_cart" >
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
@@ -110,32 +112,39 @@ if (isset($_POST['order'])) {
                                     </tr>
                                 <?php endforeach; ?>
                             </table>
-                            <h4>Cena: <?php echo $totalPrice; ?>€</h4>
-                            <h4>Doručenie: <?php echo $delivery; ?>€</h4>
+                            <h4>Medzisučet: <?php echo $totalPrice; ?>€</h4>
+                            <h5>Doručenie: <?php echo $delivery; ?>€</h5>
                             <h3><u>Spolu cena: <?php echo $totalPrice + $delivery; ?>€</u></h3>
                         </div>
                         <img class="image-bottom" src="../assets/img/bill/image2.png" alt="Bottom image">
                     </div>
-                    <div class="col-lg-8">
-                        <form method="POST">
-                            <div class="form-group">
-                                <label for="name">Meno Priezvisko</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
+                    <!-- Formulár pre vytvorenie objednávky -->
+                    <div class="col-lg-6 mx-5">
+                        <div class="card p-3">
+                            <div class="card-body">
+                                <form method="POST">
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">Meno prijímateľa</label>
+                                        <input type="text" class="form-control" id="name" name="name" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="street" class="form-label">Ulica</label>
+                                        <input type="text" class="form-control" id="street" name="street" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="city" class="form-label">Mesto</label>
+                                        <input type="text" class="form-control" id="city" name="city" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="postcode" class="form-label">PSČ</label>
+                                        <input type="text" class="form-control" id="postcode" name="postcode" required>
+                                    </div>
+                                    <div class="d-flex">
+                                        <input type="submit" value="Order" name="order" class="btn btn-primary">
+                                    </div>
+                                </form>
                             </div>
-                            <div class="form-group">
-                                <label for="street">Ulica</label>
-                                <input type="text" class="form-control" id="street" name="street" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="city">Mesto</label>
-                                <input type="text" class="form-control" id="city" name="city" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="postcode">PSČ</label>
-                                <input type="text" class="form-control" id="postcode" name="postcode" required>
-                            </div>
-                            <input type="submit" value="Order" name="order" class="btn btn-primary mt-4">
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -143,14 +152,14 @@ if (isset($_POST['order'])) {
             <h4>Nič tu nie je.</h4>
             <h4>Prejsť do <a href="menu.php">menu</a>?</h4>
         <?php endif; ?>
-
         <!-- Zobrazenie objednávok -->
         <?php
         // Získanie objednávok podľa ID užívateľa
         $orders = $order_object->select($userId);
         ?>
-
+        
         <h1>Objednávky</h1>
+        
         <?php if (!empty($orders)): ?>
             <div class="container pt-3 mb-4 orders">
                 <div class="row">
@@ -196,7 +205,7 @@ if (isset($_POST['order'])) {
                 </div>
             </div>
         <?php else: ?>
-            <h4>Nič tu nie je.</h4>
+            <h4>Ešte ste nevykonali žiadne objednávky.</h4>
         <?php endif; ?>
     </div>
 </div>
