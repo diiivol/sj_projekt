@@ -250,7 +250,7 @@ h1 {
 
 /* *** */
 
-/* Admin | User table*/
+/* Admin */
 
 .admin-table th,
 .admin-table td {
@@ -262,6 +262,10 @@ h1 {
 .admin-table th {
   background-color: #23272b;
   color: white;
+}
+
+.contact-message {
+  word-break: break-all;
 }
 
 .admin-table tr:nth-child(even) {
@@ -312,27 +316,27 @@ h1 {
 }
 
 .user-table {
-  width: 100%; /* Make the table take up the full width of its container */
+  width: 100%;
 }
 
 .user-table th:first-child, .user-table td:first-child {
-  text-align: left; /* Align the first column to the left */
+  text-align: left;
 }
 
 .user-table th:nth-child(1) {
-  width: 50%; /* Make the first column take up 30% of the table's width */
+  width: 50%;
 }
 
 .user-table th:nth-child(2) {
-  width: 20%; /* Make the second column take up 50% of the table's width */
+  width: 20%;
 }
 
 .user-table th:nth-child(3) {
-  width: 15%; /* Make the third column take up 20% of the table's width */
+  width: 15%;
 }
 
 .user-table th:nth-child(4) {
-  width: 15%; /* Make the third column take up 20% of the table's width */
+  width: 15%;
 }
 .bill{
   
@@ -355,6 +359,7 @@ h1 {
   cursor: pointer;
 }
 .remove_btn .fa {
-  color: #c74343; /* Change this to the color you want for the icon */
+  color: #c74343;
 }
+
 /* *** */

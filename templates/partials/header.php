@@ -1,9 +1,31 @@
 <?php
+
+/**
+ * This file is the header for the website.
+ * It sets up the page object and includes the necessary stylesheets and scripts.
+ */
+
 require('../_inc/config.php');
 
+/**
+ * The basename of the current script is retrieved and used to create a new Page object.
+ * The page name is set.
+ */
 $page_name = basename($_SERVER["SCRIPT_NAME"], '.php');
 $page_object = new Page();
 $page_object->set_page_name($page_name);
+
+/**
+ * An array of common pages is created and used to generate a menu.
+ */
+$commonPages = array(
+    'Menu' => 'menu.php',
+    'Kontakt' => 'contacts.php',
+    'O nas' => 'about-us.php'
+);
+
+// Create a new Menu object and generate the menu
+$menu_object = new Menu($commonPages);
 ?>
 
 <!DOCTYPE html>
@@ -23,62 +45,59 @@ $page_object->set_page_name($page_name);
 </head>
 
 <body>
-    <!-- Preload (kreatívny bod?) -->
-    <div id="preloader">
-        <img src="../assets/img/loading.gif" width="50" height = "50" alt="Loading...">
-    </div>
-    <!--  -->
 
-    <!--  -->
-    <!-- Navigácia (4b) -->
-    <!--  -->
-    <!-- Navigácia s minimálne 3 stránkami (Napr. Domov, O nás, Blog, Galéria, Kontakt,..) -->
-    <!-- Na mobiloch hamburger navigácia -->
-    <!-- Logo v navigácii -->
-    <!-- Navigácia viditeľná počas scrollovania   -->
-    <!--  -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand d-none d-lg-block" href="../index.php">
-                <img src="../assets/img/icon.svg" alt="Logo" width="35" height="35" class="img-fluid">
-                yster
-            </a>
-            <a class="navbar-brand d-lg-none" href="../index.php">
-                <img src="../assets/img/icon.svg" alt="Logo" width="35" height="35" class="d-inline-block align-text-top me-2">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <?php
-                    $commonPages = array(
-                        'Menu' => 'menu.php',
-                        'Kontakt' => 'contacts.php',
-                        'O nas' => 'about-us.php'
-                    );
-                    $menu_object = new Menu($commonPages);
-                    echo $menu_object->generate_menu();
-                    ?>
-                </ul>
-                <ul class="navbar-nav ms-auto">
-                    <?php
-                    $userPages = array();
+<!-- Preload (kreatívny bod) -->
+<div id="preloader">
+    <img src="../assets/img/loading.gif" width="50" height = "50" alt="Loading...">
+</div>
+<!--  -->
 
-                    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
-                        if ($_SESSION['user_role'] == 1) {
-                            $userPages['<i class="fas fa-user"></i> ' . $_SESSION['user_email']] = 'admin.php';
-                        } else {
-                            $userPages['<i class="fas fa-user"></i> ' . $_SESSION['user_email']] = 'user.php';
-                        }
-                        $userPages['Odhlásiť sa'] = 'logout.php';
+<!--  -->
+<!-- Navigácia (4b) -->
+<!--  -->
+<!-- Navigácia s minimálne 3 stránkami (Napr. Domov, O nás, Blog, Galéria, Kontakt,..) -->
+<!-- Na mobiloch hamburger navigácia -->
+<!-- Logo v navigácii -->
+<!-- Navigácia viditeľná počas scrollovania   -->
+<!--  -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand d-none d-lg-block" href="../index.php">
+            <img src="../assets/img/icon.svg" alt="Logo" width="35" height="35" class="img-fluid">
+            yster
+        </a>
+        <a class="navbar-brand d-lg-none" href="../index.php">
+            <img src="../assets/img/icon.svg" alt="Logo" width="35" height="35" class="d-inline-block align-text-top me-2">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <?= $menu_object->generate_menu(); ?>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <?php
+                /**
+                 * An array of user pages is created based on the user's login status and role.
+                 * This array is used to generate a menu.
+                 */
+                $userPages = array();
+                    
+                if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
+                    if ($_SESSION['user_role'] == 1) {
+                        $userPages['<i class="fas fa-user"></i> ' . $_SESSION['user_email']] = 'admin.php';
                     } else {
-                        $userPages['Prihlásiť sa'] = 'login.php';
+                        $userPages['<i class="fas fa-user"></i> ' . $_SESSION['user_email']] = 'user.php';
                     }
-                    $menu_object = new Menu($userPages);
-                    echo $menu_object->generate_menu();
-                    ?>
-                </ul>
-            </div>
+                    $userPages['Odhlásiť sa'] = 'logout.php';
+                } else {
+                    $userPages['Prihlásiť sa'] = 'login.php';
+                }
+                $menu_object = new Menu($userPages);
+                echo $menu_object->generate_menu();
+                ?>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>

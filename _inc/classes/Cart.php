@@ -19,7 +19,7 @@ class Cart
      * @param int $product_id
      * @param int $quantity
      */
-    public function addProduct(int $product_id, int $quantity): void
+    public function insert(int $product_id, int $quantity): void
     {
         // If the product is not yet in the cart, we set its quantity to 0
         if (!isset($_SESSION['cart'][$product_id])) {

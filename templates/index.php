@@ -5,52 +5,52 @@ include_once 'partials/header.php';
 <!--  -->
 <!-- Content -->
 <div class="main-content text-center">
-  <div class="container">
+    <div class="container">
     <!--  -->
     <!-- Rôzne nadpisy (1b) -->
     <!-- Formátovanie (1b) -->
     <!--  -->
-    <h1 class="main-heading">Vitajte v našej reštaurácii</h1>
-    <h2 class="sub-heading">Chutné jedlá podávané <strong>s láskou!</strong></h2>
-    <!--  -->
-  </div>
-  <div class="hodiny p-4">
+        <h1 class="main-heading">Vitajte v našej reštaurácii</h1>
+        <h2 class="sub-heading">Chutné jedlá podávané s láskou!</h2>
+        <!--  -->
+    </div>
+    <div class="hodiny p-4">
     <!--  -->
     <!-- Tabuľka (1b)  -->
     <!--  -->
-    <table>
-      <thead>
-        <tr>
-          <th>DEŇ</th>
-          <th>OD</th>
-          <th>DO</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>PO-ST</td>
-          <td>10:30</td>
-          <td>20:00</td>
-        </tr>
-        <tr>
-          <td>ŠT</td>
-          <td>10:00</td>
-          <td>21:00</td>
-        </tr>
-        <tr>
-          <td>SO</td>
-          <td>11:30</td>
-          <td>20:00</td>
-        </tr>
-        <tr>
-          <td>NE</td>
-          <td>11:00</td>
-          <td>21:00</td>
-        </tr>
-      </tbody>
-    </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>DEŇ</th>
+                    <th>OD</th>
+                    <th>DO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>PO-ST</td>
+                    <td>10:30</td>
+                    <td>20:00</td>
+                </tr>
+                <tr>
+                    <td>ŠT</td>
+                    <td>10:00</td>
+                    <td>21:00</td>
+                </tr>
+                <tr>
+                    <td>SO</td>
+                    <td>11:30</td>
+                    <td>20:00</td>
+                </tr>
+                <tr>
+                    <td>NE</td>
+                    <td>11:00</td>
+                    <td>21:00</td>
+                </tr>
+            </tbody>
+        </table>
     <!--  -->
-  </div>
+    </div>
 </div>
 <!-- Odkazy na scripty -->
 <script src="../assets/js/preload.js"></script>
