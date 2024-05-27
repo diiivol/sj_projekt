@@ -71,13 +71,14 @@ class Dishes extends Database
 
     /**
      * This method inserts a new dish into the database.
+     * 
+     * @param string $name The name of the dish.
+     * @param string $description The description of the dish.
+     * @param float $price The price of the dish.
+     * @param string $ingredients The ingredients of the dish.
      */
-    public function insert(): void
+    public function insert($name, $description, $price, $ingredients): void
     {
-        $name = $_POST['new_dish_name'];
-        $description = $_POST['new_dish_description'];
-        $price = $_POST['new_dish_price'];
-        $ingredients = $_POST['new_dish_ingredients'];
         $sql = "INSERT INTO dishes (name, description, price, ingredients) VALUES (:name, :description, :price, :ingredients)";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute(['name' => $name, 'description' => $description, 'price' => $price, 'ingredients' => $ingredients]);

@@ -23,15 +23,20 @@ class Contact extends Database
 
     /**
      * This method inserts a contact into the database.
+     * 
+     * @param int $name The name of the contact.
+     * @param string $email The email of the contact.
+     * @param string $message The message of the contact.
+     * @param bool $acceptance The acceptance of the contact.
      */
-    public function insert(): void
+    public function insert(int $name, string $email, string $message, bool $acceptance)
     {
-        if ($this->db && isset($_POST['contact_submitted'])) {
+        if ($this->db) {
             $data = array(
-                'contact_name' => $_POST['name'],
-                'contact_email' => $_POST['email'],
-                'contact_message' => filter_var($_POST['message'], FILTER_SANITIZE_FULL_SPECIAL_CHARS),
-                'contact_acceptance' => $_POST['acceptance'],
+                'contact_name' => $name,
+                'contact_email' => $email,
+                'contact_message' => filter_var($message, FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+                'contact_acceptance' => $acceptance,
             );
             try {
                 $query = "INSERT INTO contact (name, email, message, acceptance) VALUES
@@ -68,7 +73,7 @@ class Contact extends Database
      *
      * @param int $id The ID of the contact to delete.
      */
-    public function delete($id)
+    public function delete(int $id): void
     {
         try {
             $query = "DELETE FROM contact WHERE id = :id";

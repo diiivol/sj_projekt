@@ -58,6 +58,7 @@ class Page
                 $result .= ' <script src="../assets/js/slider.js"></script>';
                 break;
             case 'contacts':
+            case 'register':
                 $result .= ' <script src="../assets/js/alert.js"></script>';
                 break;
             case 'admin':

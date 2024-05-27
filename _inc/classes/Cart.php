@@ -16,8 +16,8 @@ class Cart
     /**
      * Method for adding a product to the cart
      *
-     * @param int $product_id
-     * @param int $quantity
+     * @param int $product_id The ID of the product
+     * @param int $quantity The quantity of the product
      */
     public function insert(int $product_id, int $quantity): void
     {
@@ -32,7 +32,7 @@ class Cart
     /**
      * Method for removing a product from the cart
      *
-     * @param int $id
+     * @param int $id The ID of the product to remove
      */
     public function delete(int $id): void
     {

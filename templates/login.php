@@ -1,5 +1,17 @@
 <?php
+
+/**
+ * This file is used to start a session and include all necessary classes.
+ */
+if (!file_exists('partials/header.php')) {
+    die('Chyba: chýba súbor s hlavičkou stránky. Prosím, kontaktujte administrátora.');
+}
+
+/**
+ * Include the header file.
+ */
 include 'partials/header.php';
+
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
     header('Location: admin.php');
 }

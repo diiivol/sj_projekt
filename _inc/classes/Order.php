@@ -31,7 +31,7 @@ class Order extends Database
      * @return bool True on success, false on failure.
      */
 
-    public function insert($userId, $cartItems, $totalPrice, $name, $street, $city, $postcode): bool
+    public function insert(int $userId, array $cartItems, float $totalPrice, string $name, string $street, string $city, string $postcode): bool
     {
         try {
             // Create SQL command to insert a new order
@@ -69,7 +69,7 @@ class Order extends Database
      * @param int $id The ID of the order.
      * @return bool True on success, false on failure.
      */
-    public function delete($id): bool
+    public function delete(int $id): bool
     {
         try {
             // Start the transaction
@@ -104,7 +104,7 @@ class Order extends Database
      * @param int|null $userId The ID of the user. If null, selects all orders.
      * @return array|bool The orders on success, false on failure.
      */
-    public function select($userId = null): array|bool
+    public function select(int $userId = null): array|bool
     {
         try {
             // If a user ID is specified, only get their orders
@@ -136,7 +136,7 @@ class Order extends Database
      * @param int $orderId The ID of the order.
      * @return array|bool The dishes on success, false on failure.
      */
-    public function select_dishes($orderId): array|bool
+    public function select_dishes(int $orderId): array|bool
     {
         try {
             // Vytvoríme SQL príkaz pre získanie jedál v objednávke
@@ -161,7 +161,7 @@ class Order extends Database
      * @param int $id The ID of the order.
      * @param string $newStatus The new status of the order.
      */
-    public function update($id, $newStatus): void
+    public function update(int $id, string $newStatus): void
     {
         // Create SQL command to update the order
         $sql = "UPDATE orders SET order_status = :order_status WHERE id = :id";

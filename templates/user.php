@@ -115,23 +115,23 @@ if (isset($_POST['order'])) {
                                 <th></th>
                             </tr>
                             <?php foreach ($cartItems as $id => $quantity) : ?>
-                                <?php if (isset($dishes[$id])) :
-                                    $name = $dishes[$id]->name;
-                                    $price = $dishes[$id]->price;
-                                endif; ?>
-                                <tr>
-                                    <td><?php echo $name; ?></td>
-                                    <td><?php echo $price; ?></td>
-                                    <td><?php echo $quantity; ?></td>
-                                    <td>
-                                        <form method="POST">
-                                            <input type="hidden" name="product_id" value="<?php echo $id; ?>">
-                                            <button type="submit" class="remove_btn" value="Remove" name="remove_from_cart" >
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
+                            <?php if (isset($dishes[$id])) :
+                                $name = $dishes[$id]->name;
+                                $price = $dishes[$id]->price;
+                            endif; ?>
+                            <tr>
+                                <td><?php echo $name; ?></td>
+                                <td><?php echo $price; ?></td>
+                                <td><?php echo $quantity; ?></td>
+                                <td>
+                                    <form method="POST">
+                                        <input type="hidden" name="product_id" value="<?php echo $id; ?>">
+                                        <button type="submit" class="remove_btn" value="Remove" name="remove_from_cart" >
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
                             <?php endforeach; ?>
                         </table>
                         <h4>Medzisučet: <?php echo $totalPrice; ?>€</h4>

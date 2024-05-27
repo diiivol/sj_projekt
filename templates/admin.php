@@ -102,24 +102,24 @@ if (isset($_POST['delete_dishes'])) {
     exit();
 }
 
-
 /**
  * Check if the form for adding a new dish was submitted
  */
 if (isset($_POST['add_dish'])) {
     /**
      * Get the data of the new dish from the form
-     *
-     * @var array
      */
-    $new_dish = $_POST['add_dish'];
+    $name = $_POST['new_dish_name'];
+    $description = $_POST['new_dish_description'];
+    $price = $_POST['new_dish_price'];
+    $ingredients = $_POST['new_dish_ingredients'];
 
     /**
      * Try to add the new dish and redirect to the same page
      * If an error occurs, catch the exception and display the error message
      */
     try {
-        $dishes_object->insert($new_dish);
+        $dishes_object->insert($name, $description, $price, $ingredients);
         header('Location: ' . $_SERVER['PHP_SELF']);
     } catch (Exception $e) {
         echo 'Chyba pri pridávaní jedla: ' . $e->getMessage();

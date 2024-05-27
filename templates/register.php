@@ -22,6 +22,10 @@ if ($_SESSION['logged_in'] == true) {
  */
 $user_object = new User();
 
+// Initialize error messages
+$passwordError = '';
+$registerError = '';
+
 /**
  * Check if the registration form has been submitted
  */
@@ -43,15 +47,21 @@ if (isset($_POST['user_register'])) {
          * If not successful, display an error message
          */
         if ($user_object->register($email, $password)) {
-            echo "<p>Registrácia bola úspešná</p>";
+            $registerSuccess = "Registrácia bola úspešná.\nO chvíľu budete presmerovaný na prihlasovaciu stránku.";
+            // Add line breaks to the success message
+            $registerSuccess = nl2br($registerSuccess);
+            // Log the user in
+            $user_object->login($email, $password);
+            // Redirect to the user's dashboard or home page
+            header('Refresh: 3; URL=user.php');
         } else {
-            echo "<p>Registrácia zlyhala alebo užívateľ s týmto e-mailom už existuje</p>";
+            $registerError = "Užívateľ s týmto e-mailom už existuje";
         }
     } else {
         /**
          * If the password and confirm password do not match, display an error message
          */
-        echo "<p>Heslá sa nezhodujú</p>";
+        $passwordError = "Heslá sa nezhodujú";
     }
 }
 ?>
@@ -73,11 +83,14 @@ if (isset($_POST['user_register'])) {
                 <div class="mb-3">
                     <label for="confirm_password" class="form-label">Zopakovať heslo:</label>
                     <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Zopakovať heslo" required>
+                    <p class='text-center'><?php echo $passwordError; ?></p>
                 </div>
                 <div class="d-flex">
                     <button type="submit" name="user_register" class="btn btn-primary">Registrovať sa</button>
                     <a href="login.php" class="btn btn-link">Prihlásiť sa</a>
                 </div>
+                <p class='mt-2'><?php echo $registerError; ?></p>
+                <p class='mt-2'><?php echo $registerSuccess; ?></p>
             </form>
       </div>
     </div>
