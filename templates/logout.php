@@ -1,5 +1,14 @@
 <?php
+/**
+ * This file is used to start a session and include all necessary classes.
+ */
+if (!file_exists('partials/header.php')) {
+    die('Chyba: chýba súbor s hlavičkou stránky. Prosím, kontaktujte administrátora.');
+}
+
+// Include the header
 include 'partials/header.php';
+
 ?>
 <main>
     <section class="container">

@@ -1,8 +1,13 @@
 <?php
 /**
- * Include the header file
+ * This file is used to start a session and include all necessary classes.
  */
-include_once 'partials/header.php';
+if (!file_exists('partials/header.php')) {
+    die('Chyba: chýba súbor s hlavičkou stránky. Prosím, kontaktujte administrátora.');
+}
+
+// Include the header
+include 'partials/header.php';
 
 /**
  * Create a new Cart object

@@ -35,6 +35,7 @@ class Contact extends Database
             $data = array(
                 'contact_name' => $name,
                 'contact_email' => $email,
+                // Filter the message to prevent XSS attacks
                 'contact_message' => filter_var($message, FILTER_SANITIZE_FULL_SPECIAL_CHARS),
                 'contact_acceptance' => $acceptance,
             );

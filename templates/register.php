@@ -47,13 +47,11 @@ if (isset($_POST['user_register'])) {
          * If not successful, display an error message
          */
         if ($user_object->register($email, $password)) {
-            $registerSuccess = "Registrácia bola úspešná.\nO chvíľu budete presmerovaný na prihlasovaciu stránku.";
-            // Add line breaks to the success message
-            $registerSuccess = nl2br($registerSuccess);
             // Log the user in
             $user_object->login($email, $password);
             // Redirect to the user's dashboard or home page
-            header('Refresh: 3; URL=user.php');
+            header('Location: user.php');
+            exit();
         } else {
             $registerError = "Užívateľ s týmto e-mailom už existuje";
         }
@@ -89,8 +87,7 @@ if (isset($_POST['user_register'])) {
                     <button type="submit" name="user_register" class="btn btn-primary">Registrovať sa</button>
                     <a href="login.php" class="btn btn-link">Prihlásiť sa</a>
                 </div>
-                <p class='mt-2'><?php echo $registerError; ?></p>
-                <p class='mt-2'><?php echo $registerSuccess; ?></p>
+                <div class='mt-3'><?php echo $registerError; ?></div>
             </form>
       </div>
     </div>
