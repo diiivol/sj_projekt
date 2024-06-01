@@ -12,6 +12,30 @@ if (!file_exists('partials/header.php')) {
  */
 include 'partials/header.php';
 
+/**
+ * Create a new Contact object
+ * 
+ * @var Contact
+ */
+$contact_object = new Contact();
+
+/**
+ * Check if the contact form was submitted
+ */
+if (isset($_POST['contact_submitted'])) {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $message = $_POST['message'];
+    $acceptance = $_POST['acceptance'];
+    
+    try {
+        $contact_object->insert($name, $email, $message, $acceptance);
+        header('Location: thank.php');
+    } catch (PDOException $e) {
+        echo 'Chyba pri odosielaní správy: ' . $e->getMessage();
+    }
+}
+
 ?>
 <!--  -->
 <div class="container kontakt pt-3">

@@ -29,7 +29,7 @@ class Contact extends Database
      * @param string $message The message of the contact.
      * @param bool $acceptance The acceptance of the contact.
      */
-    public function insert(int $name, string $email, string $message, bool $acceptance)
+    public function insert(int $name, string $email, string $message, bool $acceptance): void
     {
         if ($this->db) {
             $data = array(

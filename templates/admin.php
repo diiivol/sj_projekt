@@ -109,10 +109,10 @@ if (isset($_POST['add_dish'])) {
     /**
      * Get the data of the new dish from the form
      */
-    $name = $_POST['new_dish_name'];
-    $description = $_POST['new_dish_description'];
-    $price = $_POST['new_dish_price'];
-    $ingredients = $_POST['new_dish_ingredients'];
+    $name = $_POST['dish_name'];
+    $description = $_POST['dish_description'];
+    $price = $_POST['dish_price'];
+    $ingredients = $_POST['dish_ingredients'];
 
     /**
      * Try to add the new dish and redirect to the same page
@@ -345,10 +345,10 @@ $contacts = $contact_object->select();
                 <tr>
                     <form method="POST">
                         <!-- Inputs for adding a new dish -->
-                        <td><input type="text" id="new_dish_name" name="new_dish_name" placeholder="Názov jedla" required style="width: 100%;"></td>
-                        <td><textarea id="new_dish_description" name="new_dish_description" placeholder="Popis jedla" required rows="4" style="width: 100%;"></textarea></td>
-                        <td><input type="number" value="0" min="0" step="0.50" id="new_dish_price" name="new_dish_price" placeholder="Cena jedla" required style="width: 100%;"></td>
-                        <td><textarea id="new_dish_ingredients" name="new_dish_ingredients" placeholder="Ingrediencie jedla" required rows="4" style="width: 100%;"></textarea></td>
+                        <td><input type="text" id="dish_name" name="dish_name" placeholder="Názov jedla" required style="width: 100%;"></td>
+                        <td><textarea id="dish_description" name="dish_description" placeholder="Popis jedla" required rows="4" style="width: 100%;"></textarea></td>
+                        <td><input type="number" value="0" min="0" step="0.50" id="dish_price" name="dish_price" placeholder="Cena jedla" required style="width: 100%;"></td>
+                        <td><textarea id="dish_ingredients" name="dish_ingredients" placeholder="Ingrediencie jedla" required rows="4" style="width: 100%;"></textarea></td>
                         <td colspan="2"><input type="submit" value="Pridať jedlo" name="add_dish" class="btn btn-primary" required></td>
                     </form>
                 </tr>
