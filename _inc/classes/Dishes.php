@@ -62,11 +62,11 @@ class Dishes extends Database
      * @param float $new_price The new price of the dish.
      * @param string $new_ingredients The new ingredients of the dish.
      */
-    public function update(int $id, string $new_name, string $new_description, float $new_price, string $new_ingredients): void
+    public function update(int $id, string $new_image, string $new_name, string $new_description, float $new_price, string $new_ingredients): void
     {
-        $sql = "UPDATE dishes SET name = :name, description = :description, price = :price, ingredients = :ingredients WHERE id = :id";
+        $sql = "UPDATE dishes SET image = :image, name = :name, description = :description, price = :price, ingredients = :ingredients WHERE id = :id";
         $stmt = $this->connect()->prepare($sql);
-        $stmt->execute(['name' => $new_name, 'description' => $new_description, 'price' => $new_price, 'ingredients' => $new_ingredients, 'id' => $id]);
+        $stmt->execute(['image' => $new_image, 'name' => $new_name, 'description' => $new_description, 'price' => $new_price, 'ingredients' => $new_ingredients, 'id' => $id]);
     }
 
     /**
@@ -77,10 +77,10 @@ class Dishes extends Database
      * @param float $price The price of the dish.
      * @param string $ingredients The ingredients of the dish.
      */
-    public function insert($name, $description, $price, $ingredients): void
+    public function insert($image, $name, $description, $price, $ingredients): void
     {
-        $sql = "INSERT INTO dishes (name, description, price, ingredients) VALUES (:name, :description, :price, :ingredients)";
+        $sql = "INSERT INTO dishes (image, name, description, price, ingredients) VALUES (:image, :name, :description, :price, :ingredients)";
         $stmt = $this->connect()->prepare($sql);
-        $stmt->execute(['name' => $name, 'description' => $description, 'price' => $price, 'ingredients' => $ingredients]);
+        $stmt->execute(['image' => $image, 'name' => $name, 'description' => $description, 'price' => $price, 'ingredients' => $ingredients]);
     }
 }

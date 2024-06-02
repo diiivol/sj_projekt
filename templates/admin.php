@@ -45,6 +45,7 @@ if (isset($_POST['update_dishes'])) {
      * @var string
      */
     $id = $_POST['update_dishes'];
+    $new_image = $_POST['new_dish_image'];
     $new_name = $_POST['new_dish_name'];
     $new_description = $_POST['new_dish_description'];
     $new_price = $_POST['new_dish_price'];
@@ -55,7 +56,7 @@ if (isset($_POST['update_dishes'])) {
      * If an error occurs, catch the exception and display the error message
      */
     try {
-        $dishes_object->update($id, $new_name, $new_description, $new_price, $new_ingredients);
+        $dishes_object->update($id, $new_image, $new_name, $new_description, $new_price, $new_ingredients);
         header('Location: ' . $_SERVER['PHP_SELF']);
     } catch (Exception $e) {
         echo 'Error updating dish: ' . $e->getMessage();
@@ -109,6 +110,7 @@ if (isset($_POST['add_dish'])) {
     /**
      * Get the data of the new dish from the form
      */
+    $image = $_POST['dish_image'];
     $name = $_POST['dish_name'];
     $description = $_POST['dish_description'];
     $price = $_POST['dish_price'];
@@ -119,7 +121,7 @@ if (isset($_POST['add_dish'])) {
      * If an error occurs, catch the exception and display the error message
      */
     try {
-        $dishes_object->insert($name, $description, $price, $ingredients);
+        $dishes_object->insert($image, $name, $description, $price, $ingredients);
         header('Location: ' . $_SERVER['PHP_SELF']);
     } catch (Exception $e) {
         echo 'Chyba pri pridávaní jedla: ' . $e->getMessage();
@@ -303,6 +305,7 @@ $contacts = $contact_object->select();
             <table class="admin-table">
                 <tr>
                     <!-- Table headers -->
+                    <th>IMG</th>
                     <th>Name</th>
                     <th>Description</th>
                     <th>Price <i class="fa fa-eur"></i></th>
@@ -314,12 +317,36 @@ $contacts = $contact_object->select();
                 <?php foreach ($dishes as $d): ?>
                 <tr>
                     <!-- Display dish details -->
+                    <td class="dish-image">
+                        <?php
+                        /**
+                         * Get the dish image
+                         */
+                        $imagePath = "../assets/img/dishes/" . $d->image;
+                        $image = (!empty($d->image) && file_exists($imagePath)) ? $d->image : 'default.png';
+                        ?>
+                        <img src="../assets/img/dishes/<?= $image ?>" alt="<?= $d->name ?>" class="img-fluid">
+                    </td>
                     <td class="dish-name"><?= $d->name ?></td>
                     <td class="dish-description"><?= $d->description ?></td>
                     <td class="dish-price"><?= $d->price ?></td>
                     <td class="dish-ingredients"><?= $d->ingredients ?></td>
                     <td>
                         <form action="" method="POST">
+
+                            <!-- Image selection -->
+                            <select style="display: none;" name="new_dish_image">
+                                <?php
+                                $dir = '../assets/img/dishes';
+                                $files = scandir($dir);
+                                foreach ($files as $file) {
+                                    if ($file !== '.' && $file !== '..') {
+                                        $selected = ($file == $d->image) ? 'selected' : '';
+                                        echo "<option value='$file' $selected>$file</option>";
+                                    }
+                                }
+                                ?>
+                            </select>
                             <!-- Hidden inputs to hold the dish details -->
                             <input type="hidden" name="new_dish_name" value="<?= $d->name ?>" required>
                             <input type="hidden" name="new_dish_description" value="<?= $d->description ?>" required>
@@ -345,6 +372,20 @@ $contacts = $contact_object->select();
                 <tr>
                     <form method="POST">
                         <!-- Inputs for adding a new dish -->
+                        <td>
+                        <select name="dish_image">
+                            <?php
+                            $dir = '../assets/img/dishes';
+                            $files = scandir($dir);
+                            foreach ($files as $file) {
+                                if ($file !== '.' && $file !== '..') {
+                                    $selected = ($file == 'default.png') ? 'selected' : '';
+                                    echo "<option value='$file' $selected>$file</option>";
+                                }
+                            }
+                            ?>
+                        </select>
+                        </td>
                         <td><input type="text" id="dish_name" name="dish_name" placeholder="Názov jedla" required style="width: 100%;"></td>
                         <td><textarea id="dish_description" name="dish_description" placeholder="Popis jedla" required rows="4" style="width: 100%;"></textarea></td>
                         <td><input type="number" value="0" min="0" step="0.50" id="dish_price" name="dish_price" placeholder="Cena jedla" required style="width: 100%;"></td>
