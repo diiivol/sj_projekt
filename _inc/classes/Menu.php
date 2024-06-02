@@ -2,8 +2,6 @@
 
 /**
  * Trieda Menu
- *
- * Táto trieda reprezentuje menu na webovej stránke.
  */
 class Menu
 {
@@ -13,7 +11,7 @@ class Menu
     private $pages;
 
     /**
-     * Konštruktor triedy, ktorý sa automaticky zavolá pri vytvorení objektu tejto triedy.
+     * Konštruktor triedy
      *
      * @param array $pages Stránky menu.
      */

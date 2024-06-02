@@ -1,22 +1,12 @@
 <?php
 
-/**
- * Tento súbor sa používa na spustenie relácie a zahrnutie všetkých potrebných tried.
- */
-if (!file_exists('partials/header.php')) {
-    die('Chyba: chýba súbor s hlavičkou stránky. Prosím, kontaktujte administrátora.');
-}
-
-/**
- * Zahrnutie headeru
- */
-include 'partials/header.php';
+include_once 'partials/header.php';
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
     header('Location: admin.php');
 }
 
-// Kontrola prihlásenia
+// is set? PRIHLASENIE
 if (isset($_POST['user_login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];

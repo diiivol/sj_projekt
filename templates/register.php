@@ -1,66 +1,37 @@
 <?php
-/**
- * Tento súbor sa používa na spustenie relácie a zahrnutie všetkých potrebných tried.
- */
-if (!file_exists('partials/header.php')) {
-    die('Chyba: chýba súbor s hlavičkou stránky. Prosím, kontaktujte administrátora.');
-}
 
-/**
- * Zahrnutie headeru
- */
-include 'partials/header.php';
+include_once 'partials/header.php';
 
-/**
- * Skontrolujte, či je užívateľ už prihlásený
- * Ak áno, presmerujte ich na stránku 404
- */
+
 if ($_SESSION['logged_in'] == true) {
     header('Location: 404.php');
 }
 
-/**
- * Vytvorte nový objekt User
- */
+
 $user_object = new User();
 
-// Inicializácia chybových hlásení
+// chybové hlášky
 $passwordError = '';
 $registerError = '';
 
-/**
- * Skontrolujte, či bola odoslaná registračná forma
- */
+// is set? REGISTRACIA
 if (isset($_POST['user_register'])) {
-    /**
-     * Získajte odoslaný email, heslo a potvrdenie hesla
-     */
+
     $email = $_POST['email'];
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
-    /**
-     * Skontrolujte, či sa heslo a potvrdenie hesla zhodujú
-     */
+    // či sa heslo a potvrdenie hesla zhodujú?
     if ($password === $confirm_password) {
-        /**
-         * Pokúste sa zaregistrovať užívateľa
-         * Ak je úspešný, zobrazte správu o úspechu
-         * Ak nie je úspešný, zobrazte chybovú správu
-         */
+
         if ($user_object->register($email, $password)) {
-            // Prihlásiť užívateľa
             $user_object->login($email, $password);
-            // Presmerovanie na dashboard užívateľa alebo domovskú stránku
             header('Location: user.php');
             exit();
         } else {
             $registerError = "Užívateľ s týmto e-mailom už existuje";
         }
     } else {
-        /**
-         * Ak sa heslo a potvrdenie hesla nezhodujú, zobrazte chybovú správu
-         */
         $passwordError = "Heslá sa nezhodujú";
     }
 }

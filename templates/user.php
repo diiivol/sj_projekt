@@ -1,55 +1,22 @@
 <?php
 
-/**
- * Spustenie výstupného bufferovania.
- * To znamená, že akýkoľvek výstup, ktorý skript generuje po tomto bode, sa ukladá do internej pamäte namiesto toho,
- * aby bol okamžite odoslaný klientovi. To môže byť užitočné, ak chcete upraviť HTTP hlavičky po tom, ako už bol vygenerovaný nejaký výstup.
- */
-ob_start();
+include_once 'partials/header.php';
 
-/**
- * Tento súbor sa používa na spustenie relácie a zahrnutie všetkých potrebných tried.
- */
-if (!file_exists('partials/header.php')) {
-    die('Chyba: chýba súbor s hlavičkou stránky. Prosím, kontaktujte administrátora.');
-}
-
-/**
- * Zahrnutie headeru
- */
-include 'partials/header.php';
-
-/**
- * Skontrolujte, či je užívateľ prihlásený a má správnu rolu.
- */
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSION['user_role'] == 1) {
     header('Location: 404.php');
     exit();
 }
 
-/**
- * Inicializujte košík, ak ešte nie je nastavený.
- */
-if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = array();
-}
 
-/**
- * Vytvorte nový objekt Dishes a získajte všetky jedlá.
- *
- * @var Dishes
- */
+// // // DISHES // // //
+
 $dishes_object = new Dishes();
 $dishes = [];
 foreach ($dishes_object->select() as $dish) {
     $dishes[$dish->id] = $dish;
 }
 
-/**
- * Vytvorte nový objekt Cart a vypočítajte celkovú cenu položiek v košíku.
- *
- * @var Cart
- */
+// // // CART // // //
 $cart = new Cart();
 $totalPrice = 0;
 $delivery = 5;
@@ -61,35 +28,37 @@ foreach ($cartItems as $id => $quantity) {
     $totalPrice += $price * $quantity;
 }
 
-/**
- * Ak je odoslaný formulár na odstránenie z košíka, odstráňte položku z košíka a obnovte stránku.
- */
+// is set? ODSTRANENIE Z KOSIKA
 if (isset($_POST['remove_from_cart'])) {
-    $id = $_POST['product_id'];
-    $cart->delete($id);
-    header('Location: ' . $_SERVER['PHP_SELF']);
+    try {
+        $id = $_POST['product_id'];
+        $cart->delete($id);
+        header('Location: ' . $_SERVER['PHP_SELF']);
+    } catch (Exception $e) {
+        echo 'Chyba: ' . $e->getMessage();
+    }
     exit();
 }
 
-/**
- * Vytvorenie nového objektu Order.
- *
- * @var Order
- */
+// // // ORDERS // // //
 $order_object = new Order();
+
+// ID užívateľa
 $userId = $_SESSION['user_id'];
 
-/**
- * Ak je odoslaný formulár na objednávku, vytvorte novú objednávku, vyčistite košík a obnovte stránku.
- */
+// is set? VYTVORENIE OBJEDNAVKY
 if (isset($_POST['order'])) {
-    $name = $_POST['name'];
-    $street = $_POST['street'];
-    $city = $_POST['city'];
-    $postcode = $_POST['postcode'];
-    $order_object->insert($userId, $cartItems, $totalPrice + $delivery, $name, $street, $city, $postcode);
-    $order_object->clearCart();
-    header('Location: ' . $_SERVER['PHP_SELF']);
+    try {
+        $name = $_POST['name'];
+        $street = $_POST['street'];
+        $city = $_POST['city'];
+        $postcode = $_POST['postcode'];
+        $order_object->insert($userId, $cartItems, $totalPrice + $delivery, $name, $street, $city, $postcode);
+        $order_object->clearCart();
+        header('Location: ' . $_SERVER['PHP_SELF']);
+    } catch (Exception $e) {
+        echo 'Chyba: ' . $e->getMessage();
+    }
     exit();
 }
 
@@ -210,13 +179,13 @@ if (isset($_POST['order'])) {
                         <?php
                         // Získanie jedál z objednávky
                         $items = $order_object->select_dishes($o->id);
-                        // Vytvorenie zoznamu jedál
+                        // zoznam jedál
                         $itemNames = array();
-                        // Prechádzanie jedál
+
                         foreach ($items as $item) {
                             $itemNames[] = $item->name . ' x' . $item->quantity;
                         }
-                        // Spojenie názvov jedál do reťazca
+                        // Spojenie jedál do reťazca
                         $itemNamesString = implode('<br>', $itemNames);
                         ?>
                         <p><?= $itemNamesString ?></p>

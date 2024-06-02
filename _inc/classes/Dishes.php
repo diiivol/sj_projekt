@@ -1,10 +1,5 @@
 <?php
 
-/**
- * Trieda Dishes
- *
- * Táto trieda reprezentuje kolekciu jedál v databáze.
- */
 class Dishes extends Database
 {
     /**
@@ -12,19 +7,14 @@ class Dishes extends Database
      */
     private $db;
 
-    /**
-     * Konštruktor triedy, ktorý sa automaticky zavolá pri vytvorení objektu tejto triedy.
-     * Nadväzuje spojenie s databázou.
-     */
+
     public function __construct()
     {
         $this->db = $this->connect();
     }
 
     /**
-     * Táto metóda získava všetky jedlá z databázy.
-     *
-     * @return array Pole jedál.
+     * Vssetky jedla z databazy.
      */
     public function select(): array
     {
@@ -33,14 +23,14 @@ class Dishes extends Database
             $dishes = $query->fetchAll();
             return $dishes;
         } catch (PDOException $e) {
-            echo($e->getMessage());
+            echo $e->getMessage();
         }
     }
 
     /**
-     * Táto metóda odstraňuje jedlo z databázy.
+     * Odstraňenie jedla z databázy.
      *
-     * @param int $id ID jedla na odstránenie.
+     * $id - ID JEDLA NA ODSTRANENIE 
      */
     public function delete(int $id): void
     {
@@ -54,13 +44,13 @@ class Dishes extends Database
     }
 
     /**
-     * Táto metóda aktualizuje jedlo v databáze.
+     * Aktualizacia jedla v databáze.
      *
-     * @param int $id ID jedla na aktualizáciu.
-     * @param string $new_name Nové meno jedla.
-     * @param string $new_description Nový popis jedla.
-     * @param float $new_price Nová cena jedla.
-     * @param string $new_ingredients Nové ingrediencie jedla.
+     * $id - ID JEDLA NA AKTUALIZACIU
+     * $new_name - NOVY NAZOV JEDLA
+     * $new_description - NOVY POPIS JEDLA
+     * $new_price - NOVA CENA JEDLA
+     * $new_ingredients - NOVE INGREDIENCIE JEDLA
      */
     public function update(int $id, string $new_image, string $new_name, string $new_description, float $new_price, string $new_ingredients): void
     {
@@ -69,21 +59,27 @@ class Dishes extends Database
             $stmt = $this->connect()->prepare($sql);
             $stmt->execute(['image' => $new_image, 'name' => $new_name, 'description' => $new_description, 'price' => $new_price, 'ingredients' => $new_ingredients, 'id' => $id]);
         } catch (PDOException $e) {
-            echo $e->getMessage();       }
+            echo $e->getMessage();
+        }
     }
 
     /**
-     * Táto metóda vkladá nové jedlo do databázy.
+     * Vkladanie jedla do databázy.
      * 
-     * @param string $name Meno jedla.
-     * @param string $description Popis jedla.
-     * @param float $price Cena jedla.
-     * @param string $ingredients Ingrediencie jedla.
+     * $image - OBRAZOK JEDLA
+     * $name - MENO JEDLA
+     * $description - POPIS JEDLA
+     * $price - CENA JEDLA
+     * $ingredients - INGREDIENCIE JEDLA
      */
-    public function insert($image, $name, $description, $price, $ingredients): void
+    public function insert(string $image, string $name, string $description, float $price, string $ingredients): void
     {
-        $sql = "INSERT INTO dishes (image, name, description, price, ingredients) VALUES (:image, :name, :description, :price, :ingredients)";
-        $stmt = $this->connect()->prepare($sql);
-        $stmt->execute(['image' => $image, 'name' => $name, 'description' => $description, 'price' => $price, 'ingredients' => $ingredients]);
+        try {
+            $sql = "INSERT INTO dishes (image, name, description, price, ingredients) VALUES (:image, :name, :description, :price, :ingredients)";
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->execute(['image' => $image, 'name' => $name, 'description' => $description, 'price' => $price, 'ingredients' => $ingredients]);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
     }
 }

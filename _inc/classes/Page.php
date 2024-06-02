@@ -1,32 +1,16 @@
 <?php
 
-/**
- * Trieda Page
- *
- * Táto trieda reprezentuje stránku na webovej stránke.
- */
 class Page
 {
-    /**
-     * @var string $page_name Názov stránky.
-     */
+
+    // Názov stránky
     private $page_name;
 
-    /**
-     * Nastavte názov stránky.
-     *
-     * @param string $page_name Názov stránky.
-     */
     public function set_page_name(string $page_name): void
     {
         $this->page_name = $page_name;
     }
 
-    /**
-     * Pridajte štýl do stránky.
-     *
-     * @return string HTML pre odkaz na štýl.
-     */
     public function add_stylesheet(): string
     {
         $result = '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">';
@@ -40,11 +24,6 @@ class Page
         return $result;
     }
 
-    /**
-     * Pridajte skripty na stránku.
-     *
-     * @return string HTML pre odkazy na skripty.
-     */
     public function add_scripts(): string
     {
         $result = '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -69,9 +48,7 @@ class Page
         return $result;
     }
 
-    /**
-     * Presmerujte na domovskú stránku.
-     */
+    // redirect
     public function redirect_homepage(): void
     {
         header("Location: templates/index.php");

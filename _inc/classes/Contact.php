@@ -1,10 +1,5 @@
 <?php
 
-/**
- * Trieda Contact
- *
- * Táto trieda reprezentuje kolekciu kontaktov v databáze.
- */
 class Contact extends Database
 {
     /**
@@ -12,22 +7,18 @@ class Contact extends Database
      */
     private $db;
 
-    /**
-     * Konštruktor triedy, ktorý sa automaticky zavolá pri vytvorení objektu tejto triedy.
-     * Nadväzuje spojenie s databázou.
-     */
     public function __construct()
     {
         $this->db = $this->connect();
     }
 
     /**
-     * Táto metóda vkladá kontakt do databázy.
+     * VKLADANIE KONTAKTU DO DATABAZY
      * 
-     * @param string $name Meno kontaktu.
-     * @param string $email E-mail kontaktu.
-     * @param string $message Správa kontaktu.
-     * @param bool $acceptance Akceptácia kontaktu.
+     * $name - MENO KONTAKTU
+     * $email - E-MAIL KONTAKTU
+     * $message - SPRAVA KONTAKTU
+     * $acceptance - AKCEPTACIA KONTAKTU
      */
     public function insert(string $name, string $email, string $message, bool $acceptance): void
     {
@@ -41,9 +32,7 @@ class Contact extends Database
     }
 
     /**
-     * Táto metóda získava všetky kontakty z databázy.
-     *
-     * @return array Pole kontaktov.
+     * Vssetky kontakty z databazy.
      */
     public function select(): array
     {
@@ -53,14 +42,12 @@ class Contact extends Database
             $contacts = $query->fetchAll();
             return $contacts;
         } catch (PDOException $e) {
-            echo($e->getMessage());
+            echo $e->getMessage();
         }
     }
 
     /**
-     * Táto metóda odstraňuje kontakt z databázy.
-     *
-     * @param int $id ID kontaktu na odstránenie.
+     * Odstranenie kontaktu z databazy.
      */
     public function delete(int $id): void
     {

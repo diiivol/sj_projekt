@@ -1,57 +1,31 @@
 <?php
-/**
- * Tento súbor sa používa na spustenie relácie a zahrnutie všetkých potrebných tried.
- */
-if (!file_exists('partials/header.php')) {
-    die('Chyba: chýba súbor s hlavičkou stránky. Prosím, kontaktujte administrátora.');
-}
 
-/**
- * Zahrnutie headeru
- */
-include 'partials/header.php';
+include_once 'partials/header.php';
 
-/**
- * Vytvorenie nového objektu Cart
- *
- * @var Cart
- */
+// // // CART // // //
+
 $cart = new Cart();
 
-/**
- * Skontroluje, či je užívateľ prihlásený a má správnu rolu
- */
+/*
+* is set? PRIDAVANIE DO KOSIKA
+*/
 if (isset($_POST['add_to_cart'])) {
-    /**
-     * Získa množstvo a ID produktu
-     */
     $quantity = $_POST['quantity'];
     $product_id = $_POST['product_id'];
-
-    /**
-     * Vloží produkt do košíka
-     */
     $cart->insert($product_id, $quantity);
-
-    /**
-     * Presmeruje na menu
-     */
+    // redirect
     header('Location: menu.php');
     exit();
 }
 
-/**
- * Získa všetky položky v košíku
- */
+// Vsetky produkty z kosika
 $cartItems = $cart->select();
 
-/**
- * Vytvorenie nového objektu Dishes
- *
- * @var Dishes
- */
+// // // DISHES // // //
+
 $dishes_object = new Dishes();
-// Získa všetky jedlá
+
+// všetky jedlá
 $dishes = $dishes_object->select();
 ?>
 
@@ -63,9 +37,7 @@ $dishes = $dishes_object->select();
         <div class="col-md-6 col-lg-4">
             <div class="food-item">
                 <?php
-                /**
-                 * Získa cestu k obrázku
-                 */
+                // cesta k obrazku
                 $imagePath = "../assets/img/dishes/" . $dish->image;
                 $image = (!empty($dish->image) && file_exists($imagePath)) ? $dish->image : 'default.png';
                 ?>

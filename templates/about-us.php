@@ -1,13 +1,4 @@
 <?php
-
-/**
- * Tento súbor sa používa na spustenie relácie a zahrnutie všetkých potrebných tried.
- */
-if (!file_exists('partials/header.php')) {
-    die('Chyba: chýba súbor s hlavičkou stránky. Prosím, kontaktujte administrátora.');
-}
-
-// Zahrnutie headeru
 include_once 'partials/header.php';
 ?>
 
@@ -38,6 +29,5 @@ include_once 'partials/header.php';
 </div>
 
 <?php
-// Include the footer
 include_once 'partials/footer.php'
 ?>
