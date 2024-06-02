@@ -1,15 +1,15 @@
 <?php
 
 /**
- * This file is used to start a session and include all necessary classes.
+ * Tento súbor sa používa na spustenie relácie a zahrnutie všetkých potrebných tried.
  */
 if (!file_exists('partials/header.php')) {
     die('Chyba: chýba súbor s hlavičkou stránky. Prosím, kontaktujte administrátora.');
 }
 
 /**
-* Include the header file.
-*/
+ * Zahrnutie headeru
+ */
 include 'partials/header.php';
 
 ?>
@@ -25,7 +25,7 @@ include 'partials/header.php';
 
 <?php
 
-// Include the footer
+// Zahrnutie footeru
 include_once 'partials/footer.php';
 
 ?>

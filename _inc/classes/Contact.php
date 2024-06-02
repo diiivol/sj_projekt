@@ -1,20 +1,20 @@
 <?php
 
 /**
- * Class Contact
+ * Trieda Contact
  *
- * This class represents a collection of contacts in a database.
+ * Táto trieda reprezentuje kolekciu kontaktov v databáze.
  */
 class Contact extends Database
 {
     /**
-     * @var PDO The PDO connection object.
+     * @var PDO Objekt pripojenia PDO.
      */
     private $db;
 
     /**
-     * Constructor of the class, which is automatically called when an object of this class is created.
-     * It establishes a connection to the database.
+     * Konštruktor triedy, ktorý sa automaticky zavolá pri vytvorení objektu tejto triedy.
+     * Nadväzuje spojenie s databázou.
      */
     public function __construct()
     {
@@ -22,40 +22,28 @@ class Contact extends Database
     }
 
     /**
-     * This method inserts a contact into the database.
+     * Táto metóda vkladá kontakt do databázy.
      * 
-     * @param int $name The name of the contact.
-     * @param string $email The email of the contact.
-     * @param string $message The message of the contact.
-     * @param bool $acceptance The acceptance of the contact.
+     * @param string $name Meno kontaktu.
+     * @param string $email E-mail kontaktu.
+     * @param string $message Správa kontaktu.
+     * @param bool $acceptance Akceptácia kontaktu.
      */
-    public function insert(int $name, string $email, string $message, bool $acceptance): void
+    public function insert(string $name, string $email, string $message, bool $acceptance): void
     {
-        if ($this->db) {
-            $data = array(
-                'contact_name' => $name,
-                'contact_email' => $email,
-                // Filter the message to prevent XSS attacks
-                'contact_message' => filter_var($message, FILTER_SANITIZE_FULL_SPECIAL_CHARS),
-                'contact_acceptance' => $acceptance,
-            );
-            try {
-                $query = "INSERT INTO contact (name, email, message, acceptance) VALUES
-             (:contact_name, :contact_email, :contact_message, :contact_acceptance)";
-                $query_run = $this->db->prepare($query);
-                $query_run->execute($data);
-                header('Location: ' . $_SERVER['PHP_SELF']);
-                exit;
-            } catch (PDOException $e) {
-                echo 'Post was not executed: ' . $e->getMessage();
-            }
+        try {
+            $sql = "INSERT INTO contact (name, email, message, acceptance) VALUES (:name, :email, :message, :acceptance)";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute(['name' => $name, 'email' => $email, 'message' => $message, 'acceptance' => $acceptance]);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
         }
     }
 
     /**
-     * This method retrieves all contacts from the database.
+     * Táto metóda získava všetky kontakty z databázy.
      *
-     * @return array The array of contacts.
+     * @return array Pole kontaktov.
      */
     public function select(): array
     {
@@ -70,9 +58,9 @@ class Contact extends Database
     }
 
     /**
-     * This method deletes a contact from the database.
+     * Táto metóda odstraňuje kontakt z databázy.
      *
-     * @param int $id The ID of the contact to delete.
+     * @param int $id ID kontaktu na odstránenie.
      */
     public function delete(int $id): void
     {

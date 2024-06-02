@@ -1,26 +1,26 @@
 <?php
 
 /**
- * Start output buffering.
- * This means that any output that the script generates after this point is stored in internal memory instead of being
- * immediately sent to the client. This can be useful if you want to modify HTTP headers after some output has already been generated.
+ * Spustenie výstupného bufferovania.
+ * To znamená, že akýkoľvek výstup, ktorý skript generuje po tomto bode, sa ukladá do internej pamäte namiesto toho,
+ * aby bol okamžite odoslaný klientovi. To môže byť užitočné, ak chcete upraviť HTTP hlavičky po tom, ako už bol vygenerovaný nejaký výstup.
  */
 ob_start();
 
 /**
- * This file is used to start a session and include all necessary classes.
+ * Tento súbor sa používa na spustenie relácie a zahrnutie všetkých potrebných tried.
  */
 if (!file_exists('partials/header.php')) {
     die('Chyba: chýba súbor s hlavičkou stránky. Prosím, kontaktujte administrátora.');
 }
 
 /**
- * Include the header file.
+ * Zahrnutie headeru
  */
 include 'partials/header.php';
 
 /**
- * Check if the user is logged in and has the correct role.
+ * Skontrolujte, či je užívateľ prihlásený a má správnu rolu.
  */
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSION['user_role'] == 1) {
     header('Location: 404.php');
@@ -28,14 +28,14 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
 }
 
 /**
- * Initialize the cart if it's not already set.
+ * Inicializujte košík, ak ešte nie je nastavený.
  */
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
 }
 
 /**
- * Create a new Dishes object and get all dishes.
+ * Vytvorte nový objekt Dishes a získajte všetky jedlá.
  *
  * @var Dishes
  */
@@ -46,7 +46,7 @@ foreach ($dishes_object->select() as $dish) {
 }
 
 /**
- * Create a new Cart object and calculate the total price of the items in the cart.
+ * Vytvorte nový objekt Cart a vypočítajte celkovú cenu položiek v košíku.
  *
  * @var Cart
  */
@@ -62,7 +62,7 @@ foreach ($cartItems as $id => $quantity) {
 }
 
 /**
- * If the remove from cart form is submitted, remove the item from the cart and refresh the page.
+ * Ak je odoslaný formulár na odstránenie z košíka, odstráňte položku z košíka a obnovte stránku.
  */
 if (isset($_POST['remove_from_cart'])) {
     $id = $_POST['product_id'];
@@ -72,7 +72,7 @@ if (isset($_POST['remove_from_cart'])) {
 }
 
 /**
- * Create a new Order object.
+ * Vytvorenie nového objektu Order.
  *
  * @var Order
  */
@@ -80,7 +80,7 @@ $order_object = new Order();
 $userId = $_SESSION['user_id'];
 
 /**
- * If the order form is submitted, create a new order, clear the cart, and refresh the page.
+ * Ak je odoslaný formulár na objednávku, vytvorte novú objednávku, vyčistite košík a obnovte stránku.
  */
 if (isset($_POST['order'])) {
     $name = $_POST['name'];

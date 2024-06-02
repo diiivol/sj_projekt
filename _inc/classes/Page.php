@@ -1,21 +1,21 @@
 <?php
 
 /**
- * Class Page
+ * Trieda Page
  *
- * This class represents a page on the website.
+ * Táto trieda reprezentuje stránku na webovej stránke.
  */
 class Page
 {
     /**
-     * @var string $page_name The name of the page.
+     * @var string $page_name Názov stránky.
      */
     private $page_name;
 
     /**
-     * Set the name of the page.
+     * Nastavte názov stránky.
      *
-     * @param string $page_name The name of the page.
+     * @param string $page_name Názov stránky.
      */
     public function set_page_name(string $page_name): void
     {
@@ -23,9 +23,9 @@ class Page
     }
 
     /**
-     * Add a stylesheet to the page.
+     * Pridajte štýl do stránky.
      *
-     * @return string The HTML for the stylesheet link.
+     * @return string HTML pre odkaz na štýl.
      */
     public function add_stylesheet(): string
     {
@@ -41,9 +41,9 @@ class Page
     }
 
     /**
-     * Add scripts to the page.
+     * Pridajte skripty na stránku.
      *
-     * @return string The HTML for the script links.
+     * @return string HTML pre odkazy na skripty.
      */
     public function add_scripts(): string
     {
@@ -70,7 +70,7 @@ class Page
     }
 
     /**
-     * Redirect to the homepage.
+     * Presmerujte na domovskú stránku.
      */
     public function redirect_homepage(): void
     {

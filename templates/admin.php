@@ -1,26 +1,26 @@
 <?php
 
 /**
- * Start output buffering.
- * This means that any output that the script generates after this point is stored in internal memory instead of being
- * immediately sent to the client. This can be useful if you want to modify HTTP headers after some output has already been generated.
+ * Spustenie výstupného bufferovania.
+ * To znamená, že akýkoľvek výstup, ktorý skript generuje po tomto bode, sa ukladá do internej pamäte namiesto toho,
+ * aby bol okamžite odoslaný klientovi. To môže byť užitočné, ak chcete upraviť HTTP hlavičky po tom, ako už bol vygenerovaný nejaký výstup.
  */
 ob_start();
 
 /**
- * This file is used to start a session and include all necessary classes.
+ * Tento súbor sa používa na spustenie relácie a zahrnutie všetkých potrebných tried.
  */
 if (!file_exists('partials/header.php')) {
     die('Chyba: chýba súbor s hlavičkou stránky. Prosím, kontaktujte administrátora.');
 }
 
 /**
- * Include the header file.
+ * Zahrnutie headeru
  */
 include 'partials/header.php';
 
 /**
- * Check if the user is logged in and has the correct role
+ * Skontrolujte, či je používateľ prihlásený a má správnu rolu
  */
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSION['user_role'] == 0) {
     header('Location: 404.php');
@@ -28,18 +28,18 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
 }
 
 /**
- * Create a new Dishes object
+ * Vytvorenie nového objektu Dishes
  * 
  * @var Dishes
  */
 $dishes_object = new Dishes();
 
 /**
- * Check if the form for updating dishes was submitted
+ * Skontrolujte, či bol odoslaný formulár na aktualizáciu jedál
  */
 if (isset($_POST['update_dishes'])) {
     /**
-     * Get the ID and new details of the dish from the form
+     * Získajte ID a nové detaily jedla z formulára
      *
      * @var int
      * @var string
@@ -52,63 +52,56 @@ if (isset($_POST['update_dishes'])) {
     $new_ingredients = $_POST['new_dish_ingredients'];
 
     /**
-     * Try to update the dish and redirect to the same page
-     * If an error occurs, catch the exception and display the error message
+     * Skúste aktualizovať jedlo a presmerujte na rovnakú stránku
+     * Ak sa vyskytne chyba, zachytí výnimku a zobrazí chybovú správu
      */
     try {
         $dishes_object->update($id, $new_image, $new_name, $new_description, $new_price, $new_ingredients);
         header('Location: ' . $_SERVER['PHP_SELF']);
     } catch (Exception $e) {
-        echo 'Error updating dish: ' . $e->getMessage();
+        echo 'Chyba pri aktualizácii jedla: ' . $e->getMessage();
     }
 
     /**
-     * Terminate script execution
+     * Ukončenie vykonávania skriptu
      */
     exit();
 }
 
 /**
- * Check if the form for deleting dishes was submitted
+ * Skontrolujte, či bol odoslaný formulár na odstránenie jedál
  */
 if (isset($_POST['delete_dishes'])) {
     /**
-     * Get the ID of the dish from the form
+     * Získajte ID jedla z formulára
      *
      * @var int
      */
     $id = $_POST['delete_dishes'];
 
     /**
-     * Check if the ID is a number
+     * Skúste odstrániť jedlo a presmerujte na rovnakú stránku
+     * Ak sa vyskytne chyba, zachytí výnimku a zobrazí chybovú správu
      */
-    if (is_numeric($id)) {
-        /**
-         * Try to delete the dish and redirect to the same page
-         * If an error occurs, catch the exception and display the error message
-         */
-        try {
-            $dishes_object->delete($id);
-            header('Location: ' . $_SERVER['PHP_SELF']);
-        } catch (Exception $e) {
-            echo 'Chyba pri mazaní jedla: ' . $e->getMessage();
-        }
-    } else {
-        echo "Chyba: ID jedla musí byť číslo.";
+    try {
+        $dishes_object->delete($id);
+        header('Location: ' . $_SERVER['PHP_SELF']);
+    } catch (Exception $e) {
+        echo 'Chyba pri mazaní jedla: ' . $e->getMessage();
     }
 
     /**
-     * Terminate script execution
+     * Ukončenie vykonávania skriptu
      */
     exit();
 }
 
 /**
- * Check if the form for adding a new dish was submitted
+ * Skontrolujte, či bol odoslaný formulár na pridanie nového jedla
  */
 if (isset($_POST['add_dish'])) {
     /**
-     * Get the data of the new dish from the form
+     * Získajte údaje o novom jedle z formulára
      */
     $image = $_POST['dish_image'];
     $name = $_POST['dish_name'];
@@ -117,8 +110,8 @@ if (isset($_POST['add_dish'])) {
     $ingredients = $_POST['dish_ingredients'];
 
     /**
-     * Try to add the new dish and redirect to the same page
-     * If an error occurs, catch the exception and display the error message
+     * Skúste pridať nové jedlo a presmerujte na rovnakú stránku
+     * Ak sa vyskytne chyba, zachytí výnimku a zobrazí chybovú správu
      */
     try {
         $dishes_object->insert($image, $name, $description, $price, $ingredients);
@@ -128,39 +121,33 @@ if (isset($_POST['add_dish'])) {
     }
 
     /**
-     * Terminate script execution
+     * Ukončenie vykonávania skriptu
      */
     exit();
 }
 
 /**
- * Get all dishes
- *
- * @var array
+ * Získajte všetky jedlá
  */
 $dishes = $dishes_object->select();
 
 /**
- * Create a new Order object
- *
- * @var Order
+ * Vytvorte nový objekt Objednávka
  */
 $order_object = new Order();
 
 /**
- * Check if the form for deleting an order was submitted
+ * Skontrolujte, či bol odoslaný formulár na odstránenie objednávky
  */
 if (isset($_POST['delete_order'])) {
     /**
-     * Get the ID of the order from the form
-     *
-     * @var int
+     * Získajte ID objednávky z formulára
      */
     $id = $_POST['delete_order'];
 
     /**
-     * Try to delete the order and redirect to the same page
-     * If an error occurs, catch the exception and display the error message
+     * Skúste odstrániť objednávku a presmerujte na rovnakú stránku
+     * Ak sa vyskytne chyba, zachytí výnimku a zobrazí chybovú správu
      */
     try {
         $order_object->delete($id);
@@ -170,27 +157,24 @@ if (isset($_POST['delete_order'])) {
     }
 
     /**
-     * Terminate script execution
+     * Ukončenie vykonávania skriptu
      */
     exit();
 }
 
 /**
- * Check if the form for updating an order was submitted
+ * Skontrolujte, či bol odoslaný formulár na aktualizáciu objednávky
  */
 if (isset($_POST['update_order'])) {
     /**
-     * Get the ID and new status of the order from the form
-     *
-     * @var int
-     * @var string
+     * Získajte ID a nový stav objednávky z formulára
      */
     $id = $_POST['update_order'];
     $new_status = $_POST['order_status'];
 
     /**
-     * Try to update the order and redirect to the same page
-     * If an error occurs, catch the exception and display the error message
+     * Skúste aktualizovať objednávku a presmerujte na rovnakú stránku
+     * Ak sa vyskytne chyba, zachytí výnimku a zobrazí chybovú správu
      */
     try {
         $order_object->update($id, $new_status);
@@ -200,39 +184,33 @@ if (isset($_POST['update_order'])) {
     }
 
     /**
-     * Terminate script execution
+     * Ukončenie vykonávania skriptu
      */
     exit();
 }
 
 /**
- * Get all orders
- *
- * @var array
+ * Získajte všetky objednávky
  */
 $orders = $order_object->select();
 
 /**
- * Create a new Contact object
- *
- * @var Contact
+ * Vytvorte nový objekt Kontakt
  */
 $contact_object = new Contact();
 
 /**
- * Check if the form for deleting a contact was submitted
+ * Skontrolujte, či bol odoslaný formulár na odstránenie kontaktu
  */
 if (isset($_POST['delete_contact'])) {
     /**
-     * Get the ID of the contact from the form
-     *
-     * @var int
+     * Získajte ID kontaktu z formulára
      */
     $id = $_POST['delete_contact'];
 
     /**
-     * Try to delete the contact and redirect to the same page
-     * If an error occurs, catch the exception and display the error message
+     * Skúste odstrániť kontakt a presmerujte na rovnakú stránku
+     * Ak sa vyskytne chyba, zachytí výnimku a zobrazí chybovú správu
      */
     try {
         $contact_object->delete($id);
@@ -242,15 +220,13 @@ if (isset($_POST['delete_contact'])) {
     }
 
     /**
-     * Terminate script execution
+     * Ukončenie vykonávania skriptu
      */
     exit();
 }
 
 /**
- * Get all contacts
- *
- * @var array
+ * Získajte všetky kontakty
  */
 $contacts = $contact_object->select();
 
@@ -263,7 +239,7 @@ $contacts = $contact_object->select();
         
         <?php
         /**
-         * Check if the $contacts array is not empty
+         * Skontrolujte, či pole $contacts nie je prázdne
          */
         if (!empty($contacts)): ?>
         <div class="container pt-3 mb-4 contacts-table">
@@ -298,7 +274,7 @@ $contacts = $contact_object->select();
         
         <?php
         /**
-         * Check if the $dishes array is not empty
+         * Skontrolujte, či pole $dishes nie je prázdne
          */
         if (!empty($dishes)): ?>
         <div class="container pt-3 mb-4 dishes-table">
@@ -313,14 +289,14 @@ $contacts = $contact_object->select();
                     <th>Upraviť</th>
                     <th>Vymazať</th>
                 </tr>
-                <!-- Loop through each dish in the $dishes array -->
+                <!-- Prejdite cez každé jedlo v poli $dishes -->
                 <?php foreach ($dishes as $d): ?>
                 <tr>
-                    <!-- Display dish details -->
+                    <!-- Zobraziť podrobnosti o jedle -->
                     <td class="dish-image">
                         <?php
                         /**
-                         * Get the dish image
+                         * Získajte obrázok jedla
                          */
                         $imagePath = "../assets/img/dishes/" . $d->image;
                         $image = (!empty($d->image) && file_exists($imagePath)) ? $d->image : 'default.png';
@@ -334,7 +310,7 @@ $contacts = $contact_object->select();
                     <td>
                         <form action="" method="POST">
 
-                            <!-- Image selection -->
+                            <!-- Výber obrázka -->
                             <select style="display: none;" name="new_dish_image">
                                 <?php
                                 $dir = '../assets/img/dishes';
@@ -347,12 +323,12 @@ $contacts = $contact_object->select();
                                 }
                                 ?>
                             </select>
-                            <!-- Hidden inputs to hold the dish details -->
+                            <!-- Skryté vstupy na uchovanie podrobností o jedle -->
                             <input type="hidden" name="new_dish_name" value="<?= $d->name ?>" required>
                             <input type="hidden" name="new_dish_description" value="<?= $d->description ?>" required>
                             <input type="hidden" name="new_dish_price" value="<?= $d->price ?>" required>
                             <input type="hidden" name="new_dish_ingredients" value="<?= $d->ingredients ?>" required>
-                            <!-- Edit and save buttons -->
+                            <!-- Tlačidlá Upraviť a Uložiť -->
                             <button class="btn btn-warning edit-button" type="button">
                                 <i class="fa fa-pencil"></i>
                             </button>
@@ -361,7 +337,7 @@ $contacts = $contact_object->select();
                     </td>
                     <td>
                         <form action="" method="POST">
-                            <!-- Delete button -->
+                            <!-- Tlačidlo Odstrániť -->
                             <button type="submit" name="delete_dishes" class="btn btn-danger" value="<?= $d->id ?>">
                                 <i class="fa fa-trash"></i>
                             </button>
@@ -371,7 +347,7 @@ $contacts = $contact_object->select();
                 <?php endforeach; ?>
                 <tr>
                     <form method="POST">
-                        <!-- Inputs for adding a new dish -->
+                        <!-- Vstupy pre pridanie nového jedla -->
                         <td>
                         <select name="dish_image">
                             <?php
@@ -405,9 +381,9 @@ $contacts = $contact_object->select();
         if (!empty($orders)): ?>
         <div class="container pt-3 mb-4 orders">
             <div class="row">
-                <!-- Loop through each order in the orders array -->
+                <!-- Prejdite cez každú objednávku v poli $orders -->
                 <?php foreach ($orders as $o):
-                // Get the dishes for the current order
+                // Získajte jedlá v objednávke
                 $items = $order_object->select_dishes($o->id); ?>
                 <div class="col-md-6 col-lg-4">
                     <div class="food-item">
@@ -428,14 +404,14 @@ $contacts = $contact_object->select();
                         <p>Adresa: <?= $o->street ?>, <?= $o->city ?>, <?= $o->postcode ?></p>
                         <p>------------------------------------</p>
                         <?php
-                        // Create an array to store the names of the items in the order
+                        // Vytvorte pole na uloženie názvov položiek v objednávke
                         $itemNames = array();
-                        // Loop through each item in the items array
+                        // Prejdite každú položku v poli položiek
                         foreach ($items as $item) {
-                            // Add the name and quantity of the item to the itemNames array
+                            // Pridajte názov a množstvo položky do poľa itemNames
                             $itemNames[] = $item->name . ' x' . $item->quantity;
                         }
-                        // Convert the itemNames array to a string
+                        // Konvertujte pole itemNames na reťazec
                         $itemNamesString = implode('<br>', $itemNames);
                         ?>
                         <p><?= $itemNamesString ?></p>
@@ -455,6 +431,6 @@ $contacts = $contact_object->select();
 </div>
 
 <?php
-// Include the footer
+// Zahrnutie footeru
 include 'partials/footer.php';
 ?>

@@ -1,40 +1,40 @@
 <?php
 
 /**
- * Class Database
+ * Trieda Database
  *
- * This class represents a database connection.
+ * Táto trieda reprezentuje pripojenie k databáze.
  */
 class Database
 {
     /**
-     * @var string The database host.
+     * @var string Hostiteľ databázy.
      */
     private $host = '127.0.0.1';
 
     /**
-     * @var string The database name.
+     * @var string Názov databázy.
      */
     private $db_name = 'sj_projekt';
 
     /**
-     * @var string The username for the database connection.
+     * @var string Užívateľské meno pre pripojenie k databáze.
      */
     private $user_name = 'root';
 
     /**
-     * @var string The password for the database connection.
+     * @var string Heslo pre pripojenie k databáze.
      */
     private $password = '';
 
     /**
-     * @var PDO The PDO connection object.
+     * @var PDO Objekt pripojenia PDO.
      */
     protected $connection;
 
     /**
-     * Destructor of the class, which is automatically called when an object of this class is destroyed.
-     * It closes the database connection.
+     * Destruktor triedy, ktorý sa automaticky zavolá, keď je objekt tejto triedy zničený.
+     * Uzatvára pripojenie k databáze.
      */
     public function __destruct()
     {
@@ -42,9 +42,9 @@ class Database
     }
 
     /**
-     * This method establishes a connection to the database.
+     * Táto metóda vytvára pripojenie k databáze.
      *
-     * @return PDO The PDO connection object.
+     * @return PDO Objekt pripojenia PDO.
      */
     protected function connect(): PDO
     {
@@ -57,17 +57,17 @@ class Database
                 $this->password
             );
 
-            // Set the error reporting mode to WARNING
+            // Nastaví režim hlásenia chýb na WARNING
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 
-            // Set the default fetch mode to object
+            // Nastaví predvolený režim načítania na objekt
             $this->connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 
-            // Return the database connection
+            // Vráti pripojenie k databáze
             return $this->connection;
         } catch (PDOException $e) {
-            // If there is an error connecting to the database, terminate the script and print an error message
-            die("Database connection error: " . $e->getMessage());
+            // Ak je chyba pri pripájaní k databáze, ukonči skript a vytlač chybovú správu
+            die("Chyba pripojenia k databáze: " . $e->getMessage());
         }
     }
 }

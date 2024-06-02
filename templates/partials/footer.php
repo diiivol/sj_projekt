@@ -1,20 +1,20 @@
 <?php
 
 /**
- * The basename of the current script is retrieved and used to create a new Page object.
- * The page name is set and scripts are added to the page.
+ * Základný názov aktuálneho skriptu sa získa a použije na vytvorenie nového objektu Page.
+ * Nastaví sa názov stránky a na stránku sa pridajú skripty.
  */
 
-// Get the base name of the current script
+// Získajte základný názov aktuálneho skriptu
 $page_name = basename($_SERVER["SCRIPT_NAME"], '.php');
 
-// Create a new Page object
+// Vytvorte nový objekt Page
 $page_object = new Page();
 
-// Set the page name
+// Nastavte názov stránky
 $page_object->set_page_name($page_name);
 
-// Add scripts to the page and echo the result
+// Pridajte skripty na stránku a vypíšte výsledok
 echo $page_object->add_scripts();
 
 ?>

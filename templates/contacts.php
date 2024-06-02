@@ -1,33 +1,32 @@
 <?php
 
 /**
- * This file is used to start a session and include all necessary classes.
+ * Tento súbor sa používa na spustenie relácie a zahrnutie všetkých potrebných tried.
  */
 if (!file_exists('partials/header.php')) {
     die('Chyba: chýba súbor s hlavičkou stránky. Prosím, kontaktujte administrátora.');
 }
 
 /**
- * Include the header file.
+ * Zahrnutie headeru
  */
 include 'partials/header.php';
 
 /**
- * Create a new Contact object
+ * Vytvorenie nového objektu triedy Contact
  * 
  * @var Contact
  */
 $contact_object = new Contact();
 
 /**
- * Check if the contact form was submitted
+ * Skontroluje, či bol odoslaný formulár pre kontakt
  */
 if (isset($_POST['contact_submitted'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $message = $_POST['message'];
     $acceptance = $_POST['acceptance'];
-    
     try {
         $contact_object->insert($name, $email, $message, $acceptance);
         header('Location: thank.php');
@@ -51,7 +50,7 @@ if (isset($_POST['contact_submitted'])) {
     <!--  -->
     <div class="row">
         <div class="col-md-8 col-lg-6 mx-auto">
-            <form id="contact" action="thank.php" method="POST">
+            <form id="contact" method="POST">
                 <div class="mb-3">
                     <label for="name" class="form-label">Meno</label>
                     <input type="text" class="form-control" name="name" id="name" placeholder="Zadajte svoje meno" required>

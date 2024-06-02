@@ -1,21 +1,21 @@
 <?php
 
 /**
- * Class Slider
+ * Trieda Slider
  *
- * This class is used to generate HTML code for a slider.
+ * Táto trieda sa používa na generovanie HTML kódu pre posuvník.
  */
 class Slider
 {
     /**
-     * @var string The path to the image folder.
+     * @var string Cesta k priečinku s obrázkami.
      */
     private $img_folder = '';
 
     /**
-     * Sets the path to the image folder.
+     * Nastaví cestu k priečinku s obrázkami.
      *
-     * @param string $img_folder The path to the image folder.
+     * @param string $img_folder Cesta k priečinku s obrázkami.
      */
     public function set_img_folder(string $img_folder): void
     {
@@ -23,9 +23,9 @@ class Slider
     }
 
     /**
-     * Generates the slides for the slider.
+     * Generuje snímky pre posuvník.
      *
-     * @return string The HTML code for the slider.
+     * @return string HTML kód pre posuvník.
      */
     public function generate_slides(): string
     {

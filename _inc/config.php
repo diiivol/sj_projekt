@@ -1,13 +1,13 @@
 <?php
 
 /**
- * This file is used to start a session and include all necessary classes.
+ * Tento súbor sa používa na spustenie relácie a zahrnutie všetkých potrebných tried.
  */
 
-// Start a new session
+// Spustenie novej session
 session_start();
 
-// Include all necessary classes
+// Zahrnutie všetkých potrebných tried
 require_once 'classes/Menu.php';
 require_once 'classes/Page.php';
 require_once 'classes/Database.php';

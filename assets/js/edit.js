@@ -3,22 +3,30 @@ window.addEventListener('DOMContentLoaded', (event) => {
         button.addEventListener('click', (event) => {
             event.preventDefault();
             let row = event.target.closest('tr');
+
+            // Get the fields to edit
             let nameField = row.querySelector('.dish-name');
             let descriptionField = row.querySelector('.dish-description');
             let priceField = row.querySelector('.dish-price');
             let ingredientsField = row.querySelector('.dish-ingredients');
             let imageField = row.querySelector('.dish-image');
+
+            // Get the inputs to edit
             let form = event.target.closest('form');
             let nameInput = form.querySelector('input[name="new_dish_name"]');
             let descriptionInput = form.querySelector('input[name="new_dish_description"]');
             let priceInput = form.querySelector('input[name="new_dish_price"]');
             let ingredientsInput = form.querySelector('input[name="new_dish_ingredients"]');
             let imageSelect = form.querySelector('select[name="new_dish_image"]');
+            
+            // Clear the fields
             nameField.textContent = '';
             descriptionField.textContent = '';
             priceField.textContent = '';
             ingredientsField.textContent = '';
             imageField.innerHTML = '';
+            
+            // Create new inputs for the fields
             let editableNameInput = document.createElement('input');
             editableNameInput.type = 'text';
             editableNameInput.value = nameInput.value;
@@ -50,10 +58,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             editableIngredientsInput.addEventListener('input', (event) => {
                 ingredientsInput.value = event.target.value;
             });
-
-            // Create a new select element for the image
             let editableImageSelect = document.createElement('select');
-            // Copy the options from the original select to the new one
             for (let option of imageSelect.options) {
                 let newOption = document.createElement('option');
                 newOption.value = option.value;
@@ -61,17 +66,21 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 newOption.selected = option.selected;
                 editableImageSelect.add(newOption);
             }
-            // When the new select changes, update the original one
             editableImageSelect.addEventListener('change', (event) => {
                 imageSelect.value = event.target.value;
             });
 
+            // Append the inputs to the fields
             nameField.appendChild(editableNameInput);
             descriptionField.appendChild(editableDescriptionInput);
             priceField.appendChild(editablePriceInput);
             ingredientsField.appendChild(editableIngredientsInput);
             imageField.appendChild(editableImageSelect);
+
+            // Hide the edit button and show the save button
             event.currentTarget.style.display = 'none';
+
+            // Show the save button
             row.querySelector('.save-button').style.display = 'inline';
         });
     });

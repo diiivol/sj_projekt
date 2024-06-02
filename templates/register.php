@@ -1,55 +1,57 @@
 <?php
 /**
- * This file is used to start a session and include all necessary classes.
+ * Tento súbor sa používa na spustenie relácie a zahrnutie všetkých potrebných tried.
  */
 if (!file_exists('partials/header.php')) {
     die('Chyba: chýba súbor s hlavičkou stránky. Prosím, kontaktujte administrátora.');
 }
 
-// Include the header
+/**
+ * Zahrnutie headeru
+ */
 include 'partials/header.php';
 
 /**
- * Check if the user is already logged in
- * If they are, redirect them to the 404 page
+ * Skontrolujte, či je užívateľ už prihlásený
+ * Ak áno, presmerujte ich na stránku 404
  */
 if ($_SESSION['logged_in'] == true) {
     header('Location: 404.php');
 }
 
 /**
- * Create a new User object
+ * Vytvorte nový objekt User
  */
 $user_object = new User();
 
-// Initialize error messages
+// Inicializácia chybových hlásení
 $passwordError = '';
 $registerError = '';
 
 /**
- * Check if the registration form has been submitted
+ * Skontrolujte, či bola odoslaná registračná forma
  */
 if (isset($_POST['user_register'])) {
     /**
-     * Get the submitted email, password, and confirm password
+     * Získajte odoslaný email, heslo a potvrdenie hesla
      */
     $email = $_POST['email'];
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
     /**
-     * Check if the password and confirm password match
+     * Skontrolujte, či sa heslo a potvrdenie hesla zhodujú
      */
     if ($password === $confirm_password) {
         /**
-         * Attempt to register the user
-         * If successful, display a success message
-         * If not successful, display an error message
+         * Pokúste sa zaregistrovať užívateľa
+         * Ak je úspešný, zobrazte správu o úspechu
+         * Ak nie je úspešný, zobrazte chybovú správu
          */
         if ($user_object->register($email, $password)) {
-            // Log the user in
+            // Prihlásiť užívateľa
             $user_object->login($email, $password);
-            // Redirect to the user's dashboard or home page
+            // Presmerovanie na dashboard užívateľa alebo domovskú stránku
             header('Location: user.php');
             exit();
         } else {
@@ -57,14 +59,14 @@ if (isset($_POST['user_register'])) {
         }
     } else {
         /**
-         * If the password and confirm password do not match, display an error message
+         * Ak sa heslo a potvrdenie hesla nezhodujú, zobrazte chybovú správu
          */
         $passwordError = "Heslá sa nezhodujú";
     }
 }
 ?>
 
-<!-- Registration form -->
+<!-- Registračný formulár -->
 <div class="container register d-flex align-items-center justify-content-center">
     <div class = "card p-3">
       <div class="card-body">
@@ -95,7 +97,7 @@ if (isset($_POST['user_register'])) {
 
 <?php
 /**
- * Include the footer partial
+ * Zahrnutie footeru
  */
 include_once 'partials/footer.php';
 ?>

@@ -1,21 +1,21 @@
 <?php
 
 /**
- * Class Menu
+ * Trieda Menu
  *
- * This class represents a menu on the website.
+ * Táto trieda reprezentuje menu na webovej stránke.
  */
 class Menu
 {
     /**
-     * @var array $pages The pages of the menu.
+     * @var array $pages Stránky menu.
      */
     private $pages;
 
     /**
-     * Constructor of the class, which is automatically called when an object of this class is created.
+     * Konštruktor triedy, ktorý sa automaticky zavolá pri vytvorení objektu tejto triedy.
      *
-     * @param array $pages The pages of the menu.
+     * @param array $pages Stránky menu.
      */
     public function __construct($pages)
     {
@@ -23,9 +23,9 @@ class Menu
     }
 
     /**
-     * Method for generating the menu.
+     * Metóda na generovanie menu.
      *
-     * @return string The HTML code of the menu.
+     * @return string HTML kód menu.
      */
     public function generate_menu(): string
     {

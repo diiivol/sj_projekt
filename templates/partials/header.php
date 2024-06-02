@@ -1,22 +1,22 @@
 <?php
 
 /**
- * This file is the header for the website.
- * It sets up the page object and includes the necessary stylesheets and scripts.
+ * Tento súbor je hlavičkou webovej stránky.
+ * Nastavuje objekt stránky a zahrňuje potrebné štýly a skripty.
  */
 
 require('../_inc/config.php');
 
 /**
- * The basename of the current script is retrieved and used to create a new Page object.
- * The page name is set.
+ * Základný názov aktuálneho skriptu sa získa a použije na vytvorenie nového objektu Page.
+ * Nastaví sa názov stránky.
  */
 $page_name = basename($_SERVER["SCRIPT_NAME"], '.php');
 $page_object = new Page();
 $page_object->set_page_name($page_name);
 
 /**
- * An array of common pages is created and used to generate a menu.
+ * Vytvorí sa pole bežných stránok a použije sa na generovanie ponuky.
  */
 $commonPages = array(
     'Menu' => 'menu.php',
@@ -24,10 +24,9 @@ $commonPages = array(
     'O nas' => 'about-us.php'
 );
 
-// Create a new Menu object and generate the menu
+// Vytvorte nový objekt Menu a generujte menu
 $menu_object = new Menu($commonPages);
 ?>
-
 <!DOCTYPE html>
 <html lang="sk">
 
@@ -79,8 +78,8 @@ $menu_object = new Menu($commonPages);
             <ul class="navbar-nav ms-auto">
                 <?php
                 /**
-                 * An array of user pages is created based on the user's login status and role.
-                 * This array is used to generate a menu.
+                 * Vytvorí sa pole stránok používateľa na základe stavu prihlásenia používateľa a jeho role.
+                 * Toto pole sa používa na generovanie menu.
                  */
                 $userPages = array();
                     

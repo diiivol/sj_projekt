@@ -1,55 +1,57 @@
 <?php
 /**
- * This file is used to start a session and include all necessary classes.
+ * Tento súbor sa používa na spustenie relácie a zahrnutie všetkých potrebných tried.
  */
 if (!file_exists('partials/header.php')) {
     die('Chyba: chýba súbor s hlavičkou stránky. Prosím, kontaktujte administrátora.');
 }
 
-// Include the header
+/**
+ * Zahrnutie headeru
+ */
 include 'partials/header.php';
 
 /**
- * Create a new Cart object
+ * Vytvorenie nového objektu Cart
  *
  * @var Cart
  */
 $cart = new Cart();
 
 /**
- * Check if the add to cart form was submitted
+ * Skontroluje, či je užívateľ prihlásený a má správnu rolu
  */
 if (isset($_POST['add_to_cart'])) {
     /**
-     * Get the quantity and product id from the form
+     * Získa množstvo a ID produktu
      */
     $quantity = $_POST['quantity'];
     $product_id = $_POST['product_id'];
 
     /**
-     * Add the product to the cart
+     * Vloží produkt do košíka
      */
     $cart->insert($product_id, $quantity);
 
     /**
-     * Redirect to the menu page
+     * Presmeruje na menu
      */
     header('Location: menu.php');
     exit();
 }
 
 /**
- * Get the items in the cart
+ * Získa všetky položky v košíku
  */
 $cartItems = $cart->select();
 
 /**
- * Create a new Dishes object
+ * Vytvorenie nového objektu Dishes
  *
  * @var Dishes
  */
 $dishes_object = new Dishes();
-// Get all dishes
+// Získa všetky jedlá
 $dishes = $dishes_object->select();
 ?>
 
@@ -62,7 +64,7 @@ $dishes = $dishes_object->select();
             <div class="food-item">
                 <?php
                 /**
-                 * Get the dish image
+                 * Získa cestu k obrázku
                  */
                 $imagePath = "../assets/img/dishes/" . $dish->image;
                 $image = (!empty($dish->image) && file_exists($imagePath)) ? $dish->image : 'default.png';
@@ -111,7 +113,7 @@ $dishes = $dishes_object->select();
 
 <?php
 /**
- * Include the footer file
+ * Zahrnutie footeru
  */
 include_once 'partials/footer.php';
 ?>

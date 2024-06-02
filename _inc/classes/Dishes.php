@@ -1,20 +1,20 @@
 <?php
 
 /**
- * Class Dishes
+ * Trieda Dishes
  *
- * This class represents a collection of dishes in a database.
+ * Táto trieda reprezentuje kolekciu jedál v databáze.
  */
 class Dishes extends Database
 {
     /**
-     * @var PDO The PDO connection object.
+     * @var PDO Objekt pripojenia PDO.
      */
     private $db;
 
     /**
-     * Constructor of the class, which is automatically called when an object of this class is created.
-     * It establishes a connection to the database.
+     * Konštruktor triedy, ktorý sa automaticky zavolá pri vytvorení objektu tejto triedy.
+     * Nadväzuje spojenie s databázou.
      */
     public function __construct()
     {
@@ -22,9 +22,9 @@ class Dishes extends Database
     }
 
     /**
-     * This method retrieves all dishes from the database.
+     * Táto metóda získava všetky jedlá z databázy.
      *
-     * @return array The array of dishes.
+     * @return array Pole jedál.
      */
     public function select(): array
     {
@@ -38,9 +38,9 @@ class Dishes extends Database
     }
 
     /**
-     * This method deletes a dish from the database.
+     * Táto metóda odstraňuje jedlo z databázy.
      *
-     * @param int $id The ID of the dish to delete.
+     * @param int $id ID jedla na odstránenie.
      */
     public function delete(int $id): void
     {
@@ -54,28 +54,31 @@ class Dishes extends Database
     }
 
     /**
-     * This method updates a dish in the database.
+     * Táto metóda aktualizuje jedlo v databáze.
      *
-     * @param int $id The ID of the dish to update.
-     * @param string $new_name The new name of the dish.
-     * @param string $new_description The new description of the dish.
-     * @param float $new_price The new price of the dish.
-     * @param string $new_ingredients The new ingredients of the dish.
+     * @param int $id ID jedla na aktualizáciu.
+     * @param string $new_name Nové meno jedla.
+     * @param string $new_description Nový popis jedla.
+     * @param float $new_price Nová cena jedla.
+     * @param string $new_ingredients Nové ingrediencie jedla.
      */
     public function update(int $id, string $new_image, string $new_name, string $new_description, float $new_price, string $new_ingredients): void
     {
-        $sql = "UPDATE dishes SET image = :image, name = :name, description = :description, price = :price, ingredients = :ingredients WHERE id = :id";
-        $stmt = $this->connect()->prepare($sql);
-        $stmt->execute(['image' => $new_image, 'name' => $new_name, 'description' => $new_description, 'price' => $new_price, 'ingredients' => $new_ingredients, 'id' => $id]);
+        try {
+            $sql = "UPDATE dishes SET image = :image, name = :name, description = :description, price = :price, ingredients = :ingredients WHERE id = :id";
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->execute(['image' => $new_image, 'name' => $new_name, 'description' => $new_description, 'price' => $new_price, 'ingredients' => $new_ingredients, 'id' => $id]);
+        } catch (PDOException $e) {
+            echo $e->getMessage();       }
     }
 
     /**
-     * This method inserts a new dish into the database.
+     * Táto metóda vkladá nové jedlo do databázy.
      * 
-     * @param string $name The name of the dish.
-     * @param string $description The description of the dish.
-     * @param float $price The price of the dish.
-     * @param string $ingredients The ingredients of the dish.
+     * @param string $name Meno jedla.
+     * @param string $description Popis jedla.
+     * @param float $price Cena jedla.
+     * @param string $ingredients Ingrediencie jedla.
      */
     public function insert($image, $name, $description, $price, $ingredients): void
     {
