@@ -1,19 +1,15 @@
 <?php
 
-/**
- * Trieda Menu
- */
+
 class Menu
 {
-    /**
-     * @var array $pages Stránky menu.
-     */
+
     private $pages;
 
     /**
      * Konštruktor triedy
      *
-     * @param array $pages Stránky menu.
+     * $pages - Stránky menu
      */
     public function __construct($pages)
     {
@@ -21,9 +17,7 @@ class Menu
     }
 
     /**
-     * Metóda na generovanie menu.
-     *
-     * @return string HTML kód menu.
+     * generovanie menu
      */
     public function generate_menu(): string
     {

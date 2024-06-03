@@ -14,7 +14,7 @@ class Cart
      * Pridanie produktu do košíka
      *
      * $product_id - ID PRODUCTU
-     * $quantity - MNOZSTVO PRODUKTU
+     * $quantity - MNOZSTVO
      */
     public function insert(int $product_id, int $quantity): void
     {
