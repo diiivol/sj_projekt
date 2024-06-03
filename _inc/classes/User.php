@@ -50,9 +50,8 @@ class User extends Database
     /**
      * Registrácia používateľa.
      *
-     * @param string $email E-mail používateľa.
-     * @param string $password Heslo používateľa.
-     * @return bool Vracia true, ak je registrácia úspešná, inak false.
+     * $email - E-mail používateľa.
+     * $password - Heslo používateľa.
      */
     public function register(string $email, string $password): bool
     {
