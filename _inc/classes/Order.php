@@ -35,7 +35,6 @@ class Order extends Database
             ]);
             $orderId = $this->db->lastInsertId();
 
-            // Pre každú položku v košíku vložte záznam do tabuľky order_items
             foreach ($cartItems as $id => $quantity) {
                 $sql = "INSERT INTO order_items (order_id, product_id, quantity) VALUES (:order_id, :product_id, :quantity)";
                 $stmt = $this->db->prepare($sql);
