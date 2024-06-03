@@ -6,7 +6,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
     exit();
 }
 
-// // // DISHES // // //
+// // // JEDLA // // //
 
 
 $dishes_object = new Dishes();
@@ -70,7 +70,7 @@ if (isset($_POST['add_dish'])) {
  */
 $dishes = $dishes_object->select();
 
-// // // ORDERS // // //
+// // // OBJEDNAVKY // // //
 
 $order_object = new Order();
 
@@ -114,7 +114,7 @@ if (isset($_POST['update_order'])) {
 $orders = $order_object->select();
 
 
-// // // CONTACTS // // //
+// // // KONTAKT // // //
 
 
 $contact_object = new Contact();

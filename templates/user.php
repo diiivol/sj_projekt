@@ -8,7 +8,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSIO
 }
 
 
-// // // DISHES // // //
+// // // JEDLA // // //
 
 $dishes_object = new Dishes();
 $dishes = [];
@@ -16,7 +16,7 @@ foreach ($dishes_object->select() as $dish) {
     $dishes[$dish->id] = $dish;
 }
 
-// // // CART // // //
+// // // KOSIKK // // //
 $cart = new Cart();
 $totalPrice = 0;
 $delivery = 5;
@@ -40,7 +40,7 @@ if (isset($_POST['remove_from_cart'])) {
     exit();
 }
 
-// // // ORDERS // // //
+// // // OBJEDNAVKY // // //
 $order_object = new Order();
 
 // ID užívateľa

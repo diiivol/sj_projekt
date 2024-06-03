@@ -1,7 +1,7 @@
 <?php
 require_once 'partials/header.php';
 
-// // // // CONTACT // // //
+// // // // KONTAKT // // //
 $contact_object = new Contact();
 
 

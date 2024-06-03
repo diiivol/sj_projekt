@@ -32,7 +32,7 @@ if (isset($_POST['user_login'])) {
             <h1 class="display-4 text-center mb-4">Prihlásenie</h1>
             <form action="" method="POST">
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
+                    <label for="email" class="form-label">E-mail</label>
                     <input type="email" name="email" class="form-control" id="email" placeholder="Vaš e-mail">
                 </div>
                 <div class="mb-3">
@@ -40,7 +40,7 @@ if (isset($_POST['user_login'])) {
                     <input type="password" name="password" class="form-control" id="password" placeholder="Vaše heslo">
                 </div>
                 <div class="d-flex">
-                    <button type="submit" name="user_login" class="btn btn-primary">Odoslať</button>
+                    <button type="submit" name="user_login" class="btn btn-primary">Prihlásiť sa</button>
                     <a href="register.php" class="btn btn-link">Registrovať sa</a>
                 </div>
             </form>
