@@ -1,6 +1,6 @@
 <?php
 
-include_once 'partials/header.php';
+require_once 'partials/header.php';
 
 ?>
 
@@ -14,8 +14,5 @@ include_once 'partials/header.php';
 </div>
 
 <?php
-
-// Zahrnutie footeru
-include_once 'partials/footer.php';
-
+require_once 'partials/footer.php';
 ?>

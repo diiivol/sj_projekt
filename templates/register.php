@@ -1,6 +1,6 @@
 <?php
 
-include_once 'partials/header.php';
+require_once 'partials/header.php';
 
 
 if ($_SESSION['logged_in'] == true) {
@@ -67,8 +67,5 @@ if (isset($_POST['user_register'])) {
 </div>
 
 <?php
-/**
- * Zahrnutie footeru
- */
-include_once 'partials/footer.php';
+require_once 'partials/footer.php';
 ?>

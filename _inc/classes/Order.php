@@ -19,10 +19,10 @@ class Order extends Database
      * $cartItems - POLOZKY V KOSIKU
      * $totalPrice - CELKOVA CENA OBJEDNAVKY
      */
-    public function insert(int $userId, array $cartItems, float $totalPrice, string $name, string $street, string $city, string $postcode): bool
+    public function insert(int $userId, array $cartItems, float $totalPrice, string $name, string $street, string $city, string $postcode): void
     {
         try {
-            // Vytvorte príkaz SQL na vloženie novej objednávky
+            
             $sql = "INSERT INTO orders (user_id, order_date, total_price, name, street, city, postcode) VALUES (:user_id, NOW(), :total_price, :name, :street, :city, :postcode)";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
@@ -42,12 +42,10 @@ class Order extends Database
                 $stmt->execute([':order_id' => $orderId, ':product_id' => $id, ':quantity' => $quantity]);
             }
 
-            // Ak je všetko úspešné, vráti true
-            return true;
         } catch (PDOException $e) {
-            // Ak sa vyskytne chyba, vráti false
+            
             echo $e->getMessage();
-            return false;
+            
         }
     }
 
@@ -90,7 +88,7 @@ class Order extends Database
      *
      * $userId - ID používateľa. Ak je null, vyberie všetky objednávky.
      */
-    public function select(int $userId = null): array|bool
+    public function select(int $userId = null): array
     {
         try {
             // Ak je špecifikované ID používateľa, získajte len ich objednávky
@@ -104,15 +102,12 @@ class Order extends Database
                 $stmt = $this->db->query($sql);
             }
     
-            // Získajte všetky objednávky
+
             $orders = $stmt->fetchAll(PDO::FETCH_OBJ);
     
             return $orders;
         } catch (PDOException $e) {
-            // Ak nastane chyba, vráťte false
             echo $e->getMessage();
-    
-            return false;
         }
     }
 
@@ -121,7 +116,7 @@ class Order extends Database
      *
      * $orderId - ID objednávky.
      */
-    public function select_dishes(int $orderId): array|bool
+    public function select_dishes(int $orderId): array
     {
         try {
             // Vytvoríme SQL príkaz pre získanie jedál v objednávke
@@ -134,9 +129,8 @@ class Order extends Database
             $items = $stmt->fetchAll(PDO::FETCH_OBJ);
             return $items;
         } catch (PDOException $e) {
-            // Ak nastane chyba, vrátime false
+
             echo $e->getMessage();
-            return false;
         }
     }
 

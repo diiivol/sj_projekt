@@ -1,6 +1,6 @@
 <?php
 
-include_once 'partials/header.php';
+require_once 'partials/header.php';
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
     header('Location: admin.php');
@@ -48,5 +48,5 @@ if (isset($_POST['user_login'])) {
     </div>
 </div>
 <?php
-include 'partials/footer.php';
+require_once 'partials/footer.php';
 ?>

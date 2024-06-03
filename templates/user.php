@@ -1,6 +1,6 @@
 <?php
 
-include_once 'partials/header.php';
+require_once 'partials/header.php';
 
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true || $_SESSION['user_role'] == 1) {
     header('Location: 404.php');
@@ -105,7 +105,7 @@ if (isset($_POST['order'])) {
                         </table>
                         <h4>Medzisučet: <?php echo $totalPrice; ?>€</h4>
                         <h5>Doručenie: <?php echo $delivery; ?>€</h5>
-                        <h3><u>Spolu cena: <?php echo $totalPrice + $delivery; ?>€</u></h3>
+                        <h3><u>Celková cena: <?php echo $totalPrice + $delivery; ?>€</u></h3>
                     </div>
                     <img class="image-bottom" src="../assets/img/bill/image2.png" alt="Bottom image">
                 </div>
@@ -185,11 +185,12 @@ if (isset($_POST['order'])) {
                         foreach ($items as $item) {
                             $itemNames[] = $item->name . ' x' . $item->quantity;
                         }
-                        // Spojenie jedál do reťazca
+                        // Spojenie do reťazca
                         $itemNamesString = implode('<br>', $itemNames);
                         ?>
                         <p><?= $itemNamesString ?></p>
-                        <h4>Order Price: <?= $o->total_price ?>€</h4>
+                        <p>----------------------------------------------------------------</p>
+                        <h4><?= $o->total_price ?>€</h4>
                     </div>
                 </div>
                 <?php endforeach; ?>
@@ -203,5 +204,5 @@ if (isset($_POST['order'])) {
 
 <!-- Footer -->
 <?php
-include 'partials/footer.php';
+require_once 'partials/footer.php';
 ?>

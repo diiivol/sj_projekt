@@ -1,5 +1,5 @@
 <?php
-include_once 'partials/header.php';
+require_once 'partials/header.php';
 ?>
 
 <!-- About Us -->
@@ -29,5 +29,5 @@ include_once 'partials/header.php';
 </div>
 
 <?php
-include_once 'partials/footer.php'
+require_once 'partials/footer.php'
 ?>

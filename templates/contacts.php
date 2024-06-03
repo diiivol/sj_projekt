@@ -1,5 +1,5 @@
 <?php
-include_once 'partials/header.php';
+require_once 'partials/header.php';
 
 // // // // CONTACT // // //
 $contact_object = new Contact();
@@ -117,5 +117,5 @@ if (isset($_POST['contact_submitted'])) {
 <!-- Copyright -->
 <!--  -->
 <?php
-include_once 'partials/footer.php'
+require_once 'partials/footer.php'
 ?>

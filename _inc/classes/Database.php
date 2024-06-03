@@ -13,11 +13,6 @@ class Database
      */
     protected $connection;
 
-    public function __destruct()
-    {
-        $this->connection = null;
-    }
-
     protected function connect(): PDO
     {
         try {

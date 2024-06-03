@@ -5,7 +5,7 @@
  * Nastavuje objekt stránky a zahrňuje potrebné štýly a skripty.
  */
 
-require('../_inc/config.php');
+require_once('../_inc/config.php');
 
 /**
  * Základný názov aktuálneho skriptu sa získa a použije na vytvorenie nového objektu Page.

@@ -1,6 +1,6 @@
 <?php
 
-include_once 'partials/header.php';
+require_once 'partials/header.php';
 
 // // // CART // // //
 
@@ -84,8 +84,5 @@ $dishes = $dishes_object->select();
 </div>
 
 <?php
-/**
- * Zahrnutie footeru
- */
-include_once 'partials/footer.php';
+require_once 'partials/footer.php';
 ?>

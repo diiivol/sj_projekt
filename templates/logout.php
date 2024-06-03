@@ -1,6 +1,6 @@
 <?php
 
-include_once 'partials/header.php';
+require_once 'partials/header.php';
 
 ?>
 <main>
@@ -20,5 +20,5 @@ include_once 'partials/header.php';
     </section>
 </main>
 <?php
-include 'partials/footer.php';
+require_once 'partials/footer.php';
 ?>
