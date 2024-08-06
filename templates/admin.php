@@ -34,14 +34,10 @@ if (isset($_POST['update_dishes'])) {
 // is set? ODSTRANENIE JEDAL
 if (isset($_POST['delete_dishes'])) {
     $id = $_POST['delete_dishes'];
-    try {
-        $dishes_object->delete($id);
-        // redirect
+    if ($dishes_object->delete($id)) {
         header('Location: ' . $_SERVER['PHP_SELF']);
-    } catch (Exception $e) {
-        echo 'Chyba pri mazaní jedla: ' . $e->getMessage();
+        exit();
     }
-    exit();
 }
 
 // is set? PRIDANIE JEDLA

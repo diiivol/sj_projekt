@@ -35,10 +35,23 @@ class Dishes extends Database
     public function delete(int $id): void
     {
         try {
-            $query = "DELETE FROM dishes WHERE id = :id";
-            $query_run = $this->db->prepare($query);
-            $query_run->execute(['id' => $id]);
+            // ak je jedlo súčasťou objednávok, nemôže byť odstránené
+            $sqlCheck = "SELECT COUNT(*) FROM order_items WHERE product_id = :id";
+            $stmtCheck = $this->connect()->prepare($sqlCheck);
+            $stmtCheck->execute(['id' => $id]);
+            $count = $stmtCheck->fetchColumn();
+    
+            if ($count > 0) {
+                throw new Exception("Nemožno odstrániť jedlo, pretože je súčasťou objednávok");
+            }
+    
+            // odstránenie jedla
+            $sqlDelete = "DELETE FROM dishes WHERE id = :id";
+            $stmtDelete = $this->connect()->prepare($sqlDelete);
+            $stmtDelete->execute(['id' => $id]);
         } catch (PDOException $e) {
+            echo $e->getMessage();
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
