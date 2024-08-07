@@ -175,11 +175,10 @@ $contacts = $contact_object->select();
         
         <h1>Jedlá</h1>
         
-        <?php
-
-        if (!empty($dishes)): ?>
-            <div class="container pt-3 mb-4 dishes-table">
-                <table class="admin-table">
+        <div class="container pt-3 mb-4 dishes-table">
+            <table class="admin-table">
+                <?php
+                if (!empty($dishes)): ?>
                     <tr>
                         <th>IMG</th>
                         <th>Nazov</th>
@@ -189,89 +188,89 @@ $contacts = $contact_object->select();
                         <th>Upraviť</th>
                         <th>Vymazať</th>
                     </tr>
-                    <!-- každé jedlo v poli $dishes -->
-                    <?php foreach ($dishes as $d): ?>
-                        <tr>
-                            <!-- podrobnosti o jedle -->
-                            <td class="dish-image">
-                                <?php
-                                $imagePath = "../assets/img/dishes/" . $d->image;
-                                $image = (!empty($d->image) && file_exists($imagePath)) ? $d->image : 'default.png';
-                                ?>
-                                <img src="../assets/img/dishes/<?= $image ?>" alt="<?= $d->name ?>" class="img-fluid">
-                            </td>
-                            <td class="dish-name"><?= $d->name ?></td>
-                            <td class="dish-description"><?= $d->description ?></td>
-                            <td class="dish-price"><?= $d->price ?></td>
-                            <td class="dish-ingredients"><?= $d->ingredients ?></td>
-                            <td>
-                                <form action="" method="POST">
-
-                                    <!-- Výber obrázka -->
-                                    <select style="display: none;" name="new_dish_image">
-                                        <?php
-                                        $dir = '../assets/img/dishes';
-                                        $files = scandir($dir);
-                                        foreach ($files as $file) {
-                                            if ($file !== '.' && $file !== '..') {
-                                                $selected = ($file == $d->image) ? 'selected' : '';
-                                                echo "<option value='$file' $selected>$file</option>";
-                                            }
-                                        }
-                                        ?>
-                                    </select>
-                                    <!-- Skryté vstupy na uchovanie podrobností o jedle -->
-                                    <input type="hidden" name="new_dish_name" value="<?= $d->name ?>" required>
-                                    <input type="hidden" name="new_dish_description" value="<?= $d->description ?>" required>
-                                    <input type="hidden" name="new_dish_price" value="<?= $d->price ?>" required>
-                                    <input type="hidden" name="new_dish_ingredients" value="<?= $d->ingredients ?>" required>
-                                    <!-- Tlačidlá Upraviť a Uložiť -->
-                                    <button class="btn btn-warning edit-button" type="button">
-                                        <i class="fa fa-pencil"></i>
-                                    </button>
-                                    <button class="btn btn-success save-button" type="submit" name="update_dishes" value="<?= $d->id ?>" style="display: none;">OK</button>
-                                </form>
-                            </td>
-                            <td>
-                                <form action="" method="POST">
-                                    <!-- Tlačidlo Odstrániť -->
-                                    <button type="submit" name="delete_dishes" class="btn btn-danger" value="<?= $d->id ?>">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
+                <!-- každé jedlo v poli $dishes -->
+                <?php foreach ($dishes as $d): ?>
                     <tr>
-                        <form method="POST">
-                            <!-- Vstupy pre pridanie nového jedla -->
-                            <td>
-                            <select name="dish_image">
-                                <?php
-                                $dir = '../assets/img/dishes';
-                                $files = scandir($dir);
-                                foreach ($files as $file) {
-                                    if ($file !== '.' && $file !== '..') {
-                                        $selected = ($file == 'default.png') ? 'selected' : '';
-                                        echo "<option value='$file' $selected>$file</option>";
+                        <!-- podrobnosti o jedle -->
+                        <td class="dish-image">
+                            <?php
+                            $imagePath = "../assets/img/dishes/" . $d->image;
+                            $image = (!empty($d->image) && file_exists($imagePath)) ? $d->image : 'default.png';
+                            ?>
+                            <img src="../assets/img/dishes/<?= $image ?>" alt="<?= $d->name ?>" class="img-fluid">
+                        </td>
+                        <td class="dish-name"><?= $d->name ?></td>
+                        <td class="dish-description"><?= $d->description ?></td>
+                        <td class="dish-price"><?= $d->price ?></td>
+                        <td class="dish-ingredients"><?= $d->ingredients ?></td>
+                        <td>
+                            <form action="" method="POST">
+
+                                <!-- Výber obrázka -->
+                                <select style="display: none;" name="new_dish_image">
+                                    <?php
+                                    $dir = '../assets/img/dishes';
+                                    $files = scandir($dir);
+                                    foreach ($files as $file) {
+                                        if ($file !== '.' && $file !== '..') {
+                                            $selected = ($file == $d->image) ? 'selected' : '';
+                                            echo "<option value='$file' $selected>$file</option>";
+                                        }
                                     }
-                                }
-                                ?>
-                            </select>
-                            </td>
-                            <td><input type="text" id="dish_name" name="dish_name" placeholder="Názov jedla" required style="width: 100%;"></td>
-                            <td><textarea id="dish_description" name="dish_description" placeholder="Popis jedla" required rows="4" style="width: 100%;"></textarea></td>
-                            <td><input type="number" value="0" min="0" step="0.50" id="dish_price" name="dish_price" placeholder="Cena jedla" required style="width: 100%;"></td>
-                            <td><textarea id="dish_ingredients" name="dish_ingredients" placeholder="Ingrediencie jedla" required rows="4" style="width: 100%;"></textarea></td>
-                            <td colspan="2"><input type="submit" value="Pridať jedlo" name="add_dish" class="btn btn-primary" required></td>
-                        </form>
+                                    ?>
+                                </select>
+                                <!-- Skryté vstupy na uchovanie podrobností o jedle -->
+                                <input type="hidden" name="new_dish_name" value="<?= $d->name ?>" required>
+                                <input type="hidden" name="new_dish_description" value="<?= $d->description ?>" required>
+                                <input type="hidden" name="new_dish_price" value="<?= $d->price ?>" required>
+                                <input type="hidden" name="new_dish_ingredients" value="<?= $d->ingredients ?>" required>
+                                <!-- Tlačidlá Upraviť a Uložiť -->
+                                <button class="btn btn-warning edit-button" type="button">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                                <button class="btn btn-success save-button" type="submit" name="update_dishes" value="<?= $d->id ?>" style="display: none;">OK</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="" method="POST">
+                                <!-- Tlačidlo Odstrániť -->
+                                <button type="submit" name="delete_dishes" class="btn btn-danger" value="<?= $d->id ?>">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
                     </tr>
-                </table>
-            </div>
-        <?php else: ?>
-            <h4>Žiadne jedlá</h4>
-        <?php endif; ?>
-        
+                <?php endforeach; ?>
+                <?php endif; ?>
+                
+                <!-- Formulár pre pridanie nového jedla -->
+                <tr>
+                    <form method="POST">
+                        <!-- Vstupy pre pridanie nového jedla -->
+                        <td>
+                        <select name="dish_image">
+                            <?php
+                            $dir = '../assets/img/dishes';
+                            $files = scandir($dir);
+                            foreach ($files as $file) {
+                                if ($file !== '.' && $file !== '..') {
+                                    $selected = ($file == 'default.png') ? 'selected' : '';
+                                    echo "<option value='$file' $selected>$file</option>";
+                                }
+                            }
+                            ?>
+                        </select>
+                        </td>
+                        <td><input type="text" id="dish_name" name="dish_name" placeholder="Názov jedla" required style="width: 100%;"></td>
+                        <td><textarea id="dish_description" name="dish_description" placeholder="Popis jedla" required rows="4" style="width: 100%;"></textarea></td>
+                        <td><input type="number" value="0" min="0" step="0.50" id="dish_price" name="dish_price" placeholder="Cena jedla" required style="width: 100%;"></td>
+                        <td><textarea id="dish_ingredients" name="dish_ingredients" placeholder="Ingrediencie jedla" required rows="4" style="width: 100%;"></textarea></td>
+                        <td colspan="2"><input type="submit" value="Pridať jedlo" name="add_dish" class="btn btn-primary" required></td>
+                    </form>
+                </tr>
+            </table>
+        </div>
+
         <h1>Objednávky</h1>
         
         <?php
